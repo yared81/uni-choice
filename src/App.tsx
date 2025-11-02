@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import './i18n/config'
 import './style.css'
 
@@ -20,6 +21,26 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Profile from './pages/Profile'
 
+function PrivacyPage() {
+  const { t } = useTranslation()
+  return (
+    <div className="container-page py-20">
+      <h1 className="text-4xl font-heading font-bold mb-6">{t('footer.privacy_policy')}</h1>
+      <p className="text-charcoal/70">{t('legal.privacy_content', { defaultValue: 'Privacy policy content coming soon...' })}</p>
+    </div>
+  )
+}
+
+function TermsPage() {
+  const { t } = useTranslation()
+  return (
+    <div className="container-page py-20">
+      <h1 className="text-4xl font-heading font-bold mb-6">{t('footer.terms_of_service')}</h1>
+      <p className="text-charcoal/70">{t('legal.terms_content', { defaultValue: 'Terms of service content coming soon...' })}</p>
+    </div>
+  )
+}
+
 function AppRoutes() {
   const location = useLocation()
 
@@ -38,8 +59,8 @@ function AppRoutes() {
         <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
         <Route path="/signup" element={<PageTransition><Signup /></PageTransition>} />
         <Route path="/profile" element={<PageTransition><Profile /></PageTransition>} />
-        <Route path="/privacy" element={<PageTransition><div className="container-page py-20"><h1>Privacy Policy</h1></div></PageTransition>} />
-        <Route path="/terms" element={<PageTransition><div className="container-page py-20"><h1>Terms of Service</h1></div></PageTransition>} />
+        <Route path="/privacy" element={<PageTransition><PrivacyPage /></PageTransition>} />
+        <Route path="/terms" element={<PageTransition><TermsPage /></PageTransition>} />
       </Routes>
     </AnimatePresence>
   )

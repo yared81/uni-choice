@@ -1,25 +1,798 @@
 {
   "app": {
-    "name": "UniMerk",
+    "name": "UniChoice",
     "tagline": "Explore, Review & Connect with Ethiopian Universities"
   },
   "nav": {
     "home": "Home",
-    "search": "Search",
+    "universities": "Universities",
     "compare": "Compare",
     "favorites": "Favorites",
     "about": "About",
+    "resources": "Resources",
+    "contact": "Contact",
     "help": "Help",
     "login": "Login",
     "signup": "Sign up",
-    "language": "Language"
+    "profile": "Profile",
+    "language": "Language",
+    "logout": "Logout"
   },
   "landing": {
-    "hero_title": "Find your best-fit university in Ethiopia",
+    "hero_title": "Find the School That Fits You Best",
+    "hero_subtitle": "Finding the right school shouldn't be hard. From K‑12 to college to grad school, we make it easy to discover and connect with the best ones for you.",
     "hero_search_placeholder": "Search by city, program, or keyword",
+    "hero_image_alt": "University campus",
+    "search_button": "Search",
+    "quick_link_k12": "K-12 Schools",
+    "quick_link_colleges": "Colleges",
+    "quick_link_grad": "Grad Schools",
+    "stats_universities": "Universities",
+    "stats_students": "Students Helped",
+    "stats_programs": "Programs Listed",
+    "stats_languages": "Languages",
+    "students_image_alt": "Students studying",
+    "students_join_title": "Join thousands of successful students",
+    "why_choose_title": "Why Choose {{appName}}?",
+    "why_choose_subtitle": "Everything you need to make the perfect choice for your education",
+    "feature_comprehensive_search_title": "Comprehensive Search",
+    "feature_comprehensive_search_desc": "Find universities by location, program, tuition, rating, and more. Our advanced filters help you narrow down your options instantly.",
+    "feature_comparison_title": "Side-by-Side Comparison",
+    "feature_comparison_desc": "Compare up to three universities simultaneously. Evaluate tuition, programs, ratings, and key features in one view.",
+    "feature_reviews_title": "Authentic Reviews",
+    "feature_reviews_desc": "Read verified reviews from current students and alumni. Get honest insights about campus life, academics, and career outcomes.",
+    "testimonials_title": "What Students Say",
+    "testimonials_subtitle": "Real experiences from students who found their perfect match",
+    "testimonial_1": "{{appName}} helped me compare universities easily. I found the perfect program that matched both my interests and budget. The detailed reviews from current students were incredibly helpful!",
+    "testimonial_2": "As a first-generation student, I had no idea where to start. {{appName}} provided all the information I needed in one place. The comparison tool made it so easy to see my options side by side.",
+    "testimonial_3": "I love how easy it is to search and filter universities. The multilingual support meant my family could help me make the decision. Thank you {{appName}}!",
+    "cta_title": "Ready to Find Your Perfect School?",
+    "cta_description": "Join thousands of students who have found their ideal educational institution through {{appName}}.",
+    "cta_button": "Start Your Search Today",
+    "cta_image_alt": "Students",
     "cta_explore": "Explore Universities",
     "cta_student": "Join as Student",
-    "cta_university": "Join as University"
+    "cta_university": "Join as University",
+    "intro_title": "Your Journey Starts Here",
+    "intro_description": "UniChoice is your comprehensive platform for exploring Ethiopian universities. Find detailed information, read student reviews, compare programs, and make informed decisions about your future.",
+    "features_title": "Everything You Need",
+    "feature_search": "Search",
+    "feature_search_desc": "Powerful search filters to find universities by location, programs, and more",
+    "feature_compare": "Compare",
+    "feature_compare_desc": "Side-by-side comparison of up to 3 universities",
+    "feature_reviews": "Reviews",
+    "feature_reviews_desc": "Read authentic student experiences and share your own",
+    "feature_favorites": "Favorites",
+    "feature_favorites_desc": "Save universities you're interested in for easy access",
+    "future_starts_title": "Your Future Starts Here",
+    "future_starts_p1": "{{appName}} is the trusted platform connecting students with the perfect educational institutions across Ethiopia. We've revolutionized the way students discover, compare, and make informed decisions about their academic journey.",
+    "future_starts_p2": "With comprehensive data on over 50+ universities, detailed program information, real student reviews, and powerful comparison tools, we empower you to find the institution that aligns with your goals, budget, and aspirations.",
+    "learn_more_button": "Learn More About Us",
+    "expert_guidance_title": "Expert Guidance",
+    "expert_guidance_desc": "Access resources, guides, and expert advice to navigate the application process and make informed decisions.",
+    "up_to_date_title": "Up-to-Date Information",
+    "up_to_date_desc": "Our database is constantly updated with the latest tuition fees, program offerings, admission requirements, and deadlines.",
+    "multilingual_title": "Multilingual Support",
+    "multilingual_desc": "Access our platform in six languages including English, Amharic, Tigrinya, Afaan Oromo, Somali, and Afar."
+  },
+  "universities": {
+    "title": "Browse Universities",
+    "hero_title": "Explore Universities",
+    "data": {
+      "addis_ababa_university": "Addis Ababa University",
+      "bahir_dar_university": "Bahir Dar University",
+      "university_of_gondar": "University of Gondar",
+      "jimma_university": "Jimma University",
+      "hawassa_university": "Hawassa University",
+      "city": {
+        "addis_ababa": "Addis Ababa",
+        "bahir_dar": "Bahir Dar",
+        "gondar": "Gondar",
+        "jimma": "Jimma",
+        "hawassa": "Hawassa"
+      },
+      "country": {
+        "ethiopia": "Ethiopia"
+      },
+      "program": {
+        "electrical_engineering": "Electrical Engineering",
+        "computer_science": "Computer Science",
+        "water_resources_engineering": "Water Resources Engineering",
+        "information_technology": "Information Technology",
+        "medicine": "Medicine",
+        "public_health": "Public Health",
+        "nursing": "Nursing",
+        "pharmacy": "Pharmacy",
+        "law": "Law",
+        "business_administration": "Business Administration",
+        "agricultural_sciences": "Agricultural Sciences",
+        "agriculture": "Agriculture"
+      }
+    },
+    "hero_subtitle": "Discover top institutions across Ethiopia and find the perfect fit for your academic goals.",
+    "hero_image_alt": "University campus",
+    "search_button": "Search",
+    "stats_total": "Total Universities",
+    "stats_cities": "Cities",
+    "stats_programs": "Programs",
+    "stats_avg_rating": "Avg Rating",
+    "found_count": "Found",
+    "found_count_singular": "university",
+    "found_count_plural": "universities",
+    "no_results_title": "No universities found",
+    "no_results_desc": "Try a different search term or browse all universities",
+    "view_all_button": "View All Universities",
+    "cta_title": "Need Help Deciding?",
+    "cta_desc": "Use our comparison tool to see universities side by side and make an informed choice.",
+    "cta_button": "Compare Universities",
+    "search_placeholder": "Search universities...",
+    "filter_by_city": "Filter by City",
+    "filter_by_rating": "Filter by Rating",
+    "no_results": "No universities found",
+    "view_details": "View Details"
+  },
+  "profile": {
+    "title": "Profile",
+    "edit": "Edit Profile",
+    "overview": "Overview",
+    "favorites": "Favorites",
+    "reviews": "My Reviews",
+    "settings": "Settings",
+    "save": "Save Changes",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "bio": "Bio",
+    "gpa": "GPA",
+    "university": "Current University",
+    "major": "Major",
+    "graduation_year": "Graduation Year"
+  },
+  "university_profile": {
+    "overview": "Overview",
+    "campuses": "Campuses",
+    "faculties": "Faculties",
+    "programs": "Programs",
+    "admission": "Admission",
+    "contact": "Contact",
+    "reviews": "Reviews",
+    "about": "About",
+    "quick_facts": "Quick Facts",
+    "location": "Location",
+    "rating": "Rating",
+    "students": "Students",
+    "verified": "Verified",
+    "no_reviews": "No reviews yet",
+    "write_review": "Write a Review",
+    "not_found": "University not found",
+    "browse_all": "Browse all universities",
+    "academic_programs": "Academic Programs",
+    "explore_programs": "Explore {{count}} programs offered at {{university}}",
+    "student_reviews": "Student Reviews",
+    "reviews_description": "Read what {{count}} {{count, plural, one {student has} other {students have}}} to say about {{university}}",
+    "no_reviews_yet": "No reviews yet. Be the first to share your experience!",
+    "be_first_review": "Be the first to share your experience and help other students!",
+    "no_reviews_image_alt": "No reviews",
+    "verified_student": "Verified Student",
+    "edit_profile": "Edit Profile",
+    "years": "years",
+    "ready_to_apply": "Ready to Apply?",
+    "apply_description": "{{university}} could be your perfect match. Start your application process today or compare with other universities.",
+    "visit_official_website": "Visit Official Website",
+    "compare_universities": "Compare Universities",
+    "image_placeholder": "Image Placeholder",
+    "mission": "Mission",
+    "vision": "Vision",
+    "history": "History",
+    "campus_facilities": "Campus Facilities",
+    "accreditation": "Accreditation",
+    "housing": "Housing",
+    "housing_available": "Housing Available",
+    "housing_not_available": "Housing Not Available",
+    "campus_locations": "Campus Locations",
+    "no_campus_info": "No campus information available.",
+    "faculties_departments": "Faculties & Departments",
+    "no_faculty_info": "No faculty information available.",
+    "admission_information": "Admission Information",
+    "admission_requirements": "Admission Requirements",
+    "application_deadline": "Application Deadline",
+    "housing_information": "Housing Information",
+    "contact_information": "Contact Information",
+    "phone": "Phone",
+    "website": "Website",
+    "address": "Address",
+    "social_media": "Social Media",
+    "facebook": "Facebook",
+    "twitter": "Twitter/X",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "helpful": "Helpful",
+    "cancel_reply": "Cancel Reply",
+    "reply": "Reply",
+    "post_reply": "Post Reply",
+    "university": "University"
+  },
+  "university_edit": {
+    "title": "University Profile Setup",
+    "subtitle": "Manage your comprehensive university information",
+    "save": "Save All Information",
+    "view_public": "View Public Profile",
+    "basic": "Basic Info",
+    "about": "About & Description",
+    "city": "About City",
+    "campuses": "Campuses",
+    "faculties": "Faculties",
+    "programs": "Programs",
+    "admission": "Admission",
+    "contact": "Contact & Social",
+    "other": "Additional Info",
+    "max_images_alert": "Maximum 10 images allowed in the main gallery.",
+    "max_campus_images_alert": "Maximum 10 images allowed per campus.",
+    "save_success": "University information saved successfully!",
+    "profile_image_alt": "University Profile",
+    "add_campus": "Add Campus",
+    "add_faculty": "Add Faculty",
+    "add_program": "Add Program",
+    "no_campuses": "No campuses added yet. Click \"Add Campus\" to get started.",
+    "no_faculties": "No faculties added yet. Click \"Add Faculty\" to get started.",
+    "no_programs": "No programs added yet. Click \"Add Program\" to get started.",
+    "remove_campus": "Remove Campus",
+    "remove_faculty": "Remove Faculty",
+    "remove_program": "Remove Program",
+    "change_logo": "Change Logo",
+    "add_university_logo": "Add University Logo",
+    "add_campus_logo": "Add Campus Logo",
+    "faculty_name": "Faculty Name",
+    "program_name": "Program Name",
+    "degree_type": "Degree Type",
+    "duration_years": "Duration (Years)",
+    "language": "Language",
+    "academic_programs_title": "Academic Programs",
+    "faculties_departments": "Faculties/Departments",
+    "university_logo_alt": "University logo"
+  },
+  "university_card": {
+    "verified": "Verified",
+    "more_programs": "more",
+    "campus": "campus",
+    "campuses": "campuses",
+    "add_to_compare": "Add to Compare",
+    "added_toast": "Added to comparison!",
+    "max_compare_alert": "Maximum 3 universities can be compared at once."
+  },
+  "compare": {
+    "title": "Compare Universities",
+    "subtitle": "Side-by-side comparison to help you make the best decision.",
+    "no_selection": "No universities selected for comparison.",
+    "browse": "Browse Universities",
+    "remove": "Remove",
+    "view_details": "View Details",
+    "criteria": "Criteria",
+    "location": "Location",
+    "rating": "Rating",
+    "country": "Country",
+    "student_body_size": "Student Body Size",
+    "programs_available": "Programs Available",
+    "campuses": "Campuses",
+    "faculties": "Faculties",
+    "housing": "Housing",
+    "verified": "Verified",
+    "unverified": "Unverified",
+    "action": "Action",
+    "na": "N/A",
+    "available": "Available",
+    "not_available": "Not Available",
+    "programs_label": "programs"
+  },
+  "favorites": {
+    "title": "My Favorites",
+    "no_favorites": "You haven't saved any favorites yet",
+    "browse": "Browse Universities"
+  },
+  "auth": {
+    "login": "Login",
+    "signup": "Sign up",
+    "email": "Email",
+    "password": "Password",
+    "name": "Full Name",
+    "role": "Role",
+    "role_student": "Student",
+    "role_university": "University",
+    "role_university_full": "University Representative",
+    "login_button": "Login",
+    "signup_button": "Create Account",
+    "signing_in": "Signing in...",
+    "creating_account": "Creating account...",
+    "welcome_back": "Welcome Back",
+    "signin_subtitle": "Sign in to your {{appName}} account",
+    "create_account_title": "Create Account",
+    "signup_subtitle": "Join {{appName}} and start your educational journey",
+    "remember_me": "Remember me",
+    "forgot_password": "Forgot password?",
+    "already_have_account": "Already have an account?",
+    "dont_have_account": "Don't have an account?",
+    "sign_up_link": "Sign up",
+    "sign_in_link": "Sign in",
+    "error_invalid_credentials": "Invalid email or password",
+    "error_password_mismatch": "Passwords do not match",
+    "error_password_length": "Password must be at least 6 characters",
+    "error_email_exists": "Email already exists. Please try logging in.",
+    "error_occurred": "An error occurred. Please try again.",
+    "email_placeholder": "your.email@example.com",
+    "password_placeholder": "Enter your password",
+    "confirm_password": "Confirm Password",
+    "confirm_password_placeholder": "Confirm your password",
+    "name_placeholder": "Alemayehu Tesfaye"
+  },
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "remove": "Remove",
+    "search": "Search",
+    "filter": "Filter",
+    "clear": "Clear",
+    "apply": "Apply",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "view_full_size": "Click to view full size"
+  },
+  "footer": {
+    "tagline": "Your trusted partner in discovering the perfect educational institution across Ethiopia.",
+    "quick_links": "Quick Links",
+    "resources": "Resources",
+    "connect": "Connect",
+    "home": "Home",
+    "universities": "Universities",
+    "compare_schools": "Compare Schools",
+    "about_us": "About Us",
+    "study_guides": "Study Guides",
+    "admissions_info": "Admissions Info",
+    "scholarships": "Scholarships",
+    "help_center": "Help Center",
+    "contact_us": "Contact Us",
+    "our_story": "Our Story",
+    "blog": "Blog",
+    "newsletter": "Newsletter",
+    "privacy_policy": "Privacy Policy",
+    "terms_of_service": "Terms of Service",
+    "all_rights_reserved": "All rights reserved"
+  },
+  "about": {
+    "hero_title": "About {{appName}}",
+    "hero_subtitle": "Empowering students to discover their perfect educational path",
+    "story_title": "Our Story",
+    "story_p1": "{{appName}} was founded with a simple mission: to make finding the right educational institution accessible to every student in Ethiopia. We recognized that the process of choosing a school was fragmented, time-consuming, and often overwhelming.",
+    "story_p2": "Our platform consolidates comprehensive information about universities, colleges, and schools across the country, providing students with the tools they need to make informed decisions. We believe that education is the foundation of personal and national growth, and we're committed to making quality educational information accessible to all.",
+    "story_p3": "What started as a small project has grown into a comprehensive platform serving thousands of students across Ethiopia. We continue to expand our database, improve our tools, and listen to feedback from students, parents, and educators.",
+    "mission_title": "Our Mission",
+    "mission_text": "To empower students with transparent, comprehensive, and reliable information about educational institutions, enabling them to discover institutions that align with their academic goals, financial capabilities, and career aspirations.",
+    "vision_title": "Our Vision",
+    "vision_text": "To become the most trusted and comprehensive educational discovery platform in Ethiopia, connecting millions of students with their ideal educational pathways and contributing to the country's educational development.",
+    "values_title": "Our Values",
+    "values_subtitle": "The principles that guide everything we do",
+    "value_transparency": "Transparency",
+    "value_transparency_desc": "We believe in providing honest, accurate, and up-to-date information to help students make informed decisions.",
+    "value_accessibility": "Accessibility",
+    "value_accessibility_desc": "Education should be accessible to everyone, regardless of background, location, or financial situation.",
+    "value_innovation": "Innovation",
+    "value_innovation_desc": "We continuously improve our platform with new features and tools to better serve the student community.",
+    "offer_title": "What We Offer",
+    "offer_subtitle": "Comprehensive tools and resources to support your educational journey",
+    "offer_item_1": "Comprehensive database of 50+ universities and institutions",
+    "offer_item_2": "Detailed program information with admission requirements",
+    "offer_item_3": "Real student reviews and ratings",
+    "offer_item_4": "Side-by-side comparison tools",
+    "offer_item_5": "Multilingual support in six languages",
+    "offer_item_6": "Up-to-date tuition and financial aid information",
+    "offer_item_7": "Expert guides and resources",
+    "offer_item_8": "Career pathway information",
+    "offer_item_9": "Scholarship and financial aid resources",
+    "impact_title": "Our Impact",
+    "impact_p1": "Since our launch, {{appName}} has helped thousands of students navigate their educational journey. We're proud to be part of their success stories and continue to expand our reach.",
+    "impact_stat_students": "Students Helped",
+    "impact_stat_universities": "Universities Listed",
+    "impact_stat_programs": "Programs Available",
+    "impact_stat_languages": "Languages Supported",
+    "cta_title": "Join Our Community",
+    "cta_subtitle": "Start your educational journey today and discover the perfect university for you.",
+    "cta_button": "Explore Universities",
+    "learn_more": "Learn More About Us"
+  },
+  "help": {
+    "hero_title": "Help Center",
+    "hero_subtitle": "Find answers to common questions and learn how to make the most of {{appName}}.",
+    "quick_link_getting_started": "Getting Started",
+    "quick_link_getting_started_desc": "New to {{appName}}? Start here",
+    "quick_link_search_guide": "Search Guide",
+    "quick_link_search_guide_desc": "Learn advanced search tips",
+    "quick_link_contact": "Contact Support",
+    "quick_link_contact_desc": "Need more help?",
+    "learn_more": "Learn more →",
+    "faq_title": "Frequently Asked Questions",
+    "faq_search_q": "How do I search for universities?",
+    "faq_search_a": "Use the search bar on the homepage or universities page. You can search by university name, city, program, or any keyword. Our advanced filters help you narrow down results by tuition range, rating, or program type. You can also use our category filters (K-12, Colleges, Grad Schools) for quick access.",
+    "faq_compare_q": "Can I compare multiple universities?",
+    "faq_compare_a": "Yes! Click the 'Add to Compare' button on any university card or profile page. You can compare up to three universities side-by-side to evaluate tuition, programs, ratings, facilities, and other key features. Visit the Compare page to see all your selected universities in one view.",
+    "faq_favorites_q": "How do I save my favorite universities?",
+    "faq_favorites_a": "Click the heart icon on any university card. Your favorites are saved locally in your browser and can be accessed from the 'Favorites' section in the navigation menu. You can add or remove favorites at any time.",
+    "faq_reviews_q": "Are the reviews verified?",
+    "faq_reviews_a": "Yes, we verify student reviews to ensure authenticity. Reviews marked with a verified badge are from confirmed current students or alumni of the institution. We encourage honest feedback and moderate reviews to maintain quality.",
+    "faq_updates_q": "How often is the information updated?",
+    "faq_updates_a": "We update our database regularly, typically at the start of each academic year and whenever universities provide new information. However, we recommend verifying critical information like tuition fees, admission requirements, and deadlines directly with the institution for the most current details.",
+    "faq_free_q": "Is {{appName}} free to use?",
+    "faq_free_a": "Yes! {{appName}} is completely free for students. All features including search, comparison, reviews, and resources are available at no cost. We're committed to making educational information accessible to everyone.",
+    "faq_write_review_q": "How do I write a review?",
+    "faq_write_review_a": "Navigate to a university's profile page and click on the 'Reviews' tab. You'll find a form at the bottom where you can share your experience. Your review helps other students make informed decisions!",
+    "faq_languages_q": "What languages are supported?",
+    "faq_languages_a": "{{appName}} is available in six languages: English, Amharic, Tigrinya, Afaan Oromo, Somali, and Afar. Use the language switcher in the header to change your preferred language.",
+    "faq_request_q": "Can I request a university to be added?",
+    "faq_request_a": "Absolutely! We're always expanding our database. Contact us through the Contact page or email us at info@unichoice.et with the university details, and we'll work to add it to our platform.",
+    "faq_tuition_q": "How accurate is the tuition information?",
+    "faq_tuition_a": "We strive to provide accurate tuition information, but fees can vary by program, degree level, and change annually. Always confirm the exact tuition with the university's admissions office before making financial decisions.",
+    "still_need_help": "Still need help?",
+    "still_need_help_desc": "Can't find what you're looking for? Our support team is here to help you with any questions or concerns.",
+    "contact_support": "Contact Support"
+  },
+  "contact": {
+    "hero_title": "Get in Touch",
+    "hero_subtitle": "Have questions? We're here to help. Reach out to our team and we'll get back to you as soon as possible.",
+    "info_title": "Contact Information",
+    "email_title": "Email",
+    "email_value": "info@unichoice.et",
+    "email_response": "We respond within 24 hours",
+    "phone_title": "Phone",
+    "phone_value": "+251 911 234 567",
+    "phone_hours": "Mon-Fri, 9AM-6PM EAT",
+    "address_title": "Address",
+    "address_value": "Addis Ababa, Ethiopia",
+    "address_visit": "Visit our office during business hours",
+    "follow_us": "Follow Us",
+    "form_title": "Send us a Message",
+    "form_name": "Name",
+    "form_name_placeholder": "Your full name",
+    "form_email": "Email",
+    "form_email_placeholder": "your.email@example.com",
+    "form_subject": "Subject",
+    "form_subject_placeholder": "What is this regarding?",
+    "form_message": "Message",
+    "form_message_placeholder": "Tell us how we can help...",
+    "form_submit": "Send Message",
+    "form_success": "Thank you for your message! We will get back to you soon.",
+    "faq_title": "Frequently Asked Questions",
+    "faq_quick_q": "How quickly do you respond?",
+    "faq_quick_a": "We typically respond within 24 hours during business days.",
+    "faq_universities_q": "Can universities contact you?",
+    "faq_universities_a": "Yes! Universities can reach out to be listed or update their information.",
+    "faq_counseling_q": "Do you offer student counseling?",
+    "faq_counseling_a": "While we provide resources, we recommend consulting with school counselors for personalized advice."
+  },
+  "legal": {
+    "privacy_content": "Privacy policy content coming soon...",
+    "terms_content": "Terms of service content coming soon..."
+  },
+  "resources": {
+    "hero_title": "Resources & Guides",
+    "hero_subtitle": "Access comprehensive guides, tips, and resources to help you navigate your educational journey.",
+    "back_to_resources": "← Back to Resources",
+    "admissions_title": "Admissions Guide",
+    "admissions_desc": "Complete guide to university admissions in Ethiopia, including requirements, deadlines, and tips for a successful application.",
+    "scholarships_title": "Scholarships & Financial Aid",
+    "scholarships_desc": "Discover available scholarships, grants, and financial aid programs to support your education.",
+    "blog_title": "Student Blog & Insights",
+    "blog_desc": "Read stories, tips, and insights from current students and alumni.",
+    "additional_title": "Additional Resources",
+    "resource_career": "Career Guide",
+    "resource_study": "Study Tips",
+    "resource_financial": "Financial Planning",
+    "resource_life": "Student Life",
+    "learn_more": "Learn more →"
+  },
+  "profile": {
+    "profile": "Profile",
+    "university_setup_title": "Welcome to UniChoice!",
+    "university_setup_subtitle": "Set up your university account with detailed information",
+    "university_setup_desc": "Add your university profile, campuses, programs, and other important details to help students discover your institution.",
+    "profile_view_label": "Profile View:",
+    "profile_view_desc": "This is how students see your university profile",
+    "tab_overview": "Overview",
+    "tab_edit": "Edit",
+    "tab_favorites": "Favorites",
+    "tab_reviews": "Reviews",
+    "tab_settings": "Settings",
+    "personal_information": "Personal Information",
+    "academic_information": "Academic Information",
+    "about_me": "About Me",
+    "edit_profile": "Edit Profile",
+    "full_name": "Full Name",
+    "email": "Email",
+    "phone": "Phone",
+    "phone_number": "Phone Number",
+    "date_of_birth": "Date of Birth",
+    "address": "Address",
+    "gpa": "GPA",
+    "university": "Current University",
+    "major": "Major/Field of Study",
+    "graduation_year": "Graduation Year",
+    "expected_graduation": "Expected Graduation",
+    "bio": "Bio",
+    "email_cannot_change": "Email cannot be changed",
+    "save": "Save Changes",
+    "activity_summary": "Activity Summary",
+    "favorite_universities": "Favorite Universities",
+    "reviews_written": "Reviews Written",
+    "member_since": "Member Since",
+    "quick_actions": "Quick Actions",
+    "explore_universities": "Explore Universities",
+    "no_favorites_yet": "No favorites yet",
+    "start_exploring": "Start exploring universities and add them to your favorites!",
+    "my_reviews": "My Reviews",
+    "no_reviews_yet": "No reviews yet",
+    "share_experience": "Share your experience with other students!",
+    "browse_universities": "Browse Universities",
+    "university_id": "University ID",
+    "settings": "Settings",
+    "account_settings": "Account Settings",
+    "account_type": "Account Type",
+    "danger_zone": "Danger Zone",
+    "delete_account": "Delete Account",
+    "delete_account_warning": "Once you delete your account, there is no going back. Please be certain.",
+    "delete_account_confirm": "Are you sure you want to delete your account? This action cannot be undone."
+  },
+  "universities_data": {
+      "aau": {
+        "campuses": {
+          "aau-main": {
+            "description": "The historic main campus houses the College of Social Sciences, College of Humanities, Language Studies and Journalism, and the Central Administration. This campus features the iconic Sidist Kilo monument and is the heart of AAU's academic activities."
+          },
+          "aau-med": {
+            "description": "Dedicated campus for medical and health sciences including the School of Medicine, School of Pharmacy, School of Nursing, and allied health programs. Includes the Black Lion Teaching Hospital."
+          },
+          "aau-tech": {
+            "description": "Modern campus housing the College of Natural and Computational Sciences with state-of-the-art laboratories for physics, chemistry, biology, mathematics, and computer science."
+          },
+          "aau-eng": {
+            "description": "Specialized campus for engineering and technology programs including Electrical, Civil, Mechanical, Chemical, and Computer Engineering. Features advanced laboratories and workshops."
+          },
+          "aau-bus": {
+            "description": "Campus dedicated to business and economics education, housing the College of Business and Economics with programs in Business Administration, Accounting, Economics, and Management."
+          },
+          "aau-law": {
+            "description": "Campus for legal education, housing the Faculty of Law with comprehensive programs in Ethiopian and international law."
+          },
+          "aau-edu": {
+            "description": "Campus for teacher education and educational sciences, offering programs in education across various disciplines."
+          }
+        },
+        "faculties": {
+          "aau-med": {
+            "description": "One of Ethiopia's premier medical schools offering comprehensive health sciences education including Medicine, Pharmacy, Nursing, Public Health, and allied health programs."
+          },
+          "aau-eng": {
+            "description": "Leading engineering college offering programs in Electrical, Civil, Mechanical, Chemical, Computer, and Software Engineering with modern laboratories and industry partnerships."
+          },
+          "aau-ncs": {
+            "description": "Comprehensive natural sciences programs in Mathematics, Physics, Chemistry, Biology, and Computer Science with research-focused curriculum."
+          },
+          "aau-bus": {
+            "description": "Premier business school offering programs in Business Administration, Accounting, Economics, Finance, Management, and Marketing."
+          },
+          "aau-law": {
+            "description": "Established legal education institution providing comprehensive programs in Ethiopian law, international law, and legal studies."
+          },
+          "aau-social": {
+            "description": "Diverse social sciences programs including Sociology, Psychology, Anthropology, Political Science, and Social Work."
+          },
+          "aau-humanities": {
+            "description": "Comprehensive humanities education including History, Philosophy, Languages, Literature, and Cultural Studies."
+          },
+          "aau-edu": {
+            "description": "Teacher education and educational sciences programs preparing educators for primary, secondary, and higher education levels."
+          },
+          "aau-jour": {
+            "description": "Media and communication studies offering programs in Journalism, Broadcasting, Public Relations, and Media Studies."
+          }
+        },
+        "admission_requirements": "Addis Ababa University has competitive admission requirements. For undergraduate programs: Minimum high school GPA of 3.0 or equivalent. National university entrance examination scores required with specific cut-off points varying by program. Medical and engineering programs require higher entrance exam scores. For international students: Equivalent qualifications and proof of English proficiency. Application package includes completed application form, official transcripts, recommendation letters, medical certificate, and passport photos. Some programs may require additional entrance tests or interviews.",
+        "application_deadline": "September 15 for regular admission. Early admission deadline: July 30. Late applications may be considered for programs with available spaces.",
+        "housing_description": "On-campus housing available with multiple dormitories and hostels. Accommodations include single, double, and shared rooms. Off-campus housing is widely available in Addis Ababa with various options from apartments to shared housing. University provides housing assistance and maintains a housing registry. Basic amenities provided including dining facilities, study rooms, and recreational areas.",
+        "description": "Addis Ababa University (AAU) is Ethiopia's oldest and largest higher education institution, established in 1950. As the country's flagship university, AAU has been at the forefront of academic excellence, research, and innovation. The university offers a comprehensive range of undergraduate and graduate programs across multiple disciplines including medicine, engineering, law, business, social sciences, and natural sciences. With a strong commitment to research and community service, AAU has produced many of Ethiopia's leading professionals, academics, and public servants. The university is recognized internationally and maintains partnerships with universities worldwide. Its main campus in the capital city provides state-of-the-art facilities including modern laboratories, extensive libraries, research centers, and recreational facilities.",
+        "mission": "To provide quality education through teaching, learning, research, and community service; to produce competent graduates who are well-rounded, critical thinkers, and ethical citizens; and to advance knowledge through research and innovation that addresses national and global challenges.",
+        "vision": "To be a world-class university recognized for excellence in teaching, research, and community engagement, serving as a beacon of knowledge, innovation, and academic freedom that contributes to the advancement of Ethiopia and Africa.",
+        "history": "Addis Ababa University was established in 1950 as the University College of Addis Ababa by Emperor Haile Selassie I, making it Ethiopia's first institution of higher learning. It was initially affiliated with the University of London. In 1961, it became Haile Selassie I University and was renamed Addis Ababa University after the fall of the monarchy in 1975. Throughout its history, AAU has been the center of academic excellence and intellectual discourse in Ethiopia, producing generations of leaders, professionals, and scholars. The university has expanded significantly over the decades, adding new colleges, programs, and research centers. Today, it stands as one of Africa's leading universities, known for its research output, academic programs, and contribution to Ethiopia's development.",
+        "about_city": "Addis Ababa, meaning 'New Flower' in Amharic, is the capital and largest city of Ethiopia, situated at an elevation of 2,355 meters. Founded in 1886 by Emperor Menelik II, it serves as the political, economic, and cultural hub of Ethiopia and Africa. The city is home to the African Union headquarters and numerous international organizations. Addis Ababa is a vibrant metropolis with a rich cultural heritage, featuring museums, theaters, markets, and historical sites. The city offers excellent educational opportunities, modern infrastructure, and a diverse community. It's known for its pleasant climate, being located in the central highlands, and serves as the gateway to Ethiopia's rich historical and natural attractions."
+      },
+      "bdu": {
+        "campuses": {
+          "bdu-main": {
+            "description": "The main administrative campus housing the College of Business and Economics, College of Social Sciences and Humanities, College of Law, and central administration. Features modern buildings, libraries, and administrative offices."
+          },
+          "bdu-poly": {
+            "description": "Dedicated campus for engineering programs including Water Resources, Hydraulic, Civil, Electrical, Mechanical, Chemical, and Textile Engineering. Features advanced laboratories, workshops, and engineering facilities."
+          },
+          "bdu-health": {
+            "description": "Modern health sciences campus housing the School of Medicine, School of Pharmacy, School of Nursing, and Public Health programs. Includes the Teaching Hospital and clinical training facilities."
+          },
+          "bdu-agri": {
+            "description": "Campus for agricultural sciences, environmental studies, and natural resource management. Features research farms, laboratories, and greenhouses for practical agricultural training."
+          },
+          "bdu-science": {
+            "description": "Campus for natural and computational sciences including Mathematics, Physics, Chemistry, Biology, Computer Science, and Information Technology with modern laboratories and computer facilities."
+          },
+          "bdu-edu": {
+            "description": "Teacher education campus offering programs in Education, Psychology, and Educational Planning with dedicated facilities for teacher training and practice."
+          }
+        },
+        "faculties": {
+          "bdu-eng": {
+            "description": "Premier engineering college known for Water Resources and Hydraulic Engineering. Offers comprehensive engineering programs with modern laboratories and industry partnerships."
+          },
+          "bdu-med": {
+            "description": "Comprehensive health sciences education including Medicine, Pharmacy, Nursing, and Public Health programs with clinical training facilities."
+          },
+          "bdu-agri": {
+            "description": "Agricultural sciences and environmental studies with focus on sustainable agriculture, natural resource management, and environmental protection."
+          },
+          "bdu-ncs": {
+            "description": "Natural sciences and computing programs including Mathematics, Physics, Chemistry, Biology, Computer Science, and Information Technology."
+          },
+          "bdu-bus": {
+            "description": "Business and economics education with programs in Business Administration, Accounting, Economics, and Management."
+          },
+          "bdu-law": {
+            "description": "Legal education programs focusing on Ethiopian law, international law, and legal practice."
+          },
+          "bdu-social": {
+            "description": "Social sciences and humanities programs including Geography, History, Languages, and Cultural Studies."
+          },
+          "bdu-edu": {
+            "description": "Teacher education and behavioral sciences preparing educators and professionals in education and psychology."
+          }
+        },
+        "admission_requirements": "Bahir Dar University admission requirements: Minimum high school GPA of 2.5 for undergraduate programs. National university entrance examination scores required with program-specific cut-off points. Water Resources Engineering, Medicine, and other competitive programs require higher entrance exam scores. Application package includes completed application form, official transcripts, medical certificate, and passport photos. Some programs may require additional entrance tests. International students need equivalent qualifications and proof of English proficiency.",
+        "application_deadline": "September 20 for regular admission. Early admission deadline: August 15. Late applications accepted for programs with available spaces until October 1.",
+        "housing_description": "On-campus housing available with multiple dormitories and hostels for both male and female students. Accommodations include single, double, and shared rooms with basic amenities. Off-campus housing is available in Bahir Dar city with various options. University provides housing assistance and maintains a registry of recommended off-campus accommodations. Dining facilities, study rooms, and recreational areas are available on campus.",
+        "description": "Bahir Dar University (BDU) is a comprehensive public university located in the beautiful lakeside city of Bahir Dar, the capital of Amhara Region. Established in 2000 through the merger of Bahir Dar Polytechnic Institute and Bahir Dar Teachers College, BDU has rapidly grown into one of Ethiopia's leading universities. The university is particularly renowned for its excellence in Water Resources Engineering and Hydraulic Engineering, making significant contributions to Ethiopia's water resource management and development. BDU offers diverse academic programs across engineering, health sciences, business, law, education, natural sciences, and social sciences. With modern facilities, well-equipped laboratories, and a strong focus on research and community engagement, BDU provides students with quality education and practical skills. The university's strategic location near Lake Tana and the Blue Nile makes it an ideal setting for environmental and water resource studies.",
+        "mission": "To provide quality education through teaching, learning, research, and community service; to produce competent graduates equipped with knowledge, skills, and ethical values; to contribute to national development through research and innovation, particularly in water resources, engineering, and applied sciences; and to serve the community through outreach programs and knowledge transfer.",
+        "vision": "To be a leading university in Ethiopia and Africa, recognized for excellence in water resources engineering, applied sciences, and education, contributing to sustainable development and serving as a center of knowledge, innovation, and academic excellence.",
+        "history": "Bahir Dar University was established in 2000 through the merger of Bahir Dar Polytechnic Institute (founded in 1963) and Bahir Dar Teachers College (founded in 1972). The Polytechnic Institute was originally established to provide technical and engineering education, with particular focus on water resources and hydraulic engineering. The Teachers College was established to train educators for the region. The merger created a comprehensive university that combined technical excellence with teacher education. Over the past two decades, BDU has expanded significantly, adding new colleges, programs, and research centers. The university has become particularly renowned for its Water Resources Engineering program, which is considered one of the best in Ethiopia and Africa. BDU has also established strong partnerships with international universities and organizations, particularly in water resource management and engineering. Today, BDU stands as one of Ethiopia's leading universities, known for its academic excellence, research contributions, and community engagement.",
+        "about_city": "Bahir Dar, meaning 'Seashore' in Amharic, is the capital city of Amhara Region, located on the southern shore of Lake Tana, the largest lake in Ethiopia and the source of the Blue Nile. The city is approximately 578 km north of Addis Ababa. Bahir Dar is known for its scenic beauty, pleasant climate, and proximity to the Blue Nile Falls (Tis Abay), one of Ethiopia's most famous natural attractions. The city combines modern urban development with natural beauty, featuring palm-lined avenues, beautiful lakeside promenades, and a vibrant local culture. Bahir Dar serves as a gateway to the historic sites of Gondar and the Simien Mountains. The city offers a peaceful learning environment with excellent infrastructure, making it an ideal location for higher education. The proximity to Lake Tana provides opportunities for research in water resources, fisheries, and environmental studies."
+      },
+      "uog": {
+        "campuses": {
+          "uog-main": {
+            "description": "The main campus houses the College of Medicine and Health Sciences, Business and Economics, and Natural and Computational Sciences."
+          },
+          "uog-health": {
+            "description": "Dedicated campus for medical and health sciences programs including the Teaching Hospital."
+          }
+        },
+        "faculties": {
+          "uog-med": {
+            "description": "Ethiopia's oldest medical school offering MD, Nursing, Midwifery, and other health programs."
+          },
+          "uog-bus": {
+            "description": "Offers programs in Business Administration, Accounting, Economics, and Management."
+          },
+          "uog-law": {
+            "description": "Provides comprehensive legal education with focus on Ethiopian and international law."
+          },
+          "uog-agri": {
+            "description": "Offers agricultural sciences programs focusing on sustainable farming and food security."
+          },
+          "uog-ncs": {
+            "description": "Provides programs in mathematics, physics, chemistry, biology, and computer science."
+          }
+        },
+        "admission_requirements": "Minimum GPA of 2.5 for undergraduate programs. Entrance exam scores required. Specific requirements vary by program. Medical programs require higher scores. All applicants must provide completed application form, transcripts, and supporting documents.",
+        "application_deadline": "September 30 for regular admission",
+        "housing_description": "On-campus housing available for students. Hostels and dormitories with basic amenities. Off-campus housing options available in Gondar city.",
+        "description": "Established in 1954 as the Public Health College, University of Gondar is Ethiopia's oldest medical school and a leading institution in health sciences, social sciences, and research.",
+        "mission": "To provide quality education, conduct research, and serve the community through training competent professionals in health sciences, social sciences, and other disciplines.",
+        "vision": "To be a leading university in Ethiopia and Africa, recognized for excellence in teaching, research, and community service, particularly in health sciences.",
+        "history": "Founded in 1954 as the Public Health College and Training Center, it became a comprehensive university in 2004. Originally focused on public health and medical training, it has expanded to include multiple colleges and faculties.",
+        "about_city": "Gondar, known as the 'Camelot of Africa', is a historic city in the Amhara Region. Located in the northwest highlands, it was the capital of Ethiopia from 1632 to 1855. The city is famous for its Royal Enclosure with Fasil Ghebbi, a UNESCO World Heritage Site, featuring medieval castles and churches."
+      },
+      "ju": {
+        "campuses": {
+          "ju-main": {
+            "description": "The main campus houses the College of Agriculture and Veterinary Medicine, College of Business and Economics, and administrative offices."
+          },
+          "ju-health": {
+            "description": "Home to the College of Public Health and Medical Sciences, including the Teaching Hospital."
+          },
+          "ju-tech": {
+            "description": "Engineering and technology programs including Civil Engineering, Electrical Engineering, and Computer Science."
+          }
+        },
+        "faculties": {
+          "ju-agri": {
+            "description": "One of the oldest and largest agricultural colleges in Ethiopia, offering comprehensive programs in agriculture and veterinary medicine."
+          },
+          "ju-health": {
+            "description": "Offers medical, public health, and health sciences programs with strong emphasis on community health."
+          },
+          "ju-tech": {
+            "description": "Provides engineering and technology education with modern facilities and laboratories."
+          },
+          "ju-bus": {
+            "description": "Business and economics programs focusing on entrepreneurship and management."
+          },
+          "ju-law": {
+            "description": "Legal education programs emphasizing Ethiopian law and governance."
+          },
+          "ju-edu": {
+            "description": "Teacher training and educational programs across various disciplines."
+          },
+          "ju-ncs": {
+            "description": "Programs in mathematics, physics, chemistry, biology, and related fields."
+          },
+          "ju-social": {
+            "description": "Social sciences and humanities programs including languages, history, and geography."
+          }
+        },
+        "admission_requirements": "Minimum GPA of 2.5 for undergraduate programs. Entrance examination scores required. Specific requirements vary by college. Medical and engineering programs require higher entrance exam scores. Application package includes completed form, official transcripts, and supporting documents.",
+        "application_deadline": "September 15 for regular admission",
+        "housing_description": "On-campus dormitories and hostels available for students. Off-campus housing options in Jimma city. Basic amenities provided including dining facilities.",
+        "description": "Established in 1952, Jimma University is a leading public research university known for its community-oriented education approach, agricultural programs, health sciences, and comprehensive academic offerings.",
+        "mission": "To provide quality education through teaching, research, and community service, producing competent graduates who contribute to national development.",
+        "vision": "To be a center of excellence in teaching, research, and community service, particularly in agriculture and health sciences.",
+        "history": "Jimma University was established in 1999 through the amalgamation of Jimma College of Agriculture (founded in 1952) and Jimma Institute of Health Sciences (founded in 1983). It has grown into one of Ethiopia's leading universities with emphasis on community-based education.",
+        "about_city": "Jimma is the largest city in southwestern Ethiopia, located in the Oromia Region. It's a major commercial and agricultural hub, known for coffee production. The city has a warm climate and is surrounded by coffee plantations. Jimma is approximately 335 km southwest of Addis Ababa."
+      },
+      "hu": {
+        "campuses": {
+          "hu-main": {
+            "description": "The main administrative campus housing the College of Business and Economics, College of Social Sciences and Humanities, and administrative offices."
+          },
+          "hu-agri": {
+            "description": "Dedicated campus for agricultural sciences programs with research farms and laboratories."
+          },
+          "hu-law": {
+            "description": "Campus for legal education and governance studies."
+          },
+          "hu-med": {
+            "description": "Health sciences campus with Teaching Hospital and clinical facilities."
+          }
+        },
+        "faculties": {
+          "hu-med": {
+            "description": "Comprehensive medical and health sciences education with modern facilities."
+          },
+          "hu-agri": {
+            "description": "Agricultural programs focusing on sustainable agriculture and food security."
+          },
+          "hu-eng": {
+            "description": "Engineering programs including Electrical, Civil, and Computer Engineering."
+          },
+          "hu-bus": {
+            "description": "Business and economics education with focus on entrepreneurship."
+          },
+          "hu-law": {
+            "description": "Legal education programs with emphasis on Ethiopian law."
+          },
+          "hu-edu": {
+            "description": "Teacher education programs across various disciplines."
+          },
+          "hu-ncs": {
+            "description": "Natural and computational sciences programs in mathematics, physics, chemistry, and computer science."
+          }
+        },
+        "admission_requirements": "Minimum GPA of 2.5 for undergraduate programs. Entrance exam scores required. Specific requirements vary by program. Medical and engineering programs require higher scores.",
+        "application_deadline": "September 25 for regular admission",
+        "housing_description": "On-campus housing available with dormitories and hostels. Off-campus housing options in Hawassa city. Basic amenities provided.",
+        "description": "Established in 1999, Hawassa University is a national residential university offering 81 undergraduate, 108 master's, and 16 PhD programs across multiple colleges and campuses.",
+        "mission": "To provide quality education, conduct research, and serve the community through innovative teaching and learning, producing graduates who contribute to regional and national development.",
+        "vision": "To be a leading university in Ethiopia recognized for excellence in teaching, research, community service, and innovation in agriculture, health sciences, and technology.",
+        "history": "Hawassa University was established in 1999 and has grown to become one of Ethiopia's prominent universities, offering comprehensive programs across multiple disciplines with a focus on agriculture, health sciences, and technology.",
+        "about_city": "Hawassa is the capital of Sidama Region, located approximately 278 km south of Addis Ababa on the shores of Lake Hawassa. It's a popular tourist destination known for its beautiful lake, bird watching, and recreational activities. The city has a pleasant climate year-round."
+      }
+    }
   }
-}
-

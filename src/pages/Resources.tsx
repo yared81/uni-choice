@@ -1,16 +1,18 @@
 import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import ScrollReveal from '../components/ScrollReveal'
 
 export default function Resources() {
+  const { t } = useTranslation()
   const { category } = useParams()
   
   const resources = [
     {
       id: 'admissions',
-      title: 'Admissions Guide',
+      title: t('resources.admissions_title'),
       icon: '📝',
-      description: 'Complete guide to university admissions in Ethiopia, including requirements, deadlines, and tips for a successful application.',
+      description: t('resources.admissions_desc'),
       image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&h=600&fit=crop',
       content: `Applying to university can be overwhelming, but with the right information and preparation, you can navigate the process successfully.
 
@@ -53,9 +55,9 @@ Many universities offer scholarships and financial aid programs. Research these 
     },
     {
       id: 'scholarships',
-      title: 'Scholarships & Financial Aid',
+      title: t('resources.scholarships_title'),
       icon: '💰',
-      description: 'Discover available scholarships, grants, and financial aid programs to support your education.',
+      description: t('resources.scholarships_desc'),
       image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&h=600&fit=crop',
       content: `Financing your education is a crucial part of planning for university. Ethiopia offers various scholarship opportunities for eligible students.
 
@@ -101,9 +103,9 @@ Several international organizations provide funding:
     },
     {
       id: 'blog',
-      title: 'Student Blog & Insights',
+      title: t('resources.blog_title'),
       icon: '✍️',
-      description: 'Read stories, tips, and insights from current students and alumni.',
+      description: t('resources.blog_desc'),
       image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop',
       content: `Welcome to our community blog where students share their experiences, tips, and insights about university life in Ethiopia.
 
@@ -148,7 +150,7 @@ Stay tuned for regular updates from our student contributors!`
               </div>
               <div className="container-page relative z-10">
                 <Link to="/resources" className="text-olive hover:underline mb-6 inline-block font-medium">
-                  ← Back to Resources
+                  {t('resources.back_to_resources')}
                 </Link>
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
@@ -202,7 +204,7 @@ Stay tuned for regular updates from our student contributors!`
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8 }}
                 >
-                  Resources & Guides
+                  {t('resources.hero_title')}
                 </motion.h1>
                 <motion.p 
                   className="text-xl md:text-2xl text-charcoal/70 max-w-3xl mx-auto leading-relaxed"
@@ -210,7 +212,7 @@ Stay tuned for regular updates from our student contributors!`
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                  Access comprehensive guides, tips, and resources to help you navigate your educational journey.
+                  {t('resources.hero_subtitle')}
                 </motion.p>
               </div>
             </section>
@@ -250,7 +252,7 @@ Stay tuned for regular updates from our student contributors!`
                       </h3>
                       <p className="text-charcoal/70 leading-relaxed mb-6">{resource.description}</p>
                       <span className="text-olive font-bold mt-4 inline-block group-hover:translate-x-2 transition-transform">
-                        Learn more →
+                        {t('resources.learn_more')}
                       </span>
                     </Link>
                   </motion.div>
@@ -262,14 +264,14 @@ Stay tuned for regular updates from our student contributors!`
             <ScrollReveal>
               <section className="mt-24 py-16 bg-offwhite rounded-2xl p-10">
                 <h2 className="text-4xl font-heading font-bold text-center text-charcoal mb-12">
-                  Additional Resources
+                  {t('resources.additional_title')}
                 </h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {[
-                    { title: 'Career Guide', icon: '💼' },
-                    { title: 'Study Tips', icon: '📚' },
-                    { title: 'Financial Planning', icon: '💳' },
-                    { title: 'Student Life', icon: '🎓' }
+                    { title: t('resources.resource_career'), icon: '💼' },
+                    { title: t('resources.resource_study'), icon: '📚' },
+                    { title: t('resources.resource_financial'), icon: '💳' },
+                    { title: t('resources.resource_life'), icon: '🎓' }
                   ].map((item, i) => (
                     <motion.div
                       key={item.title}

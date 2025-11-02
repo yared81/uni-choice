@@ -29,7 +29,7 @@ i18n
     detection: {
       cookieMinutes: 60 * 24 * 365,
       cookieDomain: window.location.hostname,
-      lookupCookie: 'unimerk_lang'
+      lookupCookie: 'unichoice_lang'
     }
   })
 

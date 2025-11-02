@@ -16,6 +16,8 @@ export interface Campus {
   phone?: string
   email?: string
   description?: string
+  profilePicture?: string // Campus profile picture/logo
+  images?: string[] // Up to 10 images per campus
 }
 
 export interface Faculty {
@@ -32,7 +34,8 @@ export interface University {
   country?: string
   rating: number
   programs: Program[]
-  images: string[]
+  profilePicture?: string // University logo/profile picture
+  images: string[] // Up to 10 images in main profile section
   description: string
   verified?: boolean
   // Detailed Information
@@ -76,5 +79,15 @@ export interface Review {
   date: string
   helpfulCount: number
   verified?: boolean
+  replies?: ReviewReply[] // Replies from university representatives
+}
+
+export interface ReviewReply {
+  id: string
+  reviewId: string
+  author: string
+  comment: string
+  date: string
+  isUniversityReply: boolean
 }
 

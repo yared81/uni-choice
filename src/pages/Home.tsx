@@ -35,7 +35,7 @@ export default function Home() {
         <div className="absolute inset-0 opacity-5">
           <img 
             src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920&h=1080&fit=crop"
-            alt="University campus"
+            alt={t('landing.hero_image_alt')}
             className="w-full h-full object-cover"
           />
         </div>
@@ -51,9 +51,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Find the School
-            <br />
-            <span className="text-olive">That Fits You Best</span>
+            {t('landing.hero_title')}
           </motion.h1>
           
           <motion.p 
@@ -62,7 +60,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Finding the right school shouldn't be hard. From K‑12 to college to grad school, we make it easy to discover and connect with the best ones for you.
+            {t('landing.hero_subtitle')}
           </motion.p>
 
           {/* Centered Search */}
@@ -78,7 +76,6 @@ export default function Home() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                placeholder="Search by university name, city, program, or keyword..."
                 className="flex-1 bg-transparent outline-none text-base px-4 py-4 placeholder:text-charcoal/40"
               />
               <motion.button
@@ -87,7 +84,7 @@ export default function Home() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Search
+                {t('landing.search_button')}
               </motion.button>
             </div>
           </motion.div>
@@ -99,17 +96,21 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            {['K-12 Schools', 'Colleges', 'Grad Schools'].map((text, i) => (
+            {[
+              { key: 'k12', text: t('landing.quick_link_k12'), path: 'k12schools' },
+              { key: 'colleges', text: t('landing.quick_link_colleges'), path: 'colleges' },
+              { key: 'grad', text: t('landing.quick_link_grad'), path: 'gradschools' }
+            ].map((link, i) => (
               <motion.div
-                key={text}
+                key={link.key}
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <Link 
-                  to={`/universities?type=${text.toLowerCase().replace(' ', '')}`}
+                  to={`/universities?type=${link.path}`}
                   className="px-8 py-4 rounded-lg bg-white border-2 border-charcoal/10 hover:border-olive hover:shadow-xl transition-all duration-250 font-bold text-charcoal hover:text-olive"
                 >
-                  {text}
+                  {link.text}
                 </Link>
               </motion.div>
             ))}
@@ -138,10 +139,10 @@ export default function Home() {
           <div className="container-page">
             <div className="grid md:grid-cols-4 gap-8 text-center">
               {[
-                { number: '50+', label: 'Universities' },
-                { number: '10K+', label: 'Students Helped' },
-                { number: '200+', label: 'Programs Listed' },
-                { number: '6', label: 'Languages' }
+                { number: '50+', label: t('landing.stats_universities') },
+                { number: '10K+', label: t('landing.stats_students') },
+                { number: '200+', label: t('landing.stats_programs') },
+                { number: '6', label: t('landing.stats_languages') }
               ].map((stat, i) => (
                 <motion.div
                   key={stat.label}
@@ -167,22 +168,19 @@ export default function Home() {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <h2 className="text-4xl md:text-5xl font-heading font-bold text-charcoal mb-6">
-                  Your Future Starts Here
+                  {t('landing.future_starts_title')}
                 </h2>
                 <p className="text-lg text-charcoal/70 leading-relaxed mb-6">
-                  UniMerk is the trusted platform connecting students with the perfect educational institutions across Ethiopia. 
-                  We've revolutionized the way students discover, compare, and make informed decisions about their academic journey.
+                  {t('landing.future_starts_p1', { appName: t('app.name') })}
                 </p>
                 <p className="text-lg text-charcoal/70 leading-relaxed mb-8">
-                  With comprehensive data on over 50+ universities, detailed program information, real student reviews, 
-                  and powerful comparison tools, we empower you to find the institution that aligns with your goals, 
-                  budget, and aspirations.
+                  {t('landing.future_starts_p2')}
                 </p>
                 <Link
                   to="/about"
                   className="inline-block px-8 py-4 rounded-lg bg-olive text-white font-bold hover:bg-olive/90 transition-all duration-250 hover:scale-105 shadow-lg"
                 >
-                  Learn More About Us
+                  {t('landing.learn_more_button')}
                 </Link>
               </div>
               <motion.div
@@ -194,13 +192,13 @@ export default function Home() {
               >
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                   <img 
-                    src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&h=800&fit=crop"
-                    alt="Students studying"
+                    src="/img/ethio_student.jpg"
+                    alt={t('landing.students_image_alt')}
                     className="w-full h-96 object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 to-transparent" />
                   <div className="absolute bottom-8 left-8 right-8 text-white">
-                    <p className="text-xl font-heading font-bold">Join thousands of successful students</p>
+                    <p className="text-xl font-heading font-bold">{t('landing.students_join_title')}</p>
                   </div>
                 </div>
               </motion.div>
@@ -215,10 +213,10 @@ export default function Home() {
           <div className="container-page">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-heading font-bold text-charcoal mb-4">
-                Why Choose UniMerk?
+                {t('landing.why_choose_title', { appName: t('app.name') })}
               </h2>
               <p className="text-xl text-charcoal/70 max-w-2xl mx-auto">
-                Everything you need to make the perfect choice for your education
+                {t('landing.why_choose_subtitle')}
               </p>
             </div>
             
@@ -230,8 +228,8 @@ export default function Home() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                   ),
-                  title: 'Comprehensive Search',
-                  desc: 'Find universities by location, program, tuition, rating, and more. Our advanced filters help you narrow down your options instantly.'
+                  title: t('landing.feature_comprehensive_search_title'),
+                  desc: t('landing.feature_comprehensive_search_desc')
                 },
                 {
                   icon: (
@@ -239,8 +237,8 @@ export default function Home() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                     </svg>
                   ),
-                  title: 'Side-by-Side Comparison',
-                  desc: 'Compare up to three universities simultaneously. Evaluate tuition, programs, ratings, and key features in one view.'
+                  title: t('landing.feature_comparison_title'),
+                  desc: t('landing.feature_comparison_desc')
                 },
                 {
                   icon: (
@@ -248,8 +246,8 @@ export default function Home() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                     </svg>
                   ),
-                  title: 'Authentic Reviews',
-                  desc: 'Read verified reviews from current students and alumni. Get honest insights about campus life, academics, and career outcomes.'
+                  title: t('landing.feature_reviews_title'),
+                  desc: t('landing.feature_reviews_desc')
                 },
                 {
                   icon: (
@@ -257,8 +255,8 @@ export default function Home() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
                   ),
-                  title: 'Expert Guidance',
-                  desc: 'Access resources, guides, and expert advice to navigate the application process and make informed decisions.'
+                  title: t('landing.expert_guidance_title'),
+                  desc: t('landing.expert_guidance_desc')
                 },
                 {
                   icon: (
@@ -266,8 +264,8 @@ export default function Home() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   ),
-                  title: 'Up-to-Date Information',
-                  desc: 'Our database is constantly updated with the latest tuition fees, program offerings, admission requirements, and deadlines.'
+                  title: t('landing.up_to_date_title'),
+                  desc: t('landing.up_to_date_desc')
                 },
                 {
                   icon: (
@@ -275,8 +273,8 @@ export default function Home() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                   ),
-                  title: 'Multilingual Support',
-                  desc: 'Access our platform in six languages including English, Amharic, Tigrinya, Afaan Oromo, Somali, and Afar.'
+                  title: t('landing.multilingual_title'),
+                  desc: t('landing.multilingual_desc')
                 }
               ].map((feature, i) => (
                 <motion.div
@@ -306,10 +304,10 @@ export default function Home() {
           <div className="container-page">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-heading font-bold text-charcoal mb-4">
-                What Students Say
+                {t('landing.testimonials_title')}
               </h2>
               <p className="text-xl text-charcoal/70">
-                Real experiences from students who found their perfect match
+                {t('landing.testimonials_subtitle')}
               </p>
             </div>
             
@@ -319,19 +317,19 @@ export default function Home() {
                   name: 'Meron Teklu',
                   university: 'Addis Ababa University',
                   image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=faces',
-                  text: 'UniMerk helped me compare universities easily. I found the perfect program that matched both my interests and budget. The detailed reviews from current students were incredibly helpful!'
+                  text: t('landing.testimonial_1', { appName: t('app.name') })
                 },
                 {
                   name: 'Dawit Alemayehu',
                   university: 'Bahir Dar University',
                   image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=faces',
-                  text: 'As a first-generation student, I had no idea where to start. UniMerk provided all the information I needed in one place. The comparison tool made it so easy to see my options side by side.'
+                  text: t('landing.testimonial_2', { appName: t('app.name') })
                 },
                 {
                   name: 'Sara Mohammed',
                   university: 'Addis Ababa University',
                   image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=faces',
-                  text: 'I love how easy it is to search and filter universities. The multilingual support meant my family could help me make the decision. Thank you UniMerk!'
+                  text: t('landing.testimonial_3', { appName: t('app.name') })
                 }
               ].map((testimonial, i) => (
                 <motion.div
@@ -370,7 +368,7 @@ export default function Home() {
           <div className="absolute inset-0 opacity-10">
             <img 
               src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920&h=1080&fit=crop"
-              alt="Students"
+              alt={t('landing.cta_image_alt')}
               className="w-full h-full object-cover"
             />
           </div>
@@ -381,7 +379,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              Ready to Find Your Perfect School?
+              {t('landing.cta_title')}
             </motion.h2>
             <motion.p 
               className="text-xl md:text-2xl mb-10 text-white/90 max-w-2xl mx-auto"
@@ -390,7 +388,7 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
             >
-              Join thousands of students who have found their ideal educational institution through UniMerk.
+              {t('landing.cta_description', { appName: t('app.name') })}
             </motion.p>
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -402,7 +400,7 @@ export default function Home() {
                 to="/universities"
                 className="inline-block px-12 py-5 rounded-lg bg-white text-olive font-bold text-xl hover:bg-offwhite transition-all duration-250 hover:scale-110 shadow-2xl"
               >
-                Start Your Search Today
+                {t('landing.cta_button')}
               </Link>
             </motion.div>
           </div>

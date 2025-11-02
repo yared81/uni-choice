@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import { useAuth } from '../contexts/AuthContext'
 import ScrollReveal from '../components/ScrollReveal'
 
 export default function Login() {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const { login, user } = useAuth()
   const [email, setEmail] = useState('')
@@ -30,10 +32,10 @@ export default function Login() {
           }
         }, 100)
       } else {
-        setError('Invalid email or password')
+        setError(t('auth.error_invalid_credentials'))
       }
     } catch (err) {
-      setError('An error occurred. Please try again.')
+      setError(t('auth.error_occurred'))
     } finally {
       setLoading(false)
     }
@@ -50,10 +52,10 @@ export default function Login() {
             transition={{ duration: 0.5 }}
           >
             <h1 className="text-4xl font-heading font-bold text-charcoal mb-2 text-center">
-              Welcome Back
+              {t('auth.welcome_back')}
             </h1>
             <p className="text-charcoal/70 text-center mb-8">
-              Sign in to your UniMerk account
+              {t('auth.signin_subtitle', { appName: t('app.name') })}
             </p>
 
             {error && (
@@ -69,7 +71,7 @@ export default function Login() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="block text-sm font-bold text-charcoal mb-2">
-                  Email Address
+                  {t('auth.email')}
                 </label>
                 <input
                   type="email"
@@ -77,13 +79,12 @@ export default function Login() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                  placeholder="your.email@example.com"
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-bold text-charcoal mb-2">
-                  Password
+                  {t('auth.password')}
                 </label>
                 <input
                   type="password"
@@ -91,17 +92,16 @@ export default function Login() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                  placeholder="Enter your password"
                 />
               </div>
 
               <div className="flex items-center justify-between text-sm">
                 <label className="flex items-center gap-2 text-charcoal/70">
                   <input type="checkbox" className="rounded" />
-                  <span>Remember me</span>
+                  <span>{t('auth.remember_me')}</span>
                 </label>
                 <Link to="/help" className="text-olive hover:underline">
-                  Forgot password?
+                  {t('auth.forgot_password')}
                 </Link>
               </div>
 
@@ -112,15 +112,15 @@ export default function Login() {
                 whileHover={{ scale: loading ? 1 : 1.02 }}
                 whileTap={{ scale: loading ? 1 : 0.98 }}
               >
-                {loading ? 'Signing in...' : 'Sign In'}
+                {loading ? t('auth.signing_in') : t('auth.login_button')}
               </motion.button>
             </form>
 
             <div className="mt-8 text-center">
               <p className="text-charcoal/70">
-                Don't have an account?{' '}
+                {t('auth.dont_have_account')}{' '}
                 <Link to="/signup" className="text-olive font-bold hover:underline">
-                  Sign up
+                  {t('auth.sign_up_link')}
                 </Link>
               </p>
             </div>

@@ -13,36 +13,137 @@
 
   body {
     @apply bg-offwhite text-charcoal font-body antialiased;
+    background-image: 
+      radial-gradient(at 20% 30%, rgba(107, 123, 78, 0.03) 0px, transparent 50%),
+      radial-gradient(at 80% 70%, rgba(201, 106, 80, 0.03) 0px, transparent 50%);
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading tracking-tight text-charcoal;
+    letter-spacing: -0.02em;
   }
 
   a {
-    @apply transition duration-180;
+    @apply transition-all duration-250;
   }
 
   a:not(.no-style) {
-    @apply text-olive underline-offset-4 decoration-olive/30 hover:decoration-olive;
+    @apply text-olive underline-offset-4 decoration-olive/30 hover:decoration-olive hover:text-olive-600;
   }
 
   button {
-    @apply transition-all duration-180;
+    @apply transition-all duration-250;
   }
 
   :focus-visible {
-    @apply outline-none ring-2 ring-olive/60 ring-offset-2 ring-offset-offwhite;
+    @apply outline-none ring-2 ring-olive-500/60 ring-offset-2 ring-offset-offwhite;
+  }
+
+  /* Smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+
+  /* Selection color */
+  ::selection {
+    @apply bg-olive-500/20 text-charcoal;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-offwhite;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-olive-300 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-olive-400;
   }
 }
 
 @layer components {
   .ui-card {
-    @apply bg-white rounded-lg shadow-soft border border-black/5 transition-all duration-250;
+    @apply bg-white rounded-xl shadow-soft border border-black/5 transition-all duration-300;
+    backdrop-filter: blur(10px);
+  }
+
+  .ui-card:hover {
+    @apply shadow-medium border-olive-200/50;
+    transform: translateY(-2px);
+  }
+
+  .ui-card-glass {
+    @apply bg-white/80 backdrop-blur-lg border border-white/20 shadow-soft;
   }
 
   .container-page {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 rounded-lg bg-gradient-to-r from-olive-500 to-olive-600 text-white font-bold 
+           shadow-md hover:shadow-lg hover:shadow-olive-500/30 
+           transform hover:scale-105 active:scale-95 
+           transition-all duration-250;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 rounded-lg bg-white border-2 border-olive-500 text-olive-600 font-bold 
+           hover:bg-olive-50 hover:border-olive-600
+           transform hover:scale-105 active:scale-95 
+           transition-all duration-250;
+  }
+
+  .btn-ghost {
+    @apply px-6 py-3 rounded-lg bg-transparent text-charcoal font-medium 
+           hover:bg-olive-50 hover:text-olive-600
+           transition-all duration-250;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-olive-600 to-terracotta-600;
+  }
+
+  .gradient-bg {
+    @apply bg-gradient-to-br from-olive-50 via-white to-terracotta-50;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .text-shadow-lg {
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Glass morphism effect */
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/20;
+  }
+
+  /* Animated gradient background */
+  .animated-gradient {
+    background: linear-gradient(-45deg, #F4F6F2, #FAF8F5, #FAE7E0, #FDF4F2);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 }
 
@@ -51,14 +152,44 @@
     text-wrap: balance;
   }
 
-  /* Smooth scroll behavior */
-  html {
-    scroll-behavior: smooth;
-  }
-
   /* Parallax container */
   .parallax-container {
     perspective: 1000px;
     transform-style: preserve-3d;
+  }
+
+  /* Smooth fade in */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Shimmer effect */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  /* Glow effect */
+  .glow-effect {
+    @apply shadow-lg shadow-olive-500/20;
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  /* Floating animation */
+  .float-animation {
+    animation: float 3s ease-in-out infinite;
   }
 }

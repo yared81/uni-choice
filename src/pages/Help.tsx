@@ -1,51 +1,53 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import ScrollReveal from '../components/ScrollReveal'
 
 export default function Help() {
+  const { t } = useTranslation()
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   const faqs = [
     {
-      q: "How do I search for universities?",
-      a: "Use the search bar on the homepage or universities page. You can search by university name, city, program, or any keyword. Our advanced filters help you narrow down results by tuition range, rating, or program type. You can also use our category filters (K-12, Colleges, Grad Schools) for quick access."
+      q: t('help.faq_search_q'),
+      a: t('help.faq_search_a')
     },
     {
-      q: "Can I compare multiple universities?",
-      a: "Yes! Click the 'Add to Compare' button on any university card or profile page. You can compare up to three universities side-by-side to evaluate tuition, programs, ratings, facilities, and other key features. Visit the Compare page to see all your selected universities in one view."
+      q: t('help.faq_compare_q'),
+      a: t('help.faq_compare_a')
     },
     {
-      q: "How do I save my favorite universities?",
-      a: "Click the heart icon on any university card. Your favorites are saved locally in your browser and can be accessed from the 'Favorites' section in the navigation menu. You can add or remove favorites at any time."
+      q: t('help.faq_favorites_q'),
+      a: t('help.faq_favorites_a')
     },
     {
-      q: "Are the reviews verified?",
-      a: "Yes, we verify student reviews to ensure authenticity. Reviews marked with a verified badge are from confirmed current students or alumni of the institution. We encourage honest feedback and moderate reviews to maintain quality."
+      q: t('help.faq_reviews_q'),
+      a: t('help.faq_reviews_a')
     },
     {
-      q: "How often is the information updated?",
-      a: "We update our database regularly, typically at the start of each academic year and whenever universities provide new information. However, we recommend verifying critical information like tuition fees, admission requirements, and deadlines directly with the institution for the most current details."
+      q: t('help.faq_updates_q'),
+      a: t('help.faq_updates_a')
     },
     {
-      q: "Is UniMerk free to use?",
-      a: "Yes! UniMerk is completely free for students. All features including search, comparison, reviews, and resources are available at no cost. We're committed to making educational information accessible to everyone."
+      q: t('help.faq_free_q', { appName: t('app.name') }),
+      a: t('help.faq_free_a', { appName: t('app.name') })
     },
     {
-      q: "How do I write a review?",
-      a: "Navigate to a university's profile page and click on the 'Reviews' tab. You'll find a form at the bottom where you can share your experience. Your review helps other students make informed decisions!"
+      q: t('help.faq_write_review_q'),
+      a: t('help.faq_write_review_a')
     },
     {
-      q: "What languages are supported?",
-      a: "UniMerk is available in six languages: English, Amharic, Tigrinya, Afaan Oromo, Somali, and Afar. Use the language switcher in the header to change your preferred language."
+      q: t('help.faq_languages_q'),
+      a: t('help.faq_languages_a', { appName: t('app.name') })
     },
     {
-      q: "Can I request a university to be added?",
-      a: "Absolutely! We're always expanding our database. Contact us through the Contact page or email us at info@unimerk.et with the university details, and we'll work to add it to our platform."
+      q: t('help.faq_request_q'),
+      a: t('help.faq_request_a')
     },
     {
-      q: "How accurate is the tuition information?",
-      a: "We strive to provide accurate tuition information, but fees can vary by program, degree level, and change annually. Always confirm the exact tuition with the university's admissions office before making financial decisions."
+      q: t('help.faq_tuition_q'),
+      a: t('help.faq_tuition_a')
     }
   ]
 
@@ -68,7 +70,7 @@ export default function Help() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              Help Center
+              {t('help.hero_title')}
             </motion.h1>
             <motion.p 
               className="text-xl md:text-2xl text-charcoal/70 max-w-3xl mx-auto leading-relaxed"
@@ -76,7 +78,7 @@ export default function Help() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Find answers to common questions and learn how to make the most of UniMerk.
+              {t('help.hero_subtitle', { appName: t('app.name') })}
             </motion.p>
           </div>
         </section>
@@ -87,9 +89,9 @@ export default function Help() {
         <ScrollReveal>
           <div className="grid md:grid-cols-3 gap-6 mb-16">
             {[
-              { title: 'Getting Started', icon: '🚀', desc: 'New to UniMerk? Start here', link: '/universities' },
-              { title: 'Search Guide', icon: '🔍', desc: 'Learn advanced search tips', link: '/universities' },
-              { title: 'Contact Support', icon: '💬', desc: 'Need more help?', link: '/contact' }
+              { title: t('help.quick_link_getting_started'), icon: '🚀', desc: t('help.quick_link_getting_started_desc', { appName: t('app.name') }), link: '/universities' },
+              { title: t('help.quick_link_search_guide'), icon: '🔍', desc: t('help.quick_link_search_guide_desc'), link: '/universities' },
+              { title: t('help.quick_link_contact'), icon: '💬', desc: t('help.quick_link_contact_desc'), link: '/contact' }
             ].map((item, i) => (
               <motion.div
                 key={item.title}
@@ -104,7 +106,7 @@ export default function Help() {
                 <h3 className="text-xl font-heading font-bold text-charcoal mb-2">{item.title}</h3>
                 <p className="text-charcoal/70 mb-4">{item.desc}</p>
                 <Link to={item.link} className="text-olive font-medium hover:underline">
-                  Learn more →
+                  {t('help.learn_more')}
                 </Link>
               </motion.div>
             ))}
@@ -115,7 +117,7 @@ export default function Help() {
         <ScrollReveal>
           <div className="max-w-4xl mx-auto">
             <h2 className="text-4xl font-heading font-bold text-center text-charcoal mb-12">
-              Frequently Asked Questions
+              {t('help.faq_title')}
             </h2>
             
             <div className="space-y-4">
@@ -171,15 +173,15 @@ export default function Help() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl font-heading font-bold mb-6">Still need help?</h2>
+              <h2 className="text-4xl font-heading font-bold mb-6">{t('help.still_need_help')}</h2>
               <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                Can't find what you're looking for? Our support team is here to help you with any questions or concerns.
+                {t('help.still_need_help_desc')}
               </p>
               <Link
                 to="/contact"
                 className="inline-block px-10 py-5 rounded-lg bg-white text-olive font-bold text-lg hover:bg-offwhite transition-all duration-250 hover:scale-105 shadow-2xl"
               >
-                Contact Support
+                {t('help.contact_support')}
               </Link>
             </motion.div>
           </section>

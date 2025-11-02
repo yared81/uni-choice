@@ -38,7 +38,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     // Load user from localStorage on mount
-    const stored = localStorage.getItem('unimerk_user')
+    const stored = localStorage.getItem('unichoice_user')
     if (stored) {
       try {
         setUser(JSON.parse(stored))
@@ -51,14 +51,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (email: string, password: string): Promise<boolean> => {
     // Get users from localStorage
-    const users = JSON.parse(localStorage.getItem('unimerk_users') || '[]')
+    const users = JSON.parse(localStorage.getItem('unichoice_users') || '[]')
     const foundUser = users.find((u: User & { password?: string }) => u.email === email && u.password === password)
     
     if (foundUser) {
       // Remove password before storing
       const { password: _, ...userData } = foundUser
       setUser(userData as User)
-      localStorage.setItem('unimerk_user', JSON.stringify(userData))
+      localStorage.setItem('unichoice_user', JSON.stringify(userData))
       return true
     }
     return false
@@ -66,7 +66,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signup = async (email: string, password: string, name: string, role: Role): Promise<boolean> => {
     // Check if user already exists
-    const users = JSON.parse(localStorage.getItem('unimerk_users') || '[]')
+    const users = JSON.parse(localStorage.getItem('unichoice_users') || '[]')
     if (users.some((u: User & { password: string }) => u.email === email)) {
       return false
     }
@@ -82,7 +82,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     users.push(newUser)
-    localStorage.setItem('unimerk_users', JSON.stringify(users))
+    localStorage.setItem('unichoice_users', JSON.stringify(users))
 
     // Auto login after signup
     const { password: _, ...userData } = newUser
@@ -99,11 +99,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('unimerk_user', JSON.stringify(updatedUser))
 
     // Also update in users array
-    const users = JSON.parse(localStorage.getItem('unimerk_users') || '[]')
+    const users = JSON.parse(localStorage.getItem('unichoice_users') || '[]')
     const userIndex = users.findIndex((u: User & { password?: string }) => u.id === user.id)
     if (userIndex !== -1) {
       users[userIndex] = { ...users[userIndex], ...updates }
-      localStorage.setItem('unimerk_users', JSON.stringify(users))
+      localStorage.setItem('unichoice_users', JSON.stringify(users))
     }
 
     return true
@@ -111,7 +111,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = () => {
     setUser(null)
-    localStorage.removeItem('unimerk_user')
+    localStorage.removeItem('unichoice_user')
   }
 
   return (

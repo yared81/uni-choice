@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import ScrollReveal from '../components/ScrollReveal'
 import { Link } from 'react-router-dom'
 
 export default function About() {
+  const { t } = useTranslation()
   return (
     <div className="pt-20 pb-16 min-h-screen">
       {/* Hero Section */}
@@ -22,7 +24,7 @@ export default function About() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              About UniMerk
+              {t('about.hero_title', { appName: t('app.name') })}
             </motion.h1>
             <motion.p 
               className="text-xl md:text-2xl text-charcoal/70 max-w-3xl mx-auto leading-relaxed"
@@ -30,7 +32,7 @@ export default function About() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Empowering students to discover their perfect educational path
+              {t('about.hero_subtitle')}
             </motion.p>
           </div>
         </section>
@@ -43,26 +45,19 @@ export default function About() {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <h2 className="text-4xl font-heading font-bold text-charcoal mb-6">
-                  Our Story
+                  {t('about.story_title')}
                 </h2>
                 <div className="space-y-6 text-lg text-charcoal/80 leading-relaxed">
                   <p>
-                    UniMerk was founded with a simple mission: to make finding the right educational institution 
-                    accessible to every student in Ethiopia. We recognized that the process of choosing a school 
-                    was fragmented, time-consuming, and often overwhelming.
+                    {t('about.story_p1', { appName: t('app.name') })}
                   </p>
                   
                   <p>
-                    Our platform consolidates comprehensive information about universities, colleges, and schools 
-                    across the country, providing students with the tools they need to make informed decisions. 
-                    We believe that education is the foundation of personal and national growth, and we're committed 
-                    to making quality educational information accessible to all.
+                    {t('about.story_p2')}
                   </p>
 
                   <p>
-                    What started as a small project has grown into a comprehensive platform serving thousands of 
-                    students across Ethiopia. We continue to expand our database, improve our tools, and listen 
-                    to feedback from students, parents, and educators.
+                    {t('about.story_p3')}
                   </p>
                 </div>
               </div>
@@ -93,11 +88,9 @@ export default function About() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <h2 className="text-3xl font-heading font-bold text-charcoal mb-6">Our Mission</h2>
+                <h2 className="text-3xl font-heading font-bold text-charcoal mb-6">{t('about.mission_title')}</h2>
                 <p className="text-lg text-charcoal/70 leading-relaxed">
-                  To empower students with transparent, comprehensive, and reliable information about educational 
-                  institutions, enabling them to discover institutions that align with their academic goals, 
-                  financial capabilities, and career aspirations.
+                  {t('about.mission_text')}
                 </p>
               </div>
 
@@ -108,11 +101,9 @@ export default function About() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                   </svg>
                 </div>
-                <h2 className="text-3xl font-heading font-bold text-charcoal mb-6">Our Vision</h2>
+                <h2 className="text-3xl font-heading font-bold text-charcoal mb-6">{t('about.vision_title')}</h2>
                 <p className="text-lg text-charcoal/70 leading-relaxed">
-                  To become the most trusted and comprehensive educational discovery platform in Ethiopia, 
-                  connecting millions of students with their ideal educational pathways and contributing to 
-                  the country's educational development.
+                  {t('about.vision_text')}
                 </p>
               </div>
             </div>
@@ -123,27 +114,27 @@ export default function About() {
         <ScrollReveal>
           <section className="mb-20">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-heading font-bold text-charcoal mb-4">Our Values</h2>
+              <h2 className="text-4xl font-heading font-bold text-charcoal mb-4">{t('about.values_title')}</h2>
               <p className="text-xl text-charcoal/70 max-w-2xl mx-auto">
-                The principles that guide everything we do
+                {t('about.values_subtitle')}
               </p>
             </div>
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 {
-                  title: 'Transparency',
+                  title: t('about.value_transparency'),
                   icon: '👁️',
-                  desc: 'We believe in providing honest, accurate, and up-to-date information to help students make informed decisions.'
+                  desc: t('about.value_transparency_desc')
                 },
                 {
-                  title: 'Accessibility',
+                  title: t('about.value_accessibility'),
                   icon: '🌍',
-                  desc: 'Education should be accessible to everyone, regardless of background, location, or financial situation.'
+                  desc: t('about.value_accessibility_desc')
                 },
                 {
-                  title: 'Innovation',
+                  title: t('about.value_innovation'),
                   icon: '💡',
-                  desc: 'We continuously improve our platform with new features and tools to better serve the student community.'
+                  desc: t('about.value_innovation_desc')
                 }
               ].map((value, i) => (
                 <motion.div
@@ -167,22 +158,22 @@ export default function About() {
         <ScrollReveal>
           <section className="mb-20">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-heading font-bold text-charcoal mb-4">What We Offer</h2>
+              <h2 className="text-4xl font-heading font-bold text-charcoal mb-4">{t('about.offer_title')}</h2>
               <p className="text-xl text-charcoal/70 max-w-2xl mx-auto">
-                Comprehensive tools and resources to support your educational journey
+                {t('about.offer_subtitle')}
               </p>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                'Comprehensive database of 50+ universities and institutions',
-                'Detailed program information with admission requirements',
-                'Real student reviews and ratings',
-                'Side-by-side comparison tools',
-                'Multilingual support in six languages',
-                'Up-to-date tuition and financial aid information',
-                'Expert guides and resources',
-                'Career pathway information',
-                'Scholarship and financial aid resources'
+                t('about.offer_item_1'),
+                t('about.offer_item_2'),
+                t('about.offer_item_3'),
+                t('about.offer_item_4'),
+                t('about.offer_item_5'),
+                t('about.offer_item_6'),
+                t('about.offer_item_7'),
+                t('about.offer_item_8'),
+                t('about.offer_item_9')
               ].map((item, i) => (
                 <motion.div
                   key={item}
@@ -218,18 +209,17 @@ export default function About() {
                 />
               </motion.div>
               <div>
-                <h2 className="text-4xl font-heading font-bold text-charcoal mb-6">Our Impact</h2>
+                <h2 className="text-4xl font-heading font-bold text-charcoal mb-6">{t('about.impact_title')}</h2>
                 <div className="space-y-6 text-lg text-charcoal/80 leading-relaxed">
                   <p>
-                    Since our launch, UniMerk has helped thousands of students navigate their educational journey. 
-                    We're proud to be part of their success stories and continue to expand our reach.
+                    {t('about.impact_p1', { appName: t('app.name') })}
                   </p>
                   <div className="grid grid-cols-2 gap-6">
                     {[
-                      { number: '10K+', label: 'Students Helped' },
-                      { number: '50+', label: 'Universities Listed' },
-                      { number: '200+', label: 'Programs Available' },
-                      { number: '6', label: 'Languages Supported' }
+                      { number: '10K+', label: t('about.impact_stat_students') },
+                      { number: '50+', label: t('about.impact_stat_universities') },
+                      { number: '200+', label: t('about.impact_stat_programs') },
+                      { number: '6', label: t('about.impact_stat_languages') }
                     ].map((stat) => (
                       <div key={stat.label} className="ui-card p-6 text-center">
                         <div className="text-3xl font-heading font-bold text-olive mb-2">{stat.number}</div>
@@ -246,15 +236,15 @@ export default function About() {
         {/* CTA */}
         <ScrollReveal>
           <section className="py-20 bg-gradient-to-r from-olive to-terracotta text-white rounded-2xl text-center">
-            <h2 className="text-4xl font-heading font-bold mb-6">Join Our Community</h2>
+            <h2 className="text-4xl font-heading font-bold mb-6">{t('about.cta_title')}</h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Start your educational journey today and discover the perfect university for you.
+              {t('about.cta_subtitle')}
             </p>
             <Link
               to="/universities"
               className="inline-block px-10 py-5 rounded-lg bg-white text-olive font-bold text-lg hover:bg-offwhite transition-all duration-250 hover:scale-105 shadow-2xl"
             >
-              Explore Universities
+              {t('about.cta_button')}
             </Link>
           </section>
         </ScrollReveal>

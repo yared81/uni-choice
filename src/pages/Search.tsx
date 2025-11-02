@@ -39,13 +39,13 @@ export default function Search() {
     <section className="container-page py-10">
       <h1 className="text-2xl font-heading mb-4">{t('nav.search')}</h1>
       <div className="ui-card p-3 flex items-center gap-2 mb-6">
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder={t('landing.hero_search_placeholder')}
-          className="w-full bg-transparent outline-none text-base"
-        />
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder={t('universities.search_placeholder', 'Search universities...')}
+                className="w-full bg-transparent outline-none text-base"
+              />
       </div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {filtered.map(uni => (

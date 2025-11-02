@@ -3,35 +3,760 @@
     "id": "aau",
     "name": "Addis Ababa University",
     "city": "Addis Ababa",
-    "rating": 4.5,
-    "tuition": { "minUsd": 500, "maxUsd": 1800 },
+    "country": "Ethiopia",
+    "rating": 4.6,
+    "tuition": { "minUsd": 600, "maxUsd": 2000 },
     "programs": [
+      { "id": "aau-med", "name": "Medicine", "degree": "MD", "durationYears": 6, "language": "English" },
+      { "id": "aau-law", "name": "Law", "degree": "LLB", "durationYears": 4, "language": "English" },
       { "id": "aau-eng", "name": "Electrical Engineering", "degree": "BEng", "durationYears": 5, "language": "English" },
-      { "id": "aau-cs", "name": "Computer Science", "degree": "BSc", "durationYears": 4, "language": "English" }
+      { "id": "aau-cs", "name": "Computer Science", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "aau-civil", "name": "Civil Engineering", "degree": "BEng", "durationYears": 5, "language": "English" },
+      { "id": "aau-mech", "name": "Mechanical Engineering", "degree": "BEng", "durationYears": 5, "language": "English" },
+      { "id": "aau-bus", "name": "Business Administration", "degree": "BA", "durationYears": 4, "language": "English" },
+      { "id": "aau-econ", "name": "Economics", "degree": "BA", "durationYears": 4, "language": "English" },
+      { "id": "aau-arch", "name": "Architecture", "degree": "BArch", "durationYears": 5, "language": "English" },
+      { "id": "aau-pharm", "name": "Pharmacy", "degree": "BPharm", "durationYears": 5, "language": "English" },
+      { "id": "aau-nur", "name": "Nursing", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "aau-ph", "name": "Public Health", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "aau-edu", "name": "Education", "degree": "BA", "durationYears": 4, "language": "English" },
+      { "id": "aau-jour", "name": "Journalism and Communication", "degree": "BA", "durationYears": 4, "language": "English" },
+      { "id": "aau-psych", "name": "Psychology", "degree": "BA", "durationYears": 4, "language": "English" },
+      { "id": "aau-bio", "name": "Biology", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "aau-chem", "name": "Chemistry", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "aau-phys", "name": "Physics", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "aau-math", "name": "Mathematics", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "aau-soc", "name": "Sociology", "degree": "BA", "durationYears": 4, "language": "English" },
+      { "id": "aau-polisci", "name": "Political Science", "degree": "BA", "durationYears": 4, "language": "English" },
+      { "id": "aau-history", "name": "History", "degree": "BA", "durationYears": 4, "language": "English" },
+      { "id": "aau-english", "name": "English Language and Literature", "degree": "BA", "durationYears": 4, "language": "English" }
     ],
     "images": [
-      "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=1600&auto=format&fit=crop"
+      "/img/addsi abab.jpg",
+      "/img/addsi abab.jpg",
+      "/img/addsi abab.jpg",
+      "/img/addsi abab.jpg",
+      "/img/addsi abab.jpg"
     ],
-    "description": "Ethiopia's flagship university known for research and engineering programs in the capital city.",
-    "verified": true
+    "description": "Addis Ababa University (AAU) is Ethiopia's oldest and largest higher education institution, established in 1950. As the country's flagship university, AAU has been at the forefront of academic excellence, research, and innovation. The university offers a comprehensive range of undergraduate and graduate programs across multiple disciplines including medicine, engineering, law, business, social sciences, and natural sciences. With a strong commitment to research and community service, AAU has produced many of Ethiopia's leading professionals, academics, and public servants. The university is recognized internationally and maintains partnerships with universities worldwide. Its main campus in the capital city provides state-of-the-art facilities including modern laboratories, extensive libraries, research centers, and recreational facilities.",
+    "verified": true,
+    "aboutCity": "Addis Ababa, meaning 'New Flower' in Amharic, is the capital and largest city of Ethiopia, situated at an elevation of 2,355 meters. Founded in 1886 by Emperor Menelik II, it serves as the political, economic, and cultural hub of Ethiopia and Africa. The city is home to the African Union headquarters and numerous international organizations. Addis Ababa is a vibrant metropolis with a rich cultural heritage, featuring museums, theaters, markets, and historical sites. The city offers excellent educational opportunities, modern infrastructure, and a diverse community. It's known for its pleasant climate, being located in the central highlands, and serves as the gateway to Ethiopia's rich historical and natural attractions.",
+    "campuses": [
+      {
+        "id": "aau-main",
+        "name": "Sidist Kilo Campus (Main Campus)",
+        "address": "Sidist Kilo, Addis Ababa University, Addis Ababa",
+        "city": "Addis Ababa",
+        "phone": "+251 11 124 2324",
+        "email": "info@aau.edu.et",
+        "description": "The historic main campus houses the College of Social Sciences, College of Humanities, Language Studies and Journalism, and the Central Administration. This campus features the iconic Sidist Kilo monument and is the heart of AAU's academic activities."
+      },
+      {
+        "id": "aau-med",
+        "name": "College of Health Sciences Campus",
+        "address": "College of Health Sciences, Addis Ababa University, Addis Ababa",
+        "city": "Addis Ababa",
+        "phone": "+251 11 124 2500",
+        "email": "healthsciences@aau.edu.et",
+        "description": "Dedicated campus for medical and health sciences including the School of Medicine, School of Pharmacy, School of Nursing, and allied health programs. Includes the Black Lion Teaching Hospital."
+      },
+      {
+        "id": "aau-tech",
+        "name": "Akaki Campus (College of Natural and Computational Sciences)",
+        "address": "Akaki Campus, Addis Ababa University, Addis Ababa",
+        "city": "Addis Ababa",
+        "phone": "+251 11 124 2400",
+        "email": "ncs@aau.edu.et",
+        "description": "Modern campus housing the College of Natural and Computational Sciences with state-of-the-art laboratories for physics, chemistry, biology, mathematics, and computer science."
+      },
+      {
+        "id": "aau-eng",
+        "name": "Informatics Campus",
+        "address": "Informatics Campus, Addis Ababa University, Addis Ababa",
+        "city": "Addis Ababa",
+        "phone": "+251 11 124 2450",
+        "email": "informatics@aau.edu.et",
+        "description": "Specialized campus for engineering and technology programs including Electrical, Civil, Mechanical, Chemical, and Computer Engineering. Features advanced laboratories and workshops."
+      },
+      {
+        "id": "aau-bus",
+        "name": "Commerce Campus",
+        "address": "Commerce Campus, Addis Ababa University, Addis Ababa",
+        "city": "Addis Ababa",
+        "phone": "+251 11 124 2350",
+        "email": "business@aau.edu.et",
+        "description": "Campus dedicated to business and economics education, housing the College of Business and Economics with programs in Business Administration, Accounting, Economics, and Management."
+      },
+      {
+        "id": "aau-law",
+        "name": "Ras Abebe Aregay Campus",
+        "address": "Ras Abebe Aregay Campus, Addis Ababa University, Addis Ababa",
+        "city": "Addis Ababa",
+        "phone": "+251 11 124 2300",
+        "email": "law@aau.edu.et",
+        "description": "Campus for legal education, housing the Faculty of Law with comprehensive programs in Ethiopian and international law."
+      },
+      {
+        "id": "aau-edu",
+        "name": "Entoto Campus",
+        "address": "Entoto Campus, Addis Ababa University, Addis Ababa",
+        "city": "Addis Ababa",
+        "phone": "+251 11 124 2470",
+        "email": "education@aau.edu.et",
+        "description": "Campus for teacher education and educational sciences, offering programs in education across various disciplines."
+      }
+    ],
+    "faculties": [
+      {
+        "id": "aau-med",
+        "name": "College of Health Sciences",
+        "description": "One of Ethiopia's premier medical schools offering comprehensive health sciences education including Medicine, Pharmacy, Nursing, Public Health, and allied health programs.",
+        "programs": ["Medicine", "Pharmacy", "Nursing", "Public Health", "Medical Laboratory Science", "Physiotherapy", "Health Officer"]
+      },
+      {
+        "id": "aau-eng",
+        "name": "College of Engineering",
+        "description": "Leading engineering college offering programs in Electrical, Civil, Mechanical, Chemical, Computer, and Software Engineering with modern laboratories and industry partnerships.",
+        "programs": ["Electrical Engineering", "Civil Engineering", "Mechanical Engineering", "Chemical Engineering", "Computer Engineering", "Software Engineering", "Architecture"]
+      },
+      {
+        "id": "aau-ncs",
+        "name": "College of Natural and Computational Sciences",
+        "description": "Comprehensive natural sciences programs in Mathematics, Physics, Chemistry, Biology, and Computer Science with research-focused curriculum.",
+        "programs": ["Mathematics", "Physics", "Chemistry", "Biology", "Computer Science", "Statistics", "Geology", "Earth Sciences"]
+      },
+      {
+        "id": "aau-bus",
+        "name": "College of Business and Economics",
+        "description": "Premier business school offering programs in Business Administration, Accounting, Economics, Finance, Management, and Marketing.",
+        "programs": ["Business Administration", "Accounting", "Economics", "Finance", "Management", "Marketing", "Logistics and Supply Chain Management"]
+      },
+      {
+        "id": "aau-law",
+        "name": "Faculty of Law",
+        "description": "Established legal education institution providing comprehensive programs in Ethiopian law, international law, and legal studies.",
+        "programs": ["Law", "Criminology", "International Law"]
+      },
+      {
+        "id": "aau-social",
+        "name": "College of Social Sciences",
+        "description": "Diverse social sciences programs including Sociology, Psychology, Anthropology, Political Science, and Social Work.",
+        "programs": ["Sociology", "Psychology", "Anthropology", "Political Science", "Social Work", "Geography", "Urban Planning"]
+      },
+      {
+        "id": "aau-humanities",
+        "name": "College of Humanities",
+        "description": "Comprehensive humanities education including History, Philosophy, Languages, Literature, and Cultural Studies.",
+        "programs": ["History", "Philosophy", "English Language and Literature", "Amharic Language and Literature", "Ethiopian Languages", "Theater Arts", "Music"]
+      },
+      {
+        "id": "aau-edu",
+        "name": "College of Education",
+        "description": "Teacher education and educational sciences programs preparing educators for primary, secondary, and higher education levels.",
+        "programs": ["Education", "Educational Planning", "Curriculum and Instruction", "Special Needs Education", "Early Childhood Education"]
+      },
+      {
+        "id": "aau-jour",
+        "name": "School of Journalism and Communication",
+        "description": "Media and communication studies offering programs in Journalism, Broadcasting, Public Relations, and Media Studies.",
+        "programs": ["Journalism", "Broadcasting", "Public Relations", "Media Studies", "Film and Television Production"]
+      }
+    ],
+    "admissionRequirements": "Addis Ababa University has competitive admission requirements. For undergraduate programs: Minimum high school GPA of 3.0 or equivalent. National university entrance examination scores required with specific cut-off points varying by program. Medical and engineering programs require higher entrance exam scores. For international students: Equivalent qualifications and proof of English proficiency. Application package includes completed application form, official transcripts, recommendation letters, medical certificate, and passport photos. Some programs may require additional entrance tests or interviews.",
+    "applicationDeadline": "September 15 for regular admission. Early admission deadline: July 30. Late applications may be considered for programs with available spaces.",
+    "studentBodySize": 48769,
+    "campusFacilities": ["Central Library", "Specialized Libraries by College", "Research Laboratories", "Teaching Hospital (Black Lion)", "Computer Labs", "Engineering Workshops", "Sports Complex", "Swimming Pool", "Student Cafeterias", "Bookstore", "Hostels and Dormitories", "Auditoriums", "Conference Halls", "Museums", "Art Galleries", "Student Union Building", "Health Center", "Banking Services", "Post Office", "Internet Facilities", "Research Centers"],
+    "housing": {
+      "available": true,
+      "description": "On-campus housing available with multiple dormitories and hostels. Accommodations include single, double, and shared rooms. Off-campus housing is widely available in Addis Ababa with various options from apartments to shared housing. University provides housing assistance and maintains a housing registry. Basic amenities provided including dining facilities, study rooms, and recreational areas."
+    },
+    "contactInfo": {
+      "email": "info@aau.edu.et",
+      "phone": "+251 11 124 2324",
+      "website": "https://www.aau.edu.et",
+      "address": "Addis Ababa University, P.O. Box 1176, Addis Ababa, Ethiopia"
+    },
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/addisababauniversity",
+      "twitter": "https://twitter.com/aau_info",
+      "linkedin": "https://www.linkedin.com/school/addis-ababa-university",
+      "instagram": "https://www.instagram.com/addisababauniversity"
+    },
+    "accreditation": ["Ministry of Education - Ethiopia", "World Health Organization", "International Medical Education Directory", "Accreditation Council for Higher Education - Ethiopia", "International Association of Universities"],
+    "history": "Addis Ababa University was established in 1950 as the University College of Addis Ababa by Emperor Haile Selassie I, making it Ethiopia's first institution of higher learning. It was initially affiliated with the University of London. In 1961, it became Haile Selassie I University and was renamed Addis Ababa University after the fall of the monarchy in 1975. Throughout its history, AAU has been the center of academic excellence and intellectual discourse in Ethiopia, producing generations of leaders, professionals, and scholars. The university has expanded significantly over the decades, adding new colleges, programs, and research centers. Today, it stands as one of Africa's leading universities, known for its research output, academic programs, and contribution to Ethiopia's development.",
+    "mission": "To provide quality education through teaching, learning, research, and community service; to produce competent graduates who are well-rounded, critical thinkers, and ethical citizens; and to advance knowledge through research and innovation that addresses national and global challenges.",
+    "vision": "To be a world-class university recognized for excellence in teaching, research, and community engagement, serving as a beacon of knowledge, innovation, and academic freedom that contributes to the advancement of Ethiopia and Africa."
   },
   {
     "id": "bdu",
     "name": "Bahir Dar University",
     "city": "Bahir Dar",
-    "rating": 4.2,
-    "tuition": { "minUsd": 400, "maxUsd": 1500 },
+    "country": "Ethiopia",
+    "rating": 4.4,
+    "tuition": { "minUsd": 450, "maxUsd": 1600 },
     "programs": [
+      { "id": "bdu-med", "name": "Medicine", "degree": "MD", "durationYears": 6, "language": "English" },
       { "id": "bdu-wre", "name": "Water Resources Engineering", "degree": "BEng", "durationYears": 5, "language": "English" },
-      { "id": "bdu-it", "name": "Information Technology", "degree": "BSc", "durationYears": 4, "language": "English" }
+      { "id": "bdu-hyd", "name": "Hydraulic Engineering", "degree": "BEng", "durationYears": 5, "language": "English" },
+      { "id": "bdu-civil", "name": "Civil Engineering", "degree": "BEng", "durationYears": 5, "language": "English" },
+      { "id": "bdu-electrical", "name": "Electrical Engineering", "degree": "BEng", "durationYears": 5, "language": "English" },
+      { "id": "bdu-mech", "name": "Mechanical Engineering", "degree": "BEng", "durationYears": 5, "language": "English" },
+      { "id": "bdu-cs", "name": "Computer Science", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "bdu-it", "name": "Information Technology", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "bdu-software", "name": "Software Engineering", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "bdu-bus", "name": "Business Administration", "degree": "BA", "durationYears": 4, "language": "English" },
+      { "id": "bdu-accounting", "name": "Accounting", "degree": "BA", "durationYears": 4, "language": "English" },
+      { "id": "bdu-econ", "name": "Economics", "degree": "BA", "durationYears": 4, "language": "English" },
+      { "id": "bdu-law", "name": "Law", "degree": "LLB", "durationYears": 4, "language": "English" },
+      { "id": "bdu-agri", "name": "Agricultural Sciences", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "bdu-nur", "name": "Nursing", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "bdu-ph", "name": "Public Health", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "bdu-pharm", "name": "Pharmacy", "degree": "BPharm", "durationYears": 5, "language": "English" },
+      { "id": "bdu-edu", "name": "Education", "degree": "BA", "durationYears": 4, "language": "English" },
+      { "id": "bdu-textile", "name": "Textile Engineering", "degree": "BEng", "durationYears": 5, "language": "English" },
+      { "id": "bdu-chemical-eng", "name": "Chemical Engineering", "degree": "BEng", "durationYears": 5, "language": "English" },
+      { "id": "bdu-arch", "name": "Architecture", "degree": "BArch", "durationYears": 5, "language": "English" },
+      { "id": "bdu-bio", "name": "Biology", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "bdu-chemistry", "name": "Chemistry", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "bdu-phys", "name": "Physics", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "bdu-math", "name": "Mathematics", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "bdu-geography", "name": "Geography and Environmental Studies", "degree": "BA", "durationYears": 4, "language": "English" },
+      { "id": "bdu-tourism", "name": "Tourism and Hotel Management", "degree": "BA", "durationYears": 4, "language": "English" }
     ],
     "images": [
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1460518451285-97b6aa326961?q=80&w=1600&auto=format&fit=crop"
+      "/img/bahir dar.jpg",
+      "/img/bahir dar.jpg",
+      "/img/bahir dar.jpg",
+      "/img/bahir dar.jpg",
+      "/img/bahir dar.jpg"
     ],
-    "description": "A lakeside university with strengths in engineering and applied sciences.",
-    "verified": true
+    "description": "Bahir Dar University (BDU) is a comprehensive public university located in the beautiful lakeside city of Bahir Dar, the capital of Amhara Region. Established in 2000 through the merger of Bahir Dar Polytechnic Institute and Bahir Dar Teachers College, BDU has rapidly grown into one of Ethiopia's leading universities. The university is particularly renowned for its excellence in Water Resources Engineering and Hydraulic Engineering, making significant contributions to Ethiopia's water resource management and development. BDU offers diverse academic programs across engineering, health sciences, business, law, education, natural sciences, and social sciences. With modern facilities, well-equipped laboratories, and a strong focus on research and community engagement, BDU provides students with quality education and practical skills. The university's strategic location near Lake Tana and the Blue Nile makes it an ideal setting for environmental and water resource studies.",
+    "verified": true,
+    "aboutCity": "Bahir Dar, meaning 'Seashore' in Amharic, is the capital city of Amhara Region, located on the southern shore of Lake Tana, the largest lake in Ethiopia and the source of the Blue Nile. The city is approximately 578 km north of Addis Ababa. Bahir Dar is known for its scenic beauty, pleasant climate, and proximity to the Blue Nile Falls (Tis Abay), one of Ethiopia's most famous natural attractions. The city combines modern urban development with natural beauty, featuring palm-lined avenues, beautiful lakeside promenades, and a vibrant local culture. Bahir Dar serves as a gateway to the historic sites of Gondar and the Simien Mountains. The city offers a peaceful learning environment with excellent infrastructure, making it an ideal location for higher education. The proximity to Lake Tana provides opportunities for research in water resources, fisheries, and environmental studies.",
+    "campuses": [
+      {
+        "id": "bdu-main",
+        "name": "Main Campus",
+        "address": "Bahir Dar University, P.O. Box 79, Bahir Dar, Amhara Region",
+        "city": "Bahir Dar",
+        "phone": "+251 58 220 2750",
+        "email": "info@bdu.edu.et",
+        "description": "The main administrative campus housing the College of Business and Economics, College of Social Sciences and Humanities, College of Law, and central administration. Features modern buildings, libraries, and administrative offices."
+      },
+      {
+        "id": "bdu-poly",
+        "name": "Polytechnic Campus (College of Engineering)",
+        "address": "Polytechnic Campus, Bahir Dar University, Bahir Dar",
+        "city": "Bahir Dar",
+        "phone": "+251 58 220 2760",
+        "email": "engineering@bdu.edu.et",
+        "description": "Dedicated campus for engineering programs including Water Resources, Hydraulic, Civil, Electrical, Mechanical, Chemical, and Textile Engineering. Features advanced laboratories, workshops, and engineering facilities."
+      },
+      {
+        "id": "bdu-health",
+        "name": "College of Medicine and Health Sciences Campus",
+        "address": "College of Medicine and Health Sciences, Bahir Dar University, Bahir Dar",
+        "city": "Bahir Dar",
+        "phone": "+251 58 220 2770",
+        "email": "healthsciences@bdu.edu.et",
+        "description": "Modern health sciences campus housing the School of Medicine, School of Pharmacy, School of Nursing, and Public Health programs. Includes the Teaching Hospital and clinical training facilities."
+      },
+      {
+        "id": "bdu-agri",
+        "name": "College of Agriculture and Environmental Sciences Campus",
+        "address": "College of Agriculture Campus, Bahir Dar University, Bahir Dar",
+        "city": "Bahir Dar",
+        "phone": "+251 58 220 2780",
+        "email": "agriculture@bdu.edu.et",
+        "description": "Campus for agricultural sciences, environmental studies, and natural resource management. Features research farms, laboratories, and greenhouses for practical agricultural training."
+      },
+      {
+        "id": "bdu-science",
+        "name": "College of Natural and Computational Sciences Campus",
+        "address": "College of Natural Sciences, Bahir Dar University, Bahir Dar",
+        "city": "Bahir Dar",
+        "phone": "+251 58 220 2790",
+        "email": "ncs@bdu.edu.et",
+        "description": "Campus for natural and computational sciences including Mathematics, Physics, Chemistry, Biology, Computer Science, and Information Technology with modern laboratories and computer facilities."
+      },
+      {
+        "id": "bdu-edu",
+        "name": "College of Education and Behavioral Sciences Campus",
+        "address": "College of Education, Bahir Dar University, Bahir Dar",
+        "city": "Bahir Dar",
+        "phone": "+251 58 220 2800",
+        "email": "education@bdu.edu.et",
+        "description": "Teacher education campus offering programs in Education, Psychology, and Educational Planning with dedicated facilities for teacher training and practice."
+      }
+    ],
+    "faculties": [
+      {
+        "id": "bdu-eng",
+        "name": "College of Engineering",
+        "description": "Premier engineering college known for Water Resources and Hydraulic Engineering. Offers comprehensive engineering programs with modern laboratories and industry partnerships.",
+        "programs": ["Water Resources Engineering", "Hydraulic Engineering", "Civil Engineering", "Electrical Engineering", "Mechanical Engineering", "Chemical Engineering", "Textile Engineering", "Architecture"]
+      },
+      {
+        "id": "bdu-med",
+        "name": "College of Medicine and Health Sciences",
+        "description": "Comprehensive health sciences education including Medicine, Pharmacy, Nursing, and Public Health programs with clinical training facilities.",
+        "programs": ["Medicine", "Pharmacy", "Nursing", "Public Health", "Medical Laboratory Science", "Health Officer"]
+      },
+      {
+        "id": "bdu-agri",
+        "name": "College of Agriculture and Environmental Sciences",
+        "description": "Agricultural sciences and environmental studies with focus on sustainable agriculture, natural resource management, and environmental protection.",
+        "programs": ["Agricultural Sciences", "Animal Science", "Plant Science", "Agricultural Economics", "Environmental Science", "Natural Resource Management"]
+      },
+      {
+        "id": "bdu-ncs",
+        "name": "College of Natural and Computational Sciences",
+        "description": "Natural sciences and computing programs including Mathematics, Physics, Chemistry, Biology, Computer Science, and Information Technology.",
+        "programs": ["Mathematics", "Physics", "Chemistry", "Biology", "Computer Science", "Information Technology", "Software Engineering", "Statistics"]
+      },
+      {
+        "id": "bdu-bus",
+        "name": "College of Business and Economics",
+        "description": "Business and economics education with programs in Business Administration, Accounting, Economics, and Management.",
+        "programs": ["Business Administration", "Accounting", "Economics", "Management", "Finance", "Marketing", "Tourism and Hotel Management"]
+      },
+      {
+        "id": "bdu-law",
+        "name": "College of Law",
+        "description": "Legal education programs focusing on Ethiopian law, international law, and legal practice.",
+        "programs": ["Law", "Criminology"]
+      },
+      {
+        "id": "bdu-social",
+        "name": "College of Social Sciences and Humanities",
+        "description": "Social sciences and humanities programs including Geography, History, Languages, and Cultural Studies.",
+        "programs": ["Geography and Environmental Studies", "History", "English Language and Literature", "Amharic Language and Literature", "Sociology", "Political Science"]
+      },
+      {
+        "id": "bdu-edu",
+        "name": "College of Education and Behavioral Sciences",
+        "description": "Teacher education and behavioral sciences preparing educators and professionals in education and psychology.",
+        "programs": ["Education", "Educational Planning", "Psychology", "Special Needs Education", "Early Childhood Education"]
+      }
+    ],
+    "admissionRequirements": "Bahir Dar University admission requirements: Minimum high school GPA of 2.5 for undergraduate programs. National university entrance examination scores required with program-specific cut-off points. Water Resources Engineering, Medicine, and other competitive programs require higher entrance exam scores. Application package includes completed application form, official transcripts, medical certificate, and passport photos. Some programs may require additional entrance tests. International students need equivalent qualifications and proof of English proficiency.",
+    "applicationDeadline": "September 20 for regular admission. Early admission deadline: August 15. Late applications accepted for programs with available spaces until October 1.",
+    "studentBodySize": 42356,
+    "campusFacilities": ["Central Library", "Specialized Libraries by College", "Research Laboratories", "Engineering Workshops", "Hydraulic Engineering Lab", "Water Resources Research Center", "Teaching Hospital", "Computer Labs", "Sports Complex", "Stadium", "Student Cafeterias", "Bookstore", "Hostels and Dormitories", "Auditoriums", "Conference Halls", "Research Centers", "Agricultural Research Farms", "Student Union Building", "Health Center", "Banking Services", "Post Office", "Internet Facilities", "WiFi Coverage"],
+    "housing": {
+      "available": true,
+      "description": "On-campus housing available with multiple dormitories and hostels for both male and female students. Accommodations include single, double, and shared rooms with basic amenities. Off-campus housing is available in Bahir Dar city with various options. University provides housing assistance and maintains a registry of recommended off-campus accommodations. Dining facilities, study rooms, and recreational areas are available on campus."
+    },
+    "contactInfo": {
+      "email": "info@bdu.edu.et",
+      "phone": "+251 58 220 2750",
+      "website": "https://www.bdu.edu.et",
+      "address": "Bahir Dar University, P.O. Box 79, Bahir Dar, Amhara Region, Ethiopia"
+    },
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/bahir.dar.university",
+      "twitter": "https://twitter.com/bdu_ethiopia",
+      "linkedin": "https://www.linkedin.com/school/bahir-dar-university",
+      "instagram": "https://www.instagram.com/bahirdaruniversity"
+    },
+    "accreditation": ["Ministry of Education - Ethiopia", "World Health Organization", "International Medical Education Directory", "Accreditation Council for Higher Education - Ethiopia", "International Association of Universities"],
+    "history": "Bahir Dar University was established in 2000 through the merger of Bahir Dar Polytechnic Institute (founded in 1963) and Bahir Dar Teachers College (founded in 1972). The Polytechnic Institute was originally established to provide technical and engineering education, with particular focus on water resources and hydraulic engineering. The Teachers College was established to train educators for the region. The merger created a comprehensive university that combined technical excellence with teacher education. Over the past two decades, BDU has expanded significantly, adding new colleges, programs, and research centers. The university has become particularly renowned for its Water Resources Engineering program, which is considered one of the best in Ethiopia and Africa. BDU has also established strong partnerships with international universities and organizations, particularly in water resource management and engineering. Today, BDU stands as one of Ethiopia's leading universities, known for its academic excellence, research contributions, and community engagement.",
+    "mission": "To provide quality education through teaching, learning, research, and community service; to produce competent graduates equipped with knowledge, skills, and ethical values; to contribute to national development through research and innovation, particularly in water resources, engineering, and applied sciences; and to serve the community through outreach programs and knowledge transfer.",
+    "vision": "To be a leading university in Ethiopia and Africa, recognized for excellence in water resources engineering, applied sciences, and education, contributing to sustainable development and serving as a center of knowledge, innovation, and academic excellence."
+  },
+  {
+    "id": "uog",
+    "name": "University of Gondar",
+    "city": "Gondar",
+    "country": "Ethiopia",
+    "rating": 4.3,
+    "tuition": { "minUsd": 450, "maxUsd": 1600 },
+    "programs": [
+      { "id": "uog-med", "name": "Medicine", "degree": "MD", "durationYears": 6, "language": "English" },
+      { "id": "uog-ph", "name": "Public Health", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "uog-nur", "name": "Nursing", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "uog-pharm", "name": "Pharmacy", "degree": "BPharm", "durationYears": 5, "language": "English" },
+      { "id": "uog-law", "name": "Law", "degree": "LLB", "durationYears": 4, "language": "English" },
+      { "id": "uog-bus", "name": "Business Administration", "degree": "BA", "durationYears": 4, "language": "English" },
+      { "id": "uog-agri", "name": "Agricultural Sciences", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "uog-cs", "name": "Computer Science", "degree": "BSc", "durationYears": 4, "language": "English" }
+    ],
+    "images": [
+      "/img/gonder.jpg",
+      "/img/gonder.jpg",
+      "/img/gonder.jpg",
+      "/img/gonder.jpg",
+      "/img/gonder.jpg"
+    ],
+    "description": "Established in 1954 as the Public Health College, University of Gondar is Ethiopia's oldest medical school and a leading institution in health sciences, social sciences, and research.",
+    "verified": true,
+    "aboutCity": "Gondar, known as the 'Camelot of Africa', is a historic city in the Amhara Region. Located in the northwest highlands, it was the capital of Ethiopia from 1632 to 1855. The city is famous for its Royal Enclosure with Fasil Ghebbi, a UNESCO World Heritage Site, featuring medieval castles and churches.",
+    "campuses": [
+      {
+        "id": "uog-main",
+        "name": "Main Campus",
+        "address": "University of Gondar, Gondar, Amhara Region",
+        "city": "Gondar",
+        "phone": "+251 58 111 0111",
+        "email": "info@uog.edu.et",
+        "description": "The main campus houses the College of Medicine and Health Sciences, Business and Economics, and Natural and Computational Sciences."
+      },
+      {
+        "id": "uog-health",
+        "name": "Health Sciences Campus",
+        "address": "Health Sciences Campus, Gondar",
+        "city": "Gondar",
+        "phone": "+251 58 111 0122",
+        "email": "health@uog.edu.et",
+        "description": "Dedicated campus for medical and health sciences programs including the Teaching Hospital."
+      }
+    ],
+    "faculties": [
+      {
+        "id": "uog-med",
+        "name": "College of Medicine and Health Sciences",
+        "description": "Ethiopia's oldest medical school offering MD, Nursing, Midwifery, and other health programs.",
+        "programs": ["Medicine", "Nursing", "Midwifery", "Public Health", "Pharmacy", "Medical Laboratory Science"]
+      },
+      {
+        "id": "uog-bus",
+        "name": "College of Business and Economics",
+        "description": "Offers programs in Business Administration, Accounting, Economics, and Management.",
+        "programs": ["Business Administration", "Accounting", "Economics", "Management", "Marketing"]
+      },
+      {
+        "id": "uog-law",
+        "name": "College of Law",
+        "description": "Provides comprehensive legal education with focus on Ethiopian and international law.",
+        "programs": ["Law", "Criminology"]
+      },
+      {
+        "id": "uog-agri",
+        "name": "College of Agriculture",
+        "description": "Offers agricultural sciences programs focusing on sustainable farming and food security.",
+        "programs": ["Agricultural Sciences", "Animal Science", "Plant Science", "Agricultural Economics"]
+      },
+      {
+        "id": "uog-ncs",
+        "name": "College of Natural and Computational Sciences",
+        "description": "Provides programs in mathematics, physics, chemistry, biology, and computer science.",
+        "programs": ["Mathematics", "Physics", "Chemistry", "Biology", "Computer Science", "Statistics"]
+      }
+    ],
+    "admissionRequirements": "Minimum GPA of 2.5 for undergraduate programs. Entrance exam scores required. Specific requirements vary by program. Medical programs require higher scores. All applicants must provide completed application form, transcripts, and supporting documents.",
+    "applicationDeadline": "September 30 for regular admission",
+    "studentBodySize": 35000,
+    "campusFacilities": ["Library", "Research Labs", "Teaching Hospital", "Computer Labs", "Sports Facilities", "Student Cafeteria", "Hostels", "Auditorium", "Conference Halls"],
+    "housing": {
+      "available": true,
+      "description": "On-campus housing available for students. Hostels and dormitories with basic amenities. Off-campus housing options available in Gondar city."
+    },
+    "contactInfo": {
+      "email": "info@uog.edu.et",
+      "phone": "+251 58 111 0111",
+      "website": "https://www.uog.edu.et",
+      "address": "University of Gondar, P.O. Box 196, Gondar, Amhara Region, Ethiopia"
+    },
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/universityofgondar",
+      "twitter": "https://twitter.com/UoGondar",
+      "linkedin": "https://www.linkedin.com/school/university-of-gondar"
+    },
+    "accreditation": ["Ministry of Education - Ethiopia", "World Health Organization", "International Medical Education Directory"],
+    "history": "Founded in 1954 as the Public Health College and Training Center, it became a comprehensive university in 2004. Originally focused on public health and medical training, it has expanded to include multiple colleges and faculties.",
+    "mission": "To provide quality education, conduct research, and serve the community through training competent professionals in health sciences, social sciences, and other disciplines.",
+    "vision": "To be a leading university in Ethiopia and Africa, recognized for excellence in teaching, research, and community service, particularly in health sciences."
+  },
+  {
+    "id": "ju",
+    "name": "Jimma University",
+    "city": "Jimma",
+    "country": "Ethiopia",
+    "rating": 4.4,
+    "tuition": { "minUsd": 400, "maxUsd": 1500 },
+    "programs": [
+      { "id": "ju-med", "name": "Medicine", "degree": "MD", "durationYears": 6, "language": "English" },
+      { "id": "ju-agri", "name": "Agriculture", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "ju-eng", "name": "Civil Engineering", "degree": "BEng", "durationYears": 5, "language": "English" },
+      { "id": "ju-cs", "name": "Computer Science", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "ju-ph", "name": "Public Health", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "ju-bus", "name": "Business Administration", "degree": "BA", "durationYears": 4, "language": "English" },
+      { "id": "ju-law", "name": "Law", "degree": "LLB", "durationYears": 4, "language": "English" },
+      { "id": "ju-edu", "name": "Education", "degree": "BA", "durationYears": 4, "language": "English" }
+    ],
+    "images": [
+      "/img/jimma.jpg",
+      "/img/jimma.jpg",
+      "/img/jimma.jpg",
+      "/img/jimma.jpg",
+      "/img/jimma.jpg"
+    ],
+    "description": "Established in 1952, Jimma University is a leading public research university known for its community-oriented education approach, agricultural programs, health sciences, and comprehensive academic offerings.",
+    "verified": true,
+    "aboutCity": "Jimma is the largest city in southwestern Ethiopia, located in the Oromia Region. It's a major commercial and agricultural hub, known for coffee production. The city has a warm climate and is surrounded by coffee plantations. Jimma is approximately 335 km southwest of Addis Ababa.",
+    "campuses": [
+      {
+        "id": "ju-main",
+        "name": "Main Campus",
+        "address": "Jimma University, P.O. Box 378, Jimma, Oromia Region",
+        "city": "Jimma",
+        "phone": "+251 47 111 1450",
+        "email": "info@ju.edu.et",
+        "description": "The main campus houses the College of Agriculture and Veterinary Medicine, College of Business and Economics, and administrative offices."
+      },
+      {
+        "id": "ju-health",
+        "name": "Health Sciences Campus",
+        "address": "College of Public Health and Medical Sciences, Jimma",
+        "city": "Jimma",
+        "phone": "+251 47 111 1455",
+        "email": "health@ju.edu.et",
+        "description": "Home to the College of Public Health and Medical Sciences, including the Teaching Hospital."
+      },
+      {
+        "id": "ju-tech",
+        "name": "Institute of Technology",
+        "address": "Jimma Institute of Technology, Jimma",
+        "city": "Jimma",
+        "phone": "+251 47 111 1460",
+        "email": "tech@ju.edu.et",
+        "description": "Engineering and technology programs including Civil Engineering, Electrical Engineering, and Computer Science."
+      }
+    ],
+    "faculties": [
+      {
+        "id": "ju-agri",
+        "name": "College of Agriculture and Veterinary Medicine",
+        "description": "One of the oldest and largest agricultural colleges in Ethiopia, offering comprehensive programs in agriculture and veterinary medicine.",
+        "programs": ["Agriculture", "Plant Science", "Animal Science", "Veterinary Medicine", "Agricultural Economics", "Food Science"]
+      },
+      {
+        "id": "ju-health",
+        "name": "College of Public Health and Medical Sciences",
+        "description": "Offers medical, public health, and health sciences programs with strong emphasis on community health.",
+        "programs": ["Medicine", "Public Health", "Nursing", "Midwifery", "Health Officer", "Medical Laboratory Science"]
+      },
+      {
+        "id": "ju-tech",
+        "name": "Institute of Technology",
+        "description": "Provides engineering and technology education with modern facilities and laboratories.",
+        "programs": ["Civil Engineering", "Electrical Engineering", "Computer Science", "Information Technology", "Mechanical Engineering"]
+      },
+      {
+        "id": "ju-bus",
+        "name": "College of Business and Economics",
+        "description": "Business and economics programs focusing on entrepreneurship and management.",
+        "programs": ["Business Administration", "Accounting", "Economics", "Management", "Finance"]
+      },
+      {
+        "id": "ju-law",
+        "name": "College of Law and Governance",
+        "description": "Legal education programs emphasizing Ethiopian law and governance.",
+        "programs": ["Law", "Governance and Development Studies"]
+      },
+      {
+        "id": "ju-edu",
+        "name": "College of Education and Behavioral Sciences",
+        "description": "Teacher training and educational programs across various disciplines.",
+        "programs": ["Education", "Psychology", "Educational Planning", "Special Needs Education"]
+      },
+      {
+        "id": "ju-ncs",
+        "name": "College of Natural Sciences",
+        "description": "Programs in mathematics, physics, chemistry, biology, and related fields.",
+        "programs": ["Mathematics", "Physics", "Chemistry", "Biology", "Statistics"]
+      },
+      {
+        "id": "ju-social",
+        "name": "College of Social Sciences and Humanities",
+        "description": "Social sciences and humanities programs including languages, history, and geography.",
+        "programs": ["Geography", "History", "English Language and Literature", "Amharic Language", "Oromo Language"]
+      }
+    ],
+    "admissionRequirements": "Minimum GPA of 2.5 for undergraduate programs. Entrance examination scores required. Specific requirements vary by college. Medical and engineering programs require higher entrance exam scores. Application package includes completed form, official transcripts, and supporting documents.",
+    "applicationDeadline": "September 15 for regular admission",
+    "studentBodySize": 50000,
+    "campusFacilities": ["Library", "Research Centers", "Teaching Hospital", "Modern Laboratories", "Computer Labs", "Sports Complex", "Student Cafeteria", "Hostels", "Auditoriums", "Conference Facilities", "Agricultural Research Farms"],
+    "housing": {
+      "available": true,
+      "description": "On-campus dormitories and hostels available for students. Off-campus housing options in Jimma city. Basic amenities provided including dining facilities."
+    },
+    "contactInfo": {
+      "email": "info@ju.edu.et",
+      "phone": "+251 47 111 1450",
+      "website": "https://www.ju.edu.et",
+      "address": "Jimma University, P.O. Box 378, Jimma, Oromia Region, Ethiopia"
+    },
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/jimmauniversity",
+      "twitter": "https://twitter.com/jimmauniversity",
+      "linkedin": "https://www.linkedin.com/school/jimma-university"
+    },
+    "accreditation": ["Ministry of Education - Ethiopia", "World Health Organization", "International Medical Education Directory"],
+    "history": "Jimma University was established in 1999 through the amalgamation of Jimma College of Agriculture (founded in 1952) and Jimma Institute of Health Sciences (founded in 1983). It has grown into one of Ethiopia's leading universities with emphasis on community-based education.",
+    "mission": "To provide quality education through teaching, research, and community service, producing competent graduates who contribute to national development.",
+    "vision": "To be a center of excellence in teaching, research, and community service, particularly in agriculture and health sciences."
+  },
+  {
+    "id": "hu",
+    "name": "Hawassa University",
+    "city": "Hawassa",
+    "country": "Ethiopia",
+    "rating": 4.2,
+    "tuition": { "minUsd": 400, "maxUsd": 1400 },
+    "programs": [
+      { "id": "hu-med", "name": "Medicine", "degree": "MD", "durationYears": 6, "language": "English" },
+      { "id": "hu-agri", "name": "Agriculture", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "hu-eng", "name": "Electrical Engineering", "degree": "BEng", "durationYears": 5, "language": "English" },
+      { "id": "hu-cs", "name": "Computer Science", "degree": "BSc", "durationYears": 4, "language": "English" },
+      { "id": "hu-law", "name": "Law", "degree": "LLB", "durationYears": 4, "language": "English" },
+      { "id": "hu-bus", "name": "Business Administration", "degree": "BA", "durationYears": 4, "language": "English" },
+      { "id": "hu-edu", "name": "Education", "degree": "BA", "durationYears": 4, "language": "English" },
+      { "id": "hu-ph", "name": "Public Health", "degree": "BSc", "durationYears": 4, "language": "English" }
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1573164713714-95f7c38d37a3?q=80&w=1600&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=1600&auto=format&fit=crop"
+    ],
+    "description": "Established in 1999, Hawassa University is a national residential university offering 81 undergraduate, 108 master's, and 16 PhD programs across multiple colleges and campuses.",
+    "verified": true,
+    "aboutCity": "Hawassa is the capital of Sidama Region, located approximately 278 km south of Addis Ababa on the shores of Lake Hawassa. It's a popular tourist destination known for its beautiful lake, bird watching, and recreational activities. The city has a pleasant climate year-round.",
+    "campuses": [
+      {
+        "id": "hu-main",
+        "name": "Main Campus",
+        "address": "Hawassa University, P.O. Box 05, Hawassa, Sidama Region",
+        "city": "Hawassa",
+        "phone": "+251 46 220 5163",
+        "email": "info@hu.edu.et",
+        "description": "The main administrative campus housing the College of Business and Economics, College of Social Sciences and Humanities, and administrative offices."
+      },
+      {
+        "id": "hu-agri",
+        "name": "College of Agriculture",
+        "address": "College of Agriculture Campus, Hawassa",
+        "city": "Hawassa",
+        "phone": "+251 46 220 5170",
+        "email": "agriculture@hu.edu.et",
+        "description": "Dedicated campus for agricultural sciences programs with research farms and laboratories."
+      },
+      {
+        "id": "hu-law",
+        "name": "College of Law and Governance",
+        "address": "College of Law and Governance, Hawassa",
+        "city": "Hawassa",
+        "phone": "+251 46 220 5175",
+        "email": "law@hu.edu.et",
+        "description": "Campus for legal education and governance studies."
+      },
+      {
+        "id": "hu-med",
+        "name": "College of Medicine and Health Science",
+        "address": "College of Medicine and Health Science, Hawassa",
+        "city": "Hawassa",
+        "phone": "+251 46 220 5180",
+        "email": "medicine@hu.edu.et",
+        "description": "Medical and health sciences campus with teaching hospital."
+      },
+      {
+        "id": "hu-tech",
+        "name": "Institute of Technology",
+        "address": "Institute of Technology, Hawassa",
+        "city": "Hawassa",
+        "phone": "+251 46 220 5185",
+        "email": "technology@hu.edu.et",
+        "description": "Engineering and technology programs including Electrical, Civil, Mechanical, and Computer Engineering."
+      },
+      {
+        "id": "hu-wondo",
+        "name": "Wondo Genet College of Forestry and Natural Resources",
+        "address": "Wondo Genet College, Wondo Genet",
+        "city": "Wondo Genet",
+        "phone": "+251 46 220 5190",
+        "email": "forestry@hu.edu.et",
+        "description": "Specialized campus for forestry, natural resources, and environmental sciences located in Wondo Genet."
+      }
+    ],
+    "faculties": [
+      {
+        "id": "hu-agri",
+        "name": "College of Agriculture",
+        "description": "Comprehensive agricultural sciences programs with focus on sustainable agriculture and food security.",
+        "programs": ["Agriculture", "Animal Science", "Plant Science", "Agricultural Economics", "Rural Development"]
+      },
+      {
+        "id": "hu-law",
+        "name": "College of Law and Governance",
+        "description": "Legal education and governance studies programs.",
+        "programs": ["Law", "Governance and Development Studies", "Public Administration"]
+      },
+      {
+        "id": "hu-social",
+        "name": "College of Social Sciences and Humanities",
+        "description": "Social sciences and humanities programs across various disciplines.",
+        "programs": ["Geography", "History", "English Language and Literature", "Psychology", "Social Work"]
+      },
+      {
+        "id": "hu-bus",
+        "name": "College of Business and Economics",
+        "description": "Business and economics programs with emphasis on entrepreneurship and management.",
+        "programs": ["Business Administration", "Accounting", "Economics", "Management", "Finance", "Marketing"]
+      },
+      {
+        "id": "hu-med",
+        "name": "College of Medicine and Health Science",
+        "description": "Medical and health sciences programs including medicine, public health, and nursing.",
+        "programs": ["Medicine", "Public Health", "Nursing", "Midwifery", "Health Officer", "Medical Laboratory Science"]
+      },
+      {
+        "id": "hu-tech",
+        "name": "Institute of Technology",
+        "description": "Engineering and technology programs with modern facilities.",
+        "programs": ["Electrical Engineering", "Civil Engineering", "Mechanical Engineering", "Computer Science", "Information Technology"]
+      },
+      {
+        "id": "hu-edu",
+        "name": "College of Education",
+        "description": "Teacher education and educational planning programs.",
+        "programs": ["Education", "Educational Planning", "Special Needs Education", "Early Childhood Education"]
+      },
+      {
+        "id": "hu-ncs",
+        "name": "College of Natural and Computational Sciences",
+        "description": "Natural sciences and computational programs.",
+        "programs": ["Mathematics", "Physics", "Chemistry", "Biology", "Statistics", "Computer Science"]
+      },
+      {
+        "id": "hu-forestry",
+        "name": "College of Forestry and Natural Resources",
+        "description": "Specialized programs in forestry, wildlife, and natural resource management.",
+        "programs": ["Forestry", "Wildlife and Ecotourism", "Natural Resource Management", "Environmental Science"]
+      }
+    ],
+    "admissionRequirements": "Minimum GPA of 2.5 for undergraduate programs. Entrance examination scores required. Program-specific requirements apply. Medical and engineering programs have higher entrance exam score requirements. Complete application package includes application form, transcripts, and supporting documents.",
+    "applicationDeadline": "October 1 for regular admission",
+    "studentBodySize": 48558,
+    "campusFacilities": ["Library", "Research Laboratories", "Teaching Hospital", "Computer Labs", "Sports Facilities", "Student Cafeteria", "Hostels", "Auditoriums", "Conference Halls", "Agricultural Research Farms", "Forest Research Station"],
+    "housing": {
+      "available": true,
+      "description": "Residential university with on-campus dormitories and hostels. Off-campus housing available in Hawassa city. Dining facilities and basic amenities provided."
+    },
+    "contactInfo": {
+      "email": "info@hu.edu.et",
+      "phone": "+251 46 220 5163",
+      "website": "https://www.hu.edu.et",
+      "address": "Hawassa University, P.O. Box 05, Hawassa, Sidama Region, Ethiopia"
+    },
+    "socialMedia": {
+      "facebook": "https://www.facebook.com/hawassauniversity",
+      "twitter": "https://twitter.com/hawassauniv",
+      "linkedin": "https://www.linkedin.com/school/hawassa-university"
+    },
+    "accreditation": ["Ministry of Education - Ethiopia", "World Health Organization"],
+    "history": "Hawassa University was established in 1999 as a national university. It has grown significantly to become one of Ethiopia's largest universities with multiple colleges and campuses, offering diverse academic programs.",
+    "mission": "To provide quality education through teaching, research, and community service, producing competent professionals who contribute to regional and national development.",
+    "vision": "To be a leading university in Ethiopia recognized for excellence in teaching, research, and community engagement, particularly in agriculture, technology, and health sciences."
   }
 ]
 

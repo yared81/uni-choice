@@ -1,15 +1,16 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useAuth } from '../contexts/AuthContext'
 
 const LANGUAGES = [
-  { code: 'en', name: 'English' },
-  { code: 'am', name: 'Amharic' },
-  { code: 'ti', name: 'Tigrinya' },
-  { code: 'om', name: 'Afaan Oromo' },
-  { code: 'so', name: 'Somali' },
-  { code: 'aa', name: 'Afar' }
+  { code: 'en', name: 'English', flag: '🇬🇧' },
+  { code: 'am', name: 'አማርኛ', flag: '🇪🇹' },
+  { code: 'ti', name: 'ትግርኛ', flag: '🇪🇹' },
+  { code: 'om', name: 'Afaan Oromo', flag: '🇪🇹' },
+  { code: 'so', name: 'Soomaali', flag: '🇪🇹' },
+  { code: 'aa', name: 'Afar', flag: '🇪🇹' }
 ]
 
 export default function Header() {
@@ -18,6 +19,8 @@ export default function Header() {
   const navigate = useNavigate()
   const { user, logout, isAuthenticated } = useAuth()
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,134 +32,257 @@ export default function Header() {
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng)
+    setIsLanguageMenuOpen(false)
   }
 
   const isActive = (path: string) => location.pathname === path
 
+  const currentLanguage = LANGUAGES.find(lang => lang.code === i18n.language) || LANGUAGES[0]
+
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white/95 backdrop-blur-md shadow-soft' : 'bg-transparent'
-    }`}>
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled 
+          ? 'bg-white/95 backdrop-blur-xl shadow-medium border-b border-olive-100/50' 
+          : 'bg-transparent'
+      }`}
+    >
       <div className="container-page h-20 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 bg-gradient-to-br from-olive to-terracotta rounded-lg flex items-center justify-center transition-transform duration-250 group-hover:scale-105">
-            <span className="text-white font-heading text-xl font-bold">U</span>
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-3 group">
+          <motion.div
+            whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
+            whileTap={{ scale: 0.95 }}
+            className="relative"
+          >
+            <img 
+              src="/img/uniChoice_logo.ico" 
+              alt={t('app.name')}
+              className="w-12 h-12 object-contain"
+            />
+          </motion.div>
+          <div>
+            <span className="text-2xl font-heading text-charcoal font-bold bg-gradient-to-r from-olive-600 to-terracotta-600 bg-clip-text text-transparent">
+              {t('app.name')}
+            </span>
+            <p className="text-xs text-charcoal/60 -mt-1 hidden lg:block">{t('app.tagline')}</p>
           </div>
-          <span className="text-2xl font-heading text-charcoal font-bold">UniMerk</span>
         </Link>
         
-        <nav className="hidden md:flex items-center gap-8">
-          <Link 
-            to="/" 
-            className={`text-sm font-medium transition-colors duration-180 ${
-              isActive('/') ? 'text-olive' : 'text-charcoal/80 hover:text-olive'
-            }`}
-          >
-            {t('nav.home')}
-          </Link>
-          <Link 
-            to="/universities" 
-            className={`text-sm font-medium transition-colors duration-180 ${
-              isActive('/universities') ? 'text-olive' : 'text-charcoal/80 hover:text-olive'
-            }`}
-          >
-            Universities
-          </Link>
-          <Link 
-            to="/compare" 
-            className={`text-sm font-medium transition-colors duration-180 ${
-              isActive('/compare') ? 'text-olive' : 'text-charcoal/80 hover:text-olive'
-            }`}
-          >
-            {t('nav.compare')}
-          </Link>
-          <Link 
-            to="/about" 
-            className={`text-sm font-medium transition-colors duration-180 ${
-              isActive('/about') ? 'text-olive' : 'text-charcoal/80 hover:text-olive'
-            }`}
-          >
-            {t('nav.about')}
-          </Link>
-          <Link 
-            to="/resources" 
-            className={`text-sm font-medium transition-colors duration-180 ${
-              isActive('/resources') ? 'text-olive' : 'text-charcoal/80 hover:text-olive'
-            }`}
-          >
-            Resources
-          </Link>
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center gap-1">
+          {[
+            { path: '/', key: 'nav.home' },
+            { path: '/universities', key: 'nav.universities' },
+            { path: '/compare', key: 'nav.compare' },
+            { path: '/favorites', key: 'nav.favorites' },
+            { path: '/about', key: 'nav.about' },
+          ].map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className="relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-250"
+            >
+              {isActive(item.path) && (
+                <motion.div
+                  layoutId="activeTab"
+                  className="absolute inset-0 bg-gradient-to-r from-olive-50 to-terracotta-50 rounded-lg border border-olive-200/50"
+                  initial={false}
+                  transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                />
+              )}
+              <span className={`relative z-10 ${
+                isActive(item.path) 
+                  ? 'text-olive-700 font-bold' 
+                  : 'text-charcoal/70 hover:text-olive-600'
+              }`}>
+                {t(item.key)}
+              </span>
+            </Link>
+          ))}
           {isAuthenticated && (
-            <Link 
-              to="/profile" 
-              className={`text-sm font-medium transition-colors duration-180 ${
-                isActive('/profile') ? 'text-olive' : 'text-charcoal/80 hover:text-olive'
+            <Link
+              to="/profile"
+              className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-250 ${
+                isActive('/profile') 
+                  ? 'text-olive-700 font-bold' 
+                  : 'text-charcoal/70 hover:text-olive-600'
               }`}
             >
-              Profile
+              {t('nav.profile')}
             </Link>
           )}
         </nav>
 
+        {/* Right Side Actions */}
         <div className="flex items-center gap-3">
-          <select
-            className="text-sm bg-white/90 border border-black/10 rounded-md px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-olive/50 transition-all"
-            value={i18n.language}
-            onChange={(e) => changeLanguage(e.target.value)}
-          >
-            {LANGUAGES.map((lang) => (
-              <option key={lang.code} value={lang.code}>
-                {lang.name}
-              </option>
-            ))}
-          </select>
+          {/* Language Selector */}
+          <div className="relative">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
+              className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/90 border border-olive-200/50 text-sm font-medium text-charcoal hover:bg-olive-50 hover:border-olive-300 transition-all duration-250 shadow-sm"
+            >
+              <span className="text-lg">{currentLanguage.flag}</span>
+              <span className="hidden sm:inline">{currentLanguage.name}</span>
+              <motion.svg
+                animate={{ rotate: isLanguageMenuOpen ? 180 : 0 }}
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </motion.svg>
+            </motion.button>
+
+            <AnimatePresence>
+              {isLanguageMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-large border border-olive-100/50 overflow-hidden"
+                >
+                  {LANGUAGES.map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => changeLanguage(lang.code)}
+                      className={`w-full px-4 py-3 flex items-center gap-3 text-left hover:bg-olive-50 transition-colors ${
+                        i18n.language === lang.code ? 'bg-olive-50 text-olive-700 font-bold' : 'text-charcoal'
+                      }`}
+                    >
+                      <span className="text-xl">{lang.flag}</span>
+                      <span>{lang.name}</span>
+                      {i18n.language === lang.code && (
+                        <motion.span
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          className="ml-auto text-olive-600"
+                        >
+                          ✓
+                        </motion.span>
+                      )}
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Auth Buttons */}
           {isAuthenticated ? (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <Link
                 to="/profile"
-                className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+                className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-olive-50 transition-all duration-250 group"
               >
                 {user?.profilePicture ? (
-                  <img
+                  <motion.img
+                    whileHover={{ scale: 1.1 }}
                     src={user.profilePicture}
                     alt={user.name}
-                    className="w-10 h-10 rounded-full object-cover border-2 border-olive/30"
+                    className="w-10 h-10 rounded-full object-cover border-2 border-olive-300 group-hover:border-olive-500 transition-colors shadow-sm"
                   />
                 ) : (
-                  <div className="w-10 h-10 bg-gradient-to-br from-olive to-terracotta rounded-full flex items-center justify-center text-white text-sm font-bold">
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    className="w-10 h-10 bg-gradient-to-br from-olive-500 to-terracotta-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md"
+                  >
                     {user?.name.charAt(0).toUpperCase()}
-                  </div>
+                  </motion.div>
                 )}
-                <span className="text-sm font-medium text-charcoal hidden md:block">{user?.name}</span>
+                <span className="text-sm font-medium text-charcoal hidden md:block group-hover:text-olive-700 transition-colors">
+                  {user?.name}
+                </span>
               </Link>
-              <button
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => {
                   logout()
                   navigate('/')
                 }}
-                className="px-4 py-2 rounded-md bg-charcoal/10 text-charcoal text-sm font-medium hover:bg-charcoal/20 transition-colors duration-180"
+                className="px-4 py-2 rounded-lg bg-gradient-to-r from-red-500 to-red-600 text-white text-sm font-medium hover:shadow-lg transition-all duration-250"
               >
-                Logout
-              </button>
+                {t('nav.logout')}
+              </motion.button>
             </div>
           ) : (
             <div className="flex items-center gap-2">
-              <button
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => navigate('/login')}
-                className="px-4 py-2 rounded-md bg-olive text-white text-sm font-medium hover:bg-olive/90 transition-colors duration-180"
+                className="px-4 py-2 rounded-lg bg-white border-2 border-olive-500 text-olive-600 text-sm font-medium hover:bg-olive-50 transition-all duration-250 shadow-sm"
               >
                 {t('nav.login')}
-              </button>
-              <button
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => navigate('/signup')}
-                className="px-4 py-2 rounded-md bg-white border-2 border-olive text-olive text-sm font-medium hover:bg-olive/10 transition-colors duration-180"
+                className="px-4 py-2 rounded-lg bg-gradient-to-r from-olive-500 to-olive-600 text-white text-sm font-medium shadow-md hover:shadow-glow-olive transition-all duration-250"
               >
                 {t('nav.signup')}
-              </button>
+              </motion.button>
             </div>
           )}
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden p-2 rounded-lg hover:bg-olive-50 transition-colors"
+          >
+            <svg className="w-6 h-6 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {isMobileMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
         </div>
       </div>
-    </header>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden bg-white/95 backdrop-blur-xl border-t border-olive-100/50"
+          >
+            <nav className="container-page py-4 space-y-2">
+              {[
+                { path: '/', key: 'nav.home' },
+                { path: '/universities', key: 'nav.universities' },
+                { path: '/compare', key: 'nav.compare' },
+                { path: '/favorites', key: 'nav.favorites' },
+                { path: '/about', key: 'nav.about' },
+              ].map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`block px-4 py-3 rounded-lg font-medium transition-all ${
+                    isActive(item.path)
+                      ? 'bg-olive-50 text-olive-700 font-bold'
+                      : 'text-charcoal hover:bg-olive-50 hover:text-olive-600'
+                  }`}
+                >
+                  {t(item.key)}
+                </Link>
+              ))}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   )
 }

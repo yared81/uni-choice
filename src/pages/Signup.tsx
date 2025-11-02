@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import { useAuth } from '../contexts/AuthContext'
 import ScrollReveal from '../components/ScrollReveal'
 import type { Role } from '../types'
 
 export default function Signup() {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const { signup } = useAuth()
   const [formData, setFormData] = useState({
@@ -23,12 +25,12 @@ export default function Signup() {
     setError('')
 
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match')
+      setError(t('auth.error_password_mismatch'))
       return
     }
 
     if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters')
+      setError(t('auth.error_password_length'))
       return
     }
 
@@ -49,10 +51,10 @@ export default function Signup() {
           navigate('/')
         }
       } else {
-        setError('Email already exists. Please try logging in.')
+        setError(t('auth.error_email_exists'))
       }
     } catch (err) {
-      setError('An error occurred. Please try again.')
+      setError(t('auth.error_occurred'))
     } finally {
       setLoading(false)
     }
@@ -69,10 +71,10 @@ export default function Signup() {
             transition={{ duration: 0.5 }}
           >
             <h1 className="text-4xl font-heading font-bold text-charcoal mb-2 text-center">
-              Create Account
+              {t('auth.create_account_title')}
             </h1>
             <p className="text-charcoal/70 text-center mb-8">
-              Join UniMerk and start your educational journey
+              {t('auth.signup_subtitle', { appName: t('app.name') })}
             </p>
 
             {error && (
@@ -88,7 +90,7 @@ export default function Signup() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="block text-sm font-bold text-charcoal mb-2">
-                  Full Name
+                  {t('auth.name')}
                 </label>
                 <input
                   type="text"
@@ -96,13 +98,12 @@ export default function Signup() {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                  placeholder="John Doe"
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-bold text-charcoal mb-2">
-                  Email Address
+                  {t('auth.email')}
                 </label>
                 <input
                   type="email"
@@ -110,27 +111,26 @@ export default function Signup() {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                  placeholder="your.email@example.com"
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-bold text-charcoal mb-2">
-                  I am a
+                  {t('auth.role')}
                 </label>
                 <select
                   value={formData.role}
                   onChange={(e) => setFormData({ ...formData, role: e.target.value as Role })}
                   className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all bg-white"
                 >
-                  <option value="student">Student</option>
-                  <option value="university">University Representative</option>
+                  <option value="student">{t('auth.role_student')}</option>
+                  <option value="university">{t('auth.role_university_full')}</option>
                 </select>
               </div>
 
               <div>
                 <label className="block text-sm font-bold text-charcoal mb-2">
-                  Password
+                  {t('auth.password')}
                 </label>
                 <input
                   type="password"
@@ -138,13 +138,12 @@ export default function Signup() {
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                   className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                  placeholder="At least 6 characters"
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-bold text-charcoal mb-2">
-                  Confirm Password
+                  {t('auth.confirm_password') || 'Confirm Password'}
                 </label>
                 <input
                   type="password"
@@ -152,7 +151,6 @@ export default function Signup() {
                   value={formData.confirmPassword}
                   onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                   className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                  placeholder="Confirm your password"
                 />
               </div>
 
@@ -163,15 +161,15 @@ export default function Signup() {
                 whileHover={{ scale: loading ? 1 : 1.02 }}
                 whileTap={{ scale: loading ? 1 : 0.98 }}
               >
-                {loading ? 'Creating account...' : 'Create Account'}
+                {loading ? t('auth.creating_account') : t('auth.signup_button')}
               </motion.button>
             </form>
 
             <div className="mt-8 text-center">
               <p className="text-charcoal/70">
-                Already have an account?{' '}
+                {t('auth.already_have_account')}{' '}
                 <Link to="/login" className="text-olive font-bold hover:underline">
-                  Sign in
+                  {t('auth.sign_in_link')}
                 </Link>
               </p>
             </div>

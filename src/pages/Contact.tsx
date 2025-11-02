@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import ScrollReveal from '../components/ScrollReveal'
 
 export default function Contact() {
+  const { t } = useTranslation()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -12,7 +14,7 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    alert('Thank you for your message! We will get back to you soon.')
+    alert(t('contact.form_success'))
     setFormData({ name: '', email: '', subject: '', message: '' })
   }
 
@@ -35,7 +37,7 @@ export default function Contact() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              Get in Touch
+              {t('contact.hero_title')}
             </motion.h1>
             <motion.p 
               className="text-xl md:text-2xl text-charcoal/70 max-w-3xl mx-auto leading-relaxed"
@@ -43,7 +45,7 @@ export default function Contact() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Have questions? We're here to help. Reach out to our team and we'll get back to you as soon as possible.
+              {t('contact.hero_subtitle')}
             </motion.p>
           </div>
         </section>
@@ -54,7 +56,7 @@ export default function Contact() {
           {/* Contact Info */}
           <ScrollReveal>
             <div>
-              <h2 className="text-4xl font-heading font-bold mb-8 text-charcoal">Contact Information</h2>
+              <h2 className="text-4xl font-heading font-bold mb-8 text-charcoal">{t('contact.info_title')}</h2>
               <div className="space-y-8">
                 <motion.div
                   className="ui-card p-6 hover:shadow-xl transition-all"
@@ -67,11 +69,11 @@ export default function Contact() {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg text-charcoal mb-2">Email</h3>
-                      <a href="mailto:info@unimerk.et" className="text-olive hover:underline text-lg">
-                        info@unimerk.et
+                      <h3 className="font-bold text-lg text-charcoal mb-2">{t('contact.email_title')}</h3>
+                      <a href={`mailto:${t('contact.email_value')}`} className="text-olive hover:underline text-lg">
+                        {t('contact.email_value')}
                       </a>
-                      <p className="text-charcoal/60 text-sm mt-1">We respond within 24 hours</p>
+                      <p className="text-charcoal/60 text-sm mt-1">{t('contact.email_response')}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -87,11 +89,11 @@ export default function Contact() {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg text-charcoal mb-2">Phone</h3>
-                      <a href="tel:+251911234567" className="text-olive hover:underline text-lg">
-                        +251 911 234 567
+                      <h3 className="font-bold text-lg text-charcoal mb-2">{t('contact.phone_title')}</h3>
+                      <a href={`tel:${t('contact.phone_value')}`} className="text-olive hover:underline text-lg">
+                        {t('contact.phone_value')}
                       </a>
-                      <p className="text-charcoal/60 text-sm mt-1">Mon-Fri, 9AM-6PM EAT</p>
+                      <p className="text-charcoal/60 text-sm mt-1">{t('contact.phone_hours')}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -108,11 +110,11 @@ export default function Contact() {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg text-charcoal mb-2">Address</h3>
+                      <h3 className="font-bold text-lg text-charcoal mb-2">{t('contact.address_title')}</h3>
                       <p className="text-charcoal/70 text-lg">
-                        Addis Ababa, Ethiopia
+                        {t('contact.address_value')}
                       </p>
-                      <p className="text-charcoal/60 text-sm mt-1">Visit our office during business hours</p>
+                      <p className="text-charcoal/60 text-sm mt-1">{t('contact.address_visit')}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -120,7 +122,7 @@ export default function Contact() {
 
               {/* Social Media */}
               <div className="mt-12">
-                <h3 className="text-2xl font-heading font-bold text-charcoal mb-6">Follow Us</h3>
+                <h3 className="text-2xl font-heading font-bold text-charcoal mb-6">{t('contact.follow_us')}</h3>
                 <div className="flex gap-4">
                   {['Facebook', 'Twitter', 'LinkedIn', 'Instagram'].map((social, i) => (
                     <motion.a
@@ -141,50 +143,46 @@ export default function Contact() {
           {/* Contact Form */}
           <ScrollReveal>
             <div className="ui-card p-10 shadow-xl">
-              <h2 className="text-4xl font-heading font-bold mb-6 text-charcoal">Send us a Message</h2>
+              <h2 className="text-4xl font-heading font-bold mb-6 text-charcoal">{t('contact.form_title')}</h2>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label className="block text-sm font-bold text-charcoal mb-2">Name</label>
+                  <label className="block text-sm font-bold text-charcoal mb-2">{t('contact.form_name')}</label>
                   <input
                     type="text"
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                    placeholder="Your full name"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-charcoal mb-2">Email</label>
+                  <label className="block text-sm font-bold text-charcoal mb-2">{t('contact.form_email')}</label>
                   <input
                     type="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                    placeholder="your.email@example.com"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-charcoal mb-2">Subject</label>
+                  <label className="block text-sm font-bold text-charcoal mb-2">{t('contact.form_subject')}</label>
                   <input
                     type="text"
                     required
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                    placeholder="What is this regarding?"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-charcoal mb-2">Message</label>
+                  <label className="block text-sm font-bold text-charcoal mb-2">{t('contact.form_message')}</label>
                   <textarea
                     rows={6}
                     required
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all resize-none"
-                    placeholder="Tell us how we can help..."
                   />
                 </div>
                 <motion.button
@@ -193,7 +191,7 @@ export default function Contact() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Send Message
+                  {t('contact.form_submit')}
                 </motion.button>
               </form>
             </div>
@@ -204,13 +202,13 @@ export default function Contact() {
         <ScrollReveal>
           <section className="py-12 bg-offwhite rounded-2xl p-10">
             <h2 className="text-3xl font-heading font-bold text-center text-charcoal mb-8">
-              Frequently Asked Questions
+              {t('contact.faq_title')}
             </h2>
             <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {[
-                { q: 'How quickly do you respond?', a: 'We typically respond within 24 hours during business days.' },
-                { q: 'Can universities contact you?', a: 'Yes! Universities can reach out to be listed or update their information.' },
-                { q: 'Do you offer student counseling?', a: 'While we provide resources, we recommend consulting with school counselors for personalized advice.' }
+                { q: t('contact.faq_quick_q'), a: t('contact.faq_quick_a') },
+                { q: t('contact.faq_universities_q'), a: t('contact.faq_universities_a') },
+                { q: t('contact.faq_counseling_q'), a: t('contact.faq_counseling_a') }
               ].map((faq, i) => (
                 <motion.div
                   key={faq.q}

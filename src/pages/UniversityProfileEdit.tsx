@@ -1,15 +1,19 @@
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 import { useAuth } from '../contexts/AuthContext'
 import ScrollReveal from '../components/ScrollReveal'
 import type { University, Program, Campus, Faculty } from '../types'
 
 export default function UniversityProfileEdit() {
+  const { t } = useTranslation()
   const { user, logout, updateUser } = useAuth()
   const navigate = useNavigate()
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const profilePictureInputRef = useRef<HTMLInputElement>(null)
   const campusFileInputRef = useRef<HTMLInputElement>(null)
+  const campusProfilePictureInputRef = useRef<HTMLInputElement>(null)
   const [myUniversity, setMyUniversity] = useState<University | null>(null)
   const [isSaving, setIsSaving] = useState(false)
   const [activeSection, setActiveSection] = useState<string>('basic')
@@ -20,7 +24,8 @@ export default function UniversityProfileEdit() {
     country: '',
     rating: 4.0,
     programs: [],
-    images: [],
+    profilePicture: '',
+    images: [], // Up to 10 images
     description: '',
     verified: false,
     aboutCity: '',
@@ -46,7 +51,7 @@ export default function UniversityProfileEdit() {
     }
 
     // Load user's university from localStorage
-    const userUni = localStorage.getItem(`unimerk_uni_${user.id}`)
+    const userUni = localStorage.getItem(`unichoice_uni_${user.id}`)
     if (userUni) {
       try {
         const parsed = JSON.parse(userUni)
@@ -56,18 +61,34 @@ export default function UniversityProfileEdit() {
     }
   }, [user, navigate])
 
+  const handleProfilePictureUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        const base64String = reader.result as string
+        setFormData({ ...formData, profilePicture: base64String })
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, index?: number) => {
     const file = e.target.files?.[0]
     if (file) {
       const reader = new FileReader()
       reader.onloadend = () => {
         const base64String = reader.result as string
+        const currentImages = formData.images || []
+        // Limit to 10 images
         if (index !== undefined) {
-          const newImages = [...(formData.images || [])]
+          const newImages = [...currentImages]
           newImages[index] = base64String
           setFormData({ ...formData, images: newImages })
+        } else if (currentImages.length < 10) {
+          setFormData({ ...formData, images: [...currentImages, base64String] })
         } else {
-          setFormData({ ...formData, images: [...(formData.images || []), base64String] })
+          alert(t('university_edit.max_images_alert'))
         }
       }
       reader.readAsDataURL(file)
@@ -112,7 +133,9 @@ export default function UniversityProfileEdit() {
       city: '',
       phone: '',
       email: '',
-      description: ''
+      description: '',
+      profilePicture: '',
+      images: []
     }
     setFormData({
       ...formData,
@@ -124,6 +147,54 @@ export default function UniversityProfileEdit() {
     const newCampuses = [...(formData.campuses || [])]
     newCampuses[index] = { ...newCampuses[index], ...updates }
     setFormData({ ...formData, campuses: newCampuses })
+  }
+
+  const handleCampusProfilePictureUpload = (campusIndex: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        const base64String = reader.result as string
+        const campuses = [...(formData.campuses || [])]
+        campuses[campusIndex].profilePicture = base64String
+        setFormData({ ...formData, campuses })
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  const handleCampusImageUpload = (campusIndex: number, imageIndex?: number) => {
+    return (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0]
+      if (file) {
+        const reader = new FileReader()
+        reader.onloadend = () => {
+          const base64String = reader.result as string
+          const campuses = [...(formData.campuses || [])]
+          const campusImages = campuses[campusIndex].images || []
+          
+          if (imageIndex !== undefined) {
+            campusImages[imageIndex] = base64String
+          } else if (campusImages.length < 10) {
+            campusImages.push(base64String)
+          } else {
+            alert(t('university_edit.max_campus_images_alert'))
+            return
+          }
+          
+          campuses[campusIndex].images = campusImages
+          setFormData({ ...formData, campuses })
+        }
+        reader.readAsDataURL(file)
+      }
+    }
+  }
+
+  const removeCampusImage = (campusIndex: number, imageIndex: number) => {
+    const campuses = [...(formData.campuses || [])]
+    const campusImages = campuses[campusIndex].images?.filter((_, i) => i !== imageIndex) || []
+    campuses[campusIndex].images = campusImages
+    setFormData({ ...formData, campuses })
   }
 
   const removeCampus = (index: number) => {
@@ -197,6 +268,7 @@ export default function UniversityProfileEdit() {
       country: formData.country || '',
       rating: formData.rating || 4.0,
       programs: formData.programs || [],
+      profilePicture: formData.profilePicture,
       images: formData.images || [],
       description: formData.description || '',
       verified: formData.verified || false,
@@ -217,24 +289,24 @@ export default function UniversityProfileEdit() {
     }
 
     // Save to localStorage
-    localStorage.setItem(`unimerk_uni_${user.id}`, JSON.stringify(universityData))
+    localStorage.setItem(`unichoice_uni_${user.id}`, JSON.stringify(universityData))
     
     // Update user to link university
     await updateUser({ universityId: user.id })
 
     // Add to universities list in localStorage for display
-    const allUnis = JSON.parse(localStorage.getItem('unimerk_all_universities') || '[]')
+    const allUnis = JSON.parse(localStorage.getItem('unichoice_all_universities') || '[]')
     const existingIndex = allUnis.findIndex((u: University) => u.id === universityData.id)
     if (existingIndex >= 0) {
       allUnis[existingIndex] = universityData
     } else {
       allUnis.push(universityData)
     }
-    localStorage.setItem('unimerk_all_universities', JSON.stringify(allUnis))
+    localStorage.setItem('unichoice_all_universities', JSON.stringify(allUnis))
 
     setMyUniversity(universityData)
     setIsSaving(false)
-    alert('University information saved successfully!')
+    alert(t('university_edit.save_success'))
   }
 
   const handleLogout = () => {
@@ -247,15 +319,15 @@ export default function UniversityProfileEdit() {
   }
 
   const sections = [
-    { id: 'basic', name: 'Basic Info' },
-    { id: 'about', name: 'About & Description' },
-    { id: 'city', name: 'About City' },
-    { id: 'campuses', name: 'Campuses' },
-    { id: 'faculties', name: 'Faculties' },
-    { id: 'programs', name: 'Programs' },
-    { id: 'admission', name: 'Admission' },
-    { id: 'contact', name: 'Contact & Social' },
-    { id: 'other', name: 'Additional Info' }
+    { id: 'basic', name: t('university_edit.basic') },
+    { id: 'about', name: t('university_edit.about') },
+    { id: 'city', name: t('university_edit.city') },
+    { id: 'campuses', name: t('university_edit.campuses') },
+    { id: 'faculties', name: t('university_edit.faculties') },
+    { id: 'programs', name: t('university_edit.programs') },
+    { id: 'admission', name: t('university_edit.admission') },
+    { id: 'contact', name: t('university_edit.contact') },
+    { id: 'other', name: t('university_edit.other') }
   ]
 
   return (
@@ -266,7 +338,7 @@ export default function UniversityProfileEdit() {
           <div className="absolute inset-0 opacity-5">
             <img 
               src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920&h=800&fit=crop"
-              alt="University Profile"
+              alt={t('university_edit.profile_image_alt')}
               className="w-full h-full object-cover"
             />
           </div>
@@ -344,7 +416,6 @@ export default function UniversityProfileEdit() {
                           value={formData.name || ''}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                           className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                          placeholder="Addis Ababa University"
                         />
                       </div>
                       <div>
@@ -355,7 +426,6 @@ export default function UniversityProfileEdit() {
                           value={formData.city || ''}
                           onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                           className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                          placeholder="Addis Ababa"
                         />
                       </div>
                       <div>
@@ -365,7 +435,6 @@ export default function UniversityProfileEdit() {
                           value={formData.country || ''}
                           onChange={(e) => setFormData({ ...formData, country: e.target.value })}
                           className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                          placeholder="Ethiopia"
                         />
                       </div>
                       <div>
@@ -388,7 +457,6 @@ export default function UniversityProfileEdit() {
                           value={formData.studentBodySize || ''}
                           onChange={(e) => setFormData({ ...formData, studentBodySize: parseInt(e.target.value) || undefined })}
                           className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                          placeholder="5000"
                         />
                       </div>
                       <div className="flex items-center gap-2">
@@ -402,9 +470,51 @@ export default function UniversityProfileEdit() {
                       </div>
                     </div>
 
-                    {/* Images */}
+                    {/* Profile Picture/Logo */}
                     <div>
-                      <label className="block text-sm font-bold text-charcoal mb-4">University Images</label>
+                      <label className="block text-sm font-bold text-charcoal mb-4">University Logo/Profile Picture</label>
+                      {formData.profilePicture && (
+                        <div className="mb-4 relative inline-block">
+                          <img
+                            src={formData.profilePicture}
+                            alt={t('university_edit.university_logo_alt')}
+                            className="w-32 h-32 object-cover rounded-xl border-4 border-olive/20 shadow-lg"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setFormData({ ...formData, profilePicture: '' })}
+                            className="absolute top-0 right-0 w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-all"
+                          >
+                            ×
+                          </button>
+                        </div>
+                      )}
+                      <button
+                        type="button"
+                        onClick={() => profilePictureInputRef.current?.click()}
+                        className="px-6 py-3 rounded-lg bg-olive/10 text-olive font-medium hover:bg-olive/20 transition-all"
+                      >
+                        {formData.profilePicture ? t('university_edit.change_logo') : `+ ${t('university_edit.add_university_logo')}`}
+                      </button>
+                      <input
+                        ref={profilePictureInputRef}
+                        type="file"
+                        accept="image/*"
+                        onChange={handleProfilePictureUpload}
+                        className="hidden"
+                      />
+                    </div>
+
+                    {/* Images Gallery - Up to 10 images */}
+                    <div>
+                      <label className="block text-sm font-bold text-charcoal mb-4">
+                        University Images Gallery (Up to 10 images)
+                        {formData.images && formData.images.length > 0 && (
+                          <span className="ml-2 text-sm font-normal text-charcoal/60">
+                            ({formData.images.length}/10)
+                          </span>
+                        )}
+                      </label>
                       <div className="grid md:grid-cols-3 gap-4 mb-4">
                         {formData.images?.map((img, index) => (
                           <div key={index} className="relative group">
@@ -423,21 +533,27 @@ export default function UniversityProfileEdit() {
                           </div>
                         ))}
                       </div>
-                      <button
-                        type="button"
-                        onClick={() => fileInputRef.current?.click()}
-                        className="px-6 py-3 rounded-lg bg-olive/10 text-olive font-medium hover:bg-olive/20 transition-all"
-                      >
-                        + Add Image
-                      </button>
-                      <input
-                        ref={fileInputRef}
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageUpload}
-                        className="hidden"
-                        multiple
-                      />
+                      {(!formData.images || formData.images.length < 10) && (
+                        <>
+                          <button
+                            type="button"
+                            onClick={() => fileInputRef.current?.click()}
+                            className="px-6 py-3 rounded-lg bg-olive/10 text-olive font-medium hover:bg-olive/20 transition-all"
+                          >
+                            + Add Image {formData.images && formData.images.length > 0 && `(${formData.images.length}/10)`}
+                          </button>
+                          <input
+                            ref={fileInputRef}
+                            type="file"
+                            accept="image/*"
+                            onChange={handleImageUpload}
+                            className="hidden"
+                          />
+                        </>
+                      )}
+                      {formData.images && formData.images.length >= 10 && (
+                        <p className="text-sm text-charcoal/60 mt-2">Maximum 10 images reached</p>
+                      )}
                     </div>
                   </div>
                 )}
@@ -453,7 +569,6 @@ export default function UniversityProfileEdit() {
                         value={formData.description || ''}
                         onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                         className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all resize-none"
-                        placeholder="Write a comprehensive description of your university..."
                       />
                     </div>
                     <div>
@@ -463,7 +578,6 @@ export default function UniversityProfileEdit() {
                         value={formData.history || ''}
                         onChange={(e) => setFormData({ ...formData, history: e.target.value })}
                         className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all resize-none"
-                        placeholder="University history and background..."
                       />
                     </div>
                     <div>
@@ -473,7 +587,6 @@ export default function UniversityProfileEdit() {
                         value={formData.mission || ''}
                         onChange={(e) => setFormData({ ...formData, mission: e.target.value })}
                         className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all resize-none"
-                        placeholder="University mission statement..."
                       />
                     </div>
                     <div>
@@ -483,7 +596,6 @@ export default function UniversityProfileEdit() {
                         value={formData.vision || ''}
                         onChange={(e) => setFormData({ ...formData, vision: e.target.value })}
                         className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all resize-none"
-                        placeholder="University vision statement..."
                       />
                     </div>
                   </div>
@@ -498,7 +610,6 @@ export default function UniversityProfileEdit() {
                       value={formData.aboutCity || ''}
                       onChange={(e) => setFormData({ ...formData, aboutCity: e.target.value })}
                       className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all resize-none"
-                      placeholder="Describe the city, location advantages, transportation, climate, culture, local attractions, etc..."
                     />
                   </div>
                 )}
@@ -513,7 +624,7 @@ export default function UniversityProfileEdit() {
                         onClick={addCampus}
                         className="px-4 py-2 rounded-lg bg-olive text-white font-medium hover:bg-olive/90 transition-all"
                       >
-                        + Add Campus
+                        + {t('university_edit.add_campus')}
                       </button>
                     </div>
                     {formData.campuses?.map((campus, index) => (
@@ -527,7 +638,6 @@ export default function UniversityProfileEdit() {
                               value={campus.name}
                               onChange={(e) => updateCampus(index, { name: e.target.value })}
                               className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                              placeholder="Main Campus"
                             />
                           </div>
                           <div>
@@ -576,18 +686,101 @@ export default function UniversityProfileEdit() {
                             />
                           </div>
                         </div>
+
+                        {/* Campus Profile Picture */}
+                        <div className="mb-4">
+                          <label className="block text-sm font-bold text-charcoal mb-2">Campus Logo/Profile Picture</label>
+                          {campus.profilePicture && (
+                            <div className="mb-2 relative inline-block">
+                              <img
+                                src={campus.profilePicture}
+                                alt={`${campus.name} logo`}
+                                className="w-24 h-24 object-cover rounded-lg border-2 border-olive/20 shadow-md"
+                              />
+                              <button
+                                type="button"
+                                onClick={() => updateCampus(index, { profilePicture: '' })}
+                                className="absolute top-0 right-0 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center text-xs hover:bg-red-600 transition-all"
+                              >
+                                ×
+                              </button>
+                            </div>
+                          )}
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const input = document.createElement('input')
+                              input.type = 'file'
+                              input.accept = 'image/*'
+                              input.onchange = (e) => handleCampusProfilePictureUpload(index, e as any)
+                              input.click()
+                            }}
+                            className="px-4 py-2 rounded-lg bg-olive/10 text-olive font-medium hover:bg-olive/20 transition-all text-sm"
+                          >
+                            {campus.profilePicture ? t('university_edit.change_logo') : `+ ${t('university_edit.add_campus_logo')}`}
+                          </button>
+                        </div>
+
+                        {/* Campus Images Gallery - Up to 10 images */}
+                        <div className="mb-4">
+                          <label className="block text-sm font-bold text-charcoal mb-2">
+                            Campus Images Gallery (Up to 10 images)
+                            {campus.images && campus.images.length > 0 && (
+                              <span className="ml-2 text-xs font-normal text-charcoal/60">
+                                ({campus.images.length}/10)
+                              </span>
+                            )}
+                          </label>
+                          <div className="grid grid-cols-3 gap-2 mb-2">
+                            {campus.images?.map((img, imgIndex) => (
+                              <div key={imgIndex} className="relative group">
+                                <img
+                                  src={img}
+                                  alt={`${campus.name} ${imgIndex + 1}`}
+                                  className="w-full h-24 object-cover rounded-lg"
+                                />
+                                <button
+                                  type="button"
+                                  onClick={() => removeCampusImage(index, imgIndex)}
+                                  className="absolute top-1 right-1 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-xs"
+                                >
+                                  ×
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                          {(!campus.images || campus.images.length < 10) && (
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const input = document.createElement('input')
+                                input.type = 'file'
+                                input.accept = 'image/*'
+                                input.onchange = handleCampusImageUpload(index)
+                                input.click()
+                              }}
+                              className="px-4 py-2 rounded-lg bg-olive/10 text-olive font-medium hover:bg-olive/20 transition-all text-sm"
+                            >
+                              + Add Image {campus.images && campus.images.length > 0 && `(${campus.images.length}/10)`}
+                            </button>
+                          )}
+                          {campus.images && campus.images.length >= 10 && (
+                            <p className="text-xs text-charcoal/60 mt-1">Maximum 10 images reached for this campus</p>
+                          )}
+                        </div>
+
                         <button
                           type="button"
                           onClick={() => removeCampus(index)}
                           className="px-4 py-2 rounded-lg bg-red-500/10 text-red-600 font-medium hover:bg-red-500/20 transition-all"
                         >
-                          Remove Campus
+                          {t('university_edit.remove_campus')}
                         </button>
                       </div>
                     ))}
                     {(!formData.campuses || formData.campuses.length === 0) && (
                       <div className="text-center py-8 text-charcoal/60">
-                        No campuses added yet. Click "Add Campus" to get started.
+                        {t('university_edit.no_campuses')}
                       </div>
                     )}
                   </div>
@@ -597,27 +790,26 @@ export default function UniversityProfileEdit() {
                 {activeSection === 'faculties' && (
                   <div className="space-y-4">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-xl font-heading font-bold text-charcoal">Faculties/Departments</h3>
+                      <h3 className="text-xl font-heading font-bold text-charcoal">{t('university_edit.faculties_departments')}</h3>
                       <button
                         type="button"
                         onClick={addFaculty}
                         className="px-4 py-2 rounded-lg bg-olive text-white font-medium hover:bg-olive/90 transition-all"
                       >
-                        + Add Faculty
+                        + {t('university_edit.add_faculty')}
                       </button>
                     </div>
                     {formData.faculties?.map((faculty, index) => (
                       <div key={faculty.id || index} className="ui-card p-6 bg-offwhite">
                         <div className="space-y-4">
                           <div>
-                            <label className="block text-sm font-bold text-charcoal mb-2">Faculty Name *</label>
+                            <label className="block text-sm font-bold text-charcoal mb-2">{t('university_edit.faculty_name')} *</label>
                             <input
                               type="text"
                               required
                               value={faculty.name}
                               onChange={(e) => updateFaculty(index, { name: e.target.value })}
                               className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                              placeholder="Faculty of Engineering"
                             />
                           </div>
                           <div>
@@ -627,7 +819,6 @@ export default function UniversityProfileEdit() {
                               value={faculty.description || ''}
                               onChange={(e) => updateFaculty(index, { description: e.target.value })}
                               className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all resize-none"
-                              placeholder="Description of the faculty..."
                             />
                           </div>
                         </div>
@@ -636,13 +827,13 @@ export default function UniversityProfileEdit() {
                           onClick={() => removeFaculty(index)}
                           className="mt-4 px-4 py-2 rounded-lg bg-red-500/10 text-red-600 font-medium hover:bg-red-500/20 transition-all"
                         >
-                          Remove Faculty
+                          {t('university_edit.remove_faculty')}
                         </button>
                       </div>
                     ))}
                     {(!formData.faculties || formData.faculties.length === 0) && (
                       <div className="text-center py-8 text-charcoal/60">
-                        No faculties added yet. Click "Add Faculty" to get started.
+                        {t('university_edit.no_faculties')}
                       </div>
                     )}
                   </div>
@@ -652,31 +843,30 @@ export default function UniversityProfileEdit() {
                 {activeSection === 'programs' && (
                   <div className="space-y-4">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-xl font-heading font-bold text-charcoal">Academic Programs</h3>
+                      <h3 className="text-xl font-heading font-bold text-charcoal">{t('university_edit.academic_programs_title')}</h3>
                       <button
                         type="button"
                         onClick={addProgram}
                         className="px-4 py-2 rounded-lg bg-olive text-white font-medium hover:bg-olive/90 transition-all"
                       >
-                        + Add Program
+                        + {t('university_edit.add_program')}
                       </button>
                     </div>
                     {formData.programs?.map((program, index) => (
                       <div key={program.id || index} className="ui-card p-6 bg-offwhite">
                         <div className="grid md:grid-cols-2 gap-4 mb-4">
                           <div>
-                            <label className="block text-sm font-bold text-charcoal mb-2">Program Name *</label>
+                            <label className="block text-sm font-bold text-charcoal mb-2">{t('university_edit.program_name')} *</label>
                             <input
                               type="text"
                               required
                               value={program.name}
                               onChange={(e) => updateProgram(index, { name: e.target.value })}
                               className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                              placeholder="Computer Science"
                             />
                           </div>
                           <div>
-                            <label className="block text-sm font-bold text-charcoal mb-2">Degree Type *</label>
+                            <label className="block text-sm font-bold text-charcoal mb-2">{t('university_edit.degree_type')} *</label>
                             <select
                               value={program.degree}
                               onChange={(e) => updateProgram(index, { degree: e.target.value as Program['degree'] })}
@@ -692,7 +882,7 @@ export default function UniversityProfileEdit() {
                             </select>
                           </div>
                           <div>
-                            <label className="block text-sm font-bold text-charcoal mb-2">Duration (Years) *</label>
+                            <label className="block text-sm font-bold text-charcoal mb-2">{t('university_edit.duration_years')} *</label>
                             <input
                               type="number"
                               required
@@ -704,14 +894,13 @@ export default function UniversityProfileEdit() {
                             />
                           </div>
                           <div>
-                            <label className="block text-sm font-bold text-charcoal mb-2">Language *</label>
+                            <label className="block text-sm font-bold text-charcoal mb-2">{t('university_edit.language')} *</label>
                             <input
                               type="text"
                               required
                               value={program.language}
                               onChange={(e) => updateProgram(index, { language: e.target.value })}
                               className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                              placeholder="English"
                             />
                           </div>
                         </div>
@@ -720,13 +909,13 @@ export default function UniversityProfileEdit() {
                           onClick={() => removeProgram(index)}
                           className="px-4 py-2 rounded-lg bg-red-500/10 text-red-600 font-medium hover:bg-red-500/20 transition-all"
                         >
-                          Remove Program
+                          {t('university_edit.remove_program')}
                         </button>
                       </div>
                     ))}
                     {(!formData.programs || formData.programs.length === 0) && (
                       <div className="text-center py-8 text-charcoal/60">
-                        No programs added yet. Click "Add Program" to get started.
+                        {t('university_edit.no_programs')}
                       </div>
                     )}
                   </div>
@@ -742,7 +931,6 @@ export default function UniversityProfileEdit() {
                         value={formData.admissionRequirements || ''}
                         onChange={(e) => setFormData({ ...formData, admissionRequirements: e.target.value })}
                         className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all resize-none"
-                        placeholder="List admission requirements, GPA minimums, test scores, prerequisites, etc..."
                       />
                     </div>
                     <div>
@@ -752,7 +940,6 @@ export default function UniversityProfileEdit() {
                         value={formData.applicationDeadline || ''}
                         onChange={(e) => setFormData({ ...formData, applicationDeadline: e.target.value })}
                         className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                        placeholder="e.g., June 30, 2024"
                       />
                     </div>
                     <div>
@@ -779,7 +966,6 @@ export default function UniversityProfileEdit() {
                               housing: { ...formData.housing, description: e.target.value } 
                             })}
                             className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all resize-none"
-                            placeholder="Describe housing options, availability, costs..."
                           />
                         )}
                       </div>
@@ -827,7 +1013,6 @@ export default function UniversityProfileEdit() {
                               contactInfo: { ...formData.contactInfo, website: e.target.value } 
                             })}
                             className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                            placeholder="https://..."
                           />
                         </div>
                         <div>
@@ -857,7 +1042,6 @@ export default function UniversityProfileEdit() {
                               socialMedia: { ...formData.socialMedia, facebook: e.target.value } 
                             })}
                             className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                            placeholder="https://facebook.com/..."
                           />
                         </div>
                         <div>
@@ -870,7 +1054,6 @@ export default function UniversityProfileEdit() {
                               socialMedia: { ...formData.socialMedia, twitter: e.target.value } 
                             })}
                             className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                            placeholder="https://twitter.com/..."
                           />
                         </div>
                         <div>
@@ -883,7 +1066,6 @@ export default function UniversityProfileEdit() {
                               socialMedia: { ...formData.socialMedia, instagram: e.target.value } 
                             })}
                             className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                            placeholder="https://instagram.com/..."
                           />
                         </div>
                         <div>
@@ -896,7 +1078,6 @@ export default function UniversityProfileEdit() {
                               socialMedia: { ...formData.socialMedia, linkedin: e.target.value } 
                             })}
                             className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                            placeholder="https://linkedin.com/company/..."
                           />
                         </div>
                       </div>

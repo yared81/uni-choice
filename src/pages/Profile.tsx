@@ -1,15 +1,18 @@
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import { useAuth } from '../contexts/AuthContext'
 import ScrollReveal from '../components/ScrollReveal'
 import UniversityCard from '../components/UniversityCard'
+import UniversityProfileView from '../components/UniversityProfileView'
 import type { University, Program } from '../types'
 
-// Import University Profile Component
+// Import University Profile Components
 import UniversityProfileEdit from './UniversityProfileEdit'
 
 export default function Profile() {
+  const { t } = useTranslation()
   const { user, logout, updateUser } = useAuth()
   const navigate = useNavigate()
 
@@ -18,9 +21,106 @@ export default function Profile() {
     return null
   }
 
-  // If user is a university representative, show university profile editor
+  // If user is a university representative, show public profile view with settings tab
   if (user.role === 'university') {
-    return <UniversityProfileEdit />
+    // Import and use UniversityProfile component here with user's university
+    const [uniTab, setUniTab] = useState<'profile' | 'settings'>('profile')
+    const [myUniversity, setMyUniversity] = useState<University | null>(null)
+    const [reviews, setReviews] = useState<any[]>([])
+
+    const loadUniversity = () => {
+      // Load user's university
+      const userUni = localStorage.getItem(`unichoice_uni_${user.id}`)
+      if (userUni) {
+        try {
+          const parsed = JSON.parse(userUni)
+          setMyUniversity(parsed)
+          
+          // Load reviews for this university
+          const allReviews = JSON.parse(localStorage.getItem('unichoice_reviews') || '[]')
+          const uniReviews = allReviews.filter((r: any) => r.uniId === parsed.id)
+          setReviews(uniReviews)
+        } catch (e) {}
+      } else {
+        setMyUniversity(null)
+      }
+    }
+
+    useEffect(() => {
+      loadUniversity()
+      // Also check periodically if university was saved
+      const interval = setInterval(loadUniversity, 1000)
+      return () => clearInterval(interval)
+    }, [user])
+
+    // If no university set up yet, show setup interface directly
+    if (!myUniversity) {
+      return (
+        <div className="pt-24 pb-16">
+          <div className="container-page">
+            <div className="mb-8 text-center">
+              <h1 className="text-4xl font-heading font-bold text-charcoal mb-4">{t('profile.university_setup_title')}</h1>
+              <p className="text-xl text-charcoal/70 mb-2">
+                {t('profile.university_setup_subtitle')}
+              </p>
+              <p className="text-lg text-charcoal/60">
+                {t('profile.university_setup_desc')}
+              </p>
+            </div>
+            {/* Show the edit form directly for initial setup */}
+            <UniversityProfileEdit />
+          </div>
+        </div>
+      )
+    }
+
+    // Render public profile view with tabs when university is set up
+    return (
+      <div className="pt-20">
+        {/* Tab Navigation */}
+        <div className="border-b border-black/10 bg-white sticky top-20 z-40 shadow-sm">
+          <div className="container-page">
+            <div className="flex gap-8">
+              <button
+                onClick={() => setUniTab('profile')}
+                className={`py-4 px-2 font-bold text-lg border-b-2 transition-colors ${
+                  uniTab === 'profile'
+                    ? 'border-olive text-olive'
+                    : 'border-transparent text-charcoal/60 hover:text-charcoal'
+                }`}
+              >
+                {t('profile.profile')}
+              </button>
+              <button
+                onClick={() => setUniTab('settings')}
+                className={`py-4 px-2 font-bold text-lg border-b-2 transition-colors ${
+                  uniTab === 'settings'
+                    ? 'border-olive text-olive'
+                    : 'border-transparent text-charcoal/60 hover:text-charcoal'
+                }`}
+              >
+                {t('profile.settings')}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {uniTab === 'profile' ? (
+          // Show public profile view - how students see it
+          <div className="pt-0">
+            <div className="container-page py-4 bg-olive-50/30 border-b border-olive-200">
+              <p className="text-center text-charcoal/70">
+                <span className="font-bold text-olive">{t('profile.profile_view_label')}</span> {t('profile.profile_view_desc')}
+              </p>
+            </div>
+            <UniversityProfileView university={myUniversity} showEditButton={true} />
+          </div>
+        ) : (
+          // Show settings/editor
+          <UniversityProfileEdit />
+        )}
+      </div>
+    )
   }
 
   // Student profile (existing code)
@@ -67,9 +167,9 @@ export default function Profile() {
       .catch(() => {})
   }, [])
 
-  const favorites = JSON.parse(localStorage.getItem('unimerk_favorites') || '[]')
+  const favorites = JSON.parse(localStorage.getItem('unichoice_favorites') || '[]')
   const favoriteUniversities = universities.filter(u => favorites.includes(u.id))
-  const reviews = JSON.parse(localStorage.getItem('unimerk_reviews') || '[]').filter((r: any) => r.userId === user.id)
+  const reviews = JSON.parse(localStorage.getItem('unichoice_reviews') || '[]').filter((r: any) => r.userId === user.id)
 
   const handleProfilePictureChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -115,7 +215,7 @@ export default function Profile() {
           <div className="absolute inset-0 opacity-5">
             <img 
               src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920&h=800&fit=crop"
-              alt="Profile"
+              alt={t('profile.profile')}
               className="w-full h-full object-cover"
             />
           </div>
@@ -166,7 +266,7 @@ export default function Profile() {
                     </span>
                     {user.gpa && (
                       <span className="px-4 py-1.5 bg-terracotta/10 text-terracotta rounded-full text-sm font-medium">
-                        GPA: {user.gpa.toFixed(2)}
+                        {t('profile.gpa')}: {user.gpa.toFixed(2)}
                       </span>
                     )}
                     {user.major && (
@@ -203,7 +303,7 @@ export default function Profile() {
                       : 'border-transparent text-charcoal/60 hover:text-charcoal'
                   }`}
                 >
-                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                  {t(`profile.tab_${tab}`)}
                 </button>
               ))}
             </div>
@@ -218,32 +318,32 @@ export default function Profile() {
                   {/* Personal Information */}
                   <div className="ui-card p-8">
                     <div className="flex items-center justify-between mb-6">
-                      <h2 className="text-2xl font-heading font-bold text-charcoal">Personal Information</h2>
+                      <h2 className="text-2xl font-heading font-bold text-charcoal">{t('profile.personal_information')}</h2>
                       <button
                         onClick={() => setActiveTab('edit')}
                         className="px-4 py-2 rounded-lg bg-olive/10 text-olive font-medium hover:bg-olive/20 transition-all text-sm"
                       >
-                        Edit Profile
+                        {t('profile.edit_profile')}
                       </button>
                     </div>
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
-                        <label className="text-sm text-charcoal/60 mb-1 block">Full Name</label>
+                        <label className="text-sm text-charcoal/60 mb-1 block">{t('profile.full_name')}</label>
                         <p className="text-lg font-medium text-charcoal">{user.name}</p>
                       </div>
                       <div>
-                        <label className="text-sm text-charcoal/60 mb-1 block">Email</label>
+                        <label className="text-sm text-charcoal/60 mb-1 block">{t('profile.email')}</label>
                         <p className="text-lg font-medium text-charcoal">{user.email}</p>
                       </div>
                       {user.phone && (
                         <div>
-                          <label className="text-sm text-charcoal/60 mb-1 block">Phone</label>
+                          <label className="text-sm text-charcoal/60 mb-1 block">{t('profile.phone')}</label>
                           <p className="text-lg font-medium text-charcoal">{user.phone}</p>
                         </div>
                       )}
                       {user.dateOfBirth && (
                         <div>
-                          <label className="text-sm text-charcoal/60 mb-1 block">Date of Birth</label>
+                          <label className="text-sm text-charcoal/60 mb-1 block">{t('profile.date_of_birth')}</label>
                           <p className="text-lg font-medium text-charcoal">
                             {new Date(user.dateOfBirth).toLocaleDateString()}
                           </p>
@@ -251,7 +351,7 @@ export default function Profile() {
                       )}
                       {user.address && (
                         <div className="md:col-span-2">
-                          <label className="text-sm text-charcoal/60 mb-1 block">Address</label>
+                          <label className="text-sm text-charcoal/60 mb-1 block">{t('profile.address')}</label>
                           <p className="text-lg font-medium text-charcoal">{user.address}</p>
                         </div>
                       )}
@@ -261,11 +361,11 @@ export default function Profile() {
                   {/* Academic Information */}
                   {user.role === 'student' && (
                     <div className="ui-card p-8">
-                      <h2 className="text-2xl font-heading font-bold text-charcoal mb-6">Academic Information</h2>
+                      <h2 className="text-2xl font-heading font-bold text-charcoal mb-6">{t('profile.academic_information')}</h2>
                       <div className="grid md:grid-cols-2 gap-6">
                         {user.gpa && (
                           <div>
-                            <label className="text-sm text-charcoal/60 mb-1 block">GPA</label>
+                            <label className="text-sm text-charcoal/60 mb-1 block">{t('profile.gpa')}</label>
                             <div className="flex items-center gap-2">
                               <span className="text-3xl font-heading font-bold text-olive">{user.gpa.toFixed(2)}</span>
                               <span className="text-charcoal/60">/ 4.0</span>
@@ -274,19 +374,19 @@ export default function Profile() {
                         )}
                         {user.currentUniversity && (
                           <div>
-                            <label className="text-sm text-charcoal/60 mb-1 block">Current University</label>
+                            <label className="text-sm text-charcoal/60 mb-1 block">{t('profile.university')}</label>
                             <p className="text-lg font-medium text-charcoal">{user.currentUniversity}</p>
                           </div>
                         )}
                         {user.major && (
                           <div>
-                            <label className="text-sm text-charcoal/60 mb-1 block">Major/Field of Study</label>
+                            <label className="text-sm text-charcoal/60 mb-1 block">{t('profile.major')}</label>
                             <p className="text-lg font-medium text-charcoal">{user.major}</p>
                           </div>
                         )}
                         {user.graduationYear && (
                           <div>
-                            <label className="text-sm text-charcoal/60 mb-1 block">Expected Graduation</label>
+                            <label className="text-sm text-charcoal/60 mb-1 block">{t('profile.expected_graduation')}</label>
                             <p className="text-lg font-medium text-charcoal">{user.graduationYear}</p>
                           </div>
                         )}
@@ -297,7 +397,7 @@ export default function Profile() {
                   {/* Bio */}
                   {user.bio && (
                     <div className="ui-card p-8">
-                      <h2 className="text-2xl font-heading font-bold text-charcoal mb-4">About Me</h2>
+                      <h2 className="text-2xl font-heading font-bold text-charcoal mb-4">{t('profile.about_me')}</h2>
                       <p className="text-charcoal/80 leading-relaxed">{user.bio}</p>
                     </div>
                   )}
@@ -307,18 +407,18 @@ export default function Profile() {
                 <div className="space-y-6">
                   {/* Activity Summary */}
                   <div className="ui-card p-6">
-                    <h3 className="text-xl font-heading font-bold text-charcoal mb-4">Activity Summary</h3>
+                    <h3 className="text-xl font-heading font-bold text-charcoal mb-4">{t('profile.activity_summary')}</h3>
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <span className="text-charcoal/70">Favorite Universities</span>
+                        <span className="text-charcoal/70">{t('profile.favorite_universities')}</span>
                         <span className="text-2xl font-heading font-bold text-olive">{favorites.length}</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-charcoal/70">Reviews Written</span>
+                        <span className="text-charcoal/70">{t('profile.reviews_written')}</span>
                         <span className="text-2xl font-heading font-bold text-olive">{reviews.length}</span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-charcoal/70">Member Since</span>
+                        <span className="text-charcoal/70">{t('profile.member_since')}</span>
                         <span className="text-sm font-medium text-charcoal">
                           {new Date(user.createdAt).toLocaleDateString()}
                         </span>
@@ -328,25 +428,25 @@ export default function Profile() {
 
                   {/* Quick Actions */}
                   <div className="ui-card p-6">
-                    <h3 className="text-xl font-heading font-bold text-charcoal mb-4">Quick Actions</h3>
+                    <h3 className="text-xl font-heading font-bold text-charcoal mb-4">{t('profile.quick_actions')}</h3>
                     <div className="space-y-2">
                       <Link
                         to="/universities"
                         className="block px-4 py-2 rounded-lg bg-olive/10 text-olive font-medium hover:bg-olive/20 transition-all text-sm text-center"
                       >
-                        Explore Universities
+                        {t('profile.explore_universities')}
                       </Link>
                       <button
                         onClick={() => setActiveTab('edit')}
                         className="w-full px-4 py-2 rounded-lg bg-sand text-charcoal font-medium hover:bg-sand/80 transition-all text-sm"
                       >
-                        Edit Profile
+                        {t('profile.edit_profile')}
                       </button>
                       <button
                         onClick={handleLogout}
                         className="w-full px-4 py-2 rounded-lg bg-red-500/10 text-red-600 font-medium hover:bg-red-500/20 transition-all text-sm"
                       >
-                        Logout
+                        {t('nav.logout')}
                       </button>
                     </div>
                   </div>
@@ -359,11 +459,11 @@ export default function Profile() {
           {activeTab === 'edit' && (
             <ScrollReveal>
               <div className="ui-card p-8">
-                <h2 className="text-3xl font-heading font-bold text-charcoal mb-6">Edit Profile</h2>
+                <h2 className="text-3xl font-heading font-bold text-charcoal mb-6">{t('profile.edit_profile')}</h2>
                 <form onSubmit={(e) => { e.preventDefault(); handleSave(); }} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-bold text-charcoal mb-2">Full Name *</label>
+                      <label className="block text-sm font-bold text-charcoal mb-2">{t('profile.full_name')} *</label>
                       <input
                         type="text"
                         required
@@ -373,7 +473,7 @@ export default function Profile() {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-bold text-charcoal mb-2">Email *</label>
+                      <label className="block text-sm font-bold text-charcoal mb-2">{t('profile.email')} *</label>
                       <input
                         type="email"
                         required
@@ -382,20 +482,19 @@ export default function Profile() {
                         className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
                         disabled
                       />
-                      <p className="text-xs text-charcoal/60 mt-1">Email cannot be changed</p>
+                      <p className="text-xs text-charcoal/60 mt-1">{t('profile.email_cannot_change')}</p>
                     </div>
                     <div>
-                      <label className="block text-sm font-bold text-charcoal mb-2">Phone Number</label>
+                      <label className="block text-sm font-bold text-charcoal mb-2">{t('profile.phone_number')}</label>
                       <input
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                        placeholder="+251 9XX XXX XXX"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-bold text-charcoal mb-2">Date of Birth</label>
+                      <label className="block text-sm font-bold text-charcoal mb-2">{t('profile.date_of_birth')}</label>
                       <input
                         type="date"
                         value={formData.dateOfBirth}
@@ -404,17 +503,16 @@ export default function Profile() {
                       />
                     </div>
                     <div className="md:col-span-2">
-                      <label className="block text-sm font-bold text-charcoal mb-2">Address</label>
+                      <label className="block text-sm font-bold text-charcoal mb-2">{t('profile.address')}</label>
                       <input
                         type="text"
                         value={formData.address}
                         onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                         className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                        placeholder="City, Country"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-bold text-charcoal mb-2">GPA</label>
+                      <label className="block text-sm font-bold text-charcoal mb-2">{t('profile.gpa')}</label>
                       <input
                         type="number"
                         step="0.01"
@@ -423,31 +521,28 @@ export default function Profile() {
                         value={formData.gpa}
                         onChange={(e) => setFormData({ ...formData, gpa: e.target.value })}
                         className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                        placeholder="3.50"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-bold text-charcoal mb-2">Current University</label>
+                      <label className="block text-sm font-bold text-charcoal mb-2">{t('profile.university')}</label>
                       <input
                         type="text"
                         value={formData.currentUniversity}
                         onChange={(e) => setFormData({ ...formData, currentUniversity: e.target.value })}
                         className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                        placeholder="University name"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-bold text-charcoal mb-2">Major/Field of Study</label>
+                      <label className="block text-sm font-bold text-charcoal mb-2">{t('profile.major')}</label>
                       <input
                         type="text"
                         value={formData.major}
                         onChange={(e) => setFormData({ ...formData, major: e.target.value })}
                         className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                        placeholder="e.g., Computer Science"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-bold text-charcoal mb-2">Expected Graduation Year</label>
+                      <label className="block text-sm font-bold text-charcoal mb-2">{t('profile.graduation_year')}</label>
                       <input
                         type="number"
                         min="2024"
@@ -455,17 +550,15 @@ export default function Profile() {
                         value={formData.graduationYear}
                         onChange={(e) => setFormData({ ...formData, graduationYear: e.target.value })}
                         className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all"
-                        placeholder="2025"
                       />
                     </div>
                     <div className="md:col-span-2">
-                      <label className="block text-sm font-bold text-charcoal mb-2">Bio</label>
+                      <label className="block text-sm font-bold text-charcoal mb-2">{t('profile.bio')}</label>
                       <textarea
                         rows={4}
                         value={formData.bio}
                         onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
                         className="w-full px-4 py-3 border-2 border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive/50 focus:border-olive transition-all resize-none"
-                        placeholder="Tell us about yourself..."
                       />
                     </div>
                   </div>
@@ -476,7 +569,7 @@ export default function Profile() {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      Save Changes
+                      {t('profile.save')}
                     </motion.button>
                     <button
                       type="button"
@@ -486,7 +579,7 @@ export default function Profile() {
                       }}
                       className="px-8 py-4 rounded-lg bg-charcoal/10 text-charcoal font-bold hover:bg-charcoal/20 transition-all"
                     >
-                      Cancel
+                      {t('common.cancel')}
                     </button>
                   </div>
                 </form>
@@ -498,7 +591,7 @@ export default function Profile() {
           {activeTab === 'favorites' && (
             <ScrollReveal>
               <div>
-                <h2 className="text-3xl font-heading font-bold text-charcoal mb-6">Favorite Universities</h2>
+                <h2 className="text-3xl font-heading font-bold text-charcoal mb-6">{t('profile.favorite_universities')}</h2>
                 {favoriteUniversities.length > 0 ? (
                   <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {favoriteUniversities.map(uni => (
@@ -508,13 +601,13 @@ export default function Profile() {
                 ) : (
                   <div className="ui-card p-12 text-center">
                     <div className="text-6xl mb-4">⭐</div>
-                    <p className="text-xl text-charcoal/70 mb-4">No favorites yet</p>
-                    <p className="text-charcoal/60 mb-6">Start exploring universities and add them to your favorites!</p>
+                    <p className="text-xl text-charcoal/70 mb-4">{t('profile.no_favorites_yet')}</p>
+                    <p className="text-charcoal/60 mb-6">{t('profile.start_exploring')}</p>
                     <Link
                       to="/universities"
                       className="inline-block px-8 py-4 rounded-lg bg-olive text-white font-bold hover:bg-olive/90 transition-all"
                     >
-                      Explore Universities
+                      {t('profile.explore_universities')}
                     </Link>
                   </div>
                 )}
@@ -526,7 +619,7 @@ export default function Profile() {
           {activeTab === 'reviews' && (
             <ScrollReveal>
               <div>
-                <h2 className="text-3xl font-heading font-bold text-charcoal mb-6">My Reviews</h2>
+                <h2 className="text-3xl font-heading font-bold text-charcoal mb-6">{t('profile.my_reviews')}</h2>
                 {reviews.length > 0 ? (
                   <div className="space-y-4">
                     {reviews.map((review: any, i: number) => {
@@ -547,7 +640,7 @@ export default function Profile() {
                                   {uni.name}
                                 </Link>
                               ) : (
-                                <span className="font-bold text-charcoal">University ID: {review.uniId}</span>
+                                <span className="font-bold text-charcoal">{t('profile.university_id')}: {review.uniId}</span>
                               )}
                             </div>
                             <span className="text-olive font-bold text-xl">★ {review.rating}</span>
@@ -561,13 +654,13 @@ export default function Profile() {
                 ) : (
                   <div className="ui-card p-12 text-center">
                     <div className="text-6xl mb-4">✍️</div>
-                    <p className="text-xl text-charcoal/70 mb-4">No reviews yet</p>
-                    <p className="text-charcoal/60 mb-6">Share your experience with other students!</p>
+                    <p className="text-xl text-charcoal/70 mb-4">{t('profile.no_reviews_yet')}</p>
+                    <p className="text-charcoal/60 mb-6">{t('profile.share_experience')}</p>
                     <Link
                       to="/universities"
                       className="inline-block px-8 py-4 rounded-lg bg-olive text-white font-bold hover:bg-olive/90 transition-all"
                     >
-                      Browse Universities
+                      {t('profile.browse_universities')}
                     </Link>
                   </div>
                 )}
@@ -579,14 +672,14 @@ export default function Profile() {
           {activeTab === 'settings' && (
             <ScrollReveal>
               <div className="ui-card p-8">
-                <h2 className="text-3xl font-heading font-bold text-charcoal mb-6">Settings</h2>
+                <h2 className="text-3xl font-heading font-bold text-charcoal mb-6">{t('profile.settings')}</h2>
                 <div className="space-y-8">
                   <div>
-                    <h3 className="text-xl font-heading font-bold text-charcoal mb-4">Account Settings</h3>
+                    <h3 className="text-xl font-heading font-bold text-charcoal mb-4">{t('profile.account_settings')}</h3>
                     <div className="space-y-4">
                       <div className="flex items-center justify-between p-4 bg-offwhite rounded-lg">
                         <div>
-                          <p className="font-medium text-charcoal">Account Type</p>
+                          <p className="font-medium text-charcoal">{t('profile.account_type')}</p>
                           <p className="text-sm text-charcoal/60 capitalize">{user.role}</p>
                         </div>
                         <span className="px-4 py-1 bg-olive/10 text-olive rounded-full text-sm font-medium capitalize">
@@ -595,7 +688,7 @@ export default function Profile() {
                       </div>
                       <div className="flex items-center justify-between p-4 bg-offwhite rounded-lg">
                         <div>
-                          <p className="font-medium text-charcoal">Member Since</p>
+                          <p className="font-medium text-charcoal">{t('profile.member_since')}</p>
                           <p className="text-sm text-charcoal/60">
                             {new Date(user.createdAt).toLocaleDateString()}
                           </p>
@@ -604,21 +697,21 @@ export default function Profile() {
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-heading font-bold text-red-600 mb-4">Danger Zone</h3>
+                    <h3 className="text-xl font-heading font-bold text-red-600 mb-4">{t('profile.danger_zone')}</h3>
                     <div className="p-6 bg-red-50 border-2 border-red-200 rounded-lg">
-                      <p className="font-medium text-red-900 mb-4">Delete Account</p>
+                      <p className="font-medium text-red-900 mb-4">{t('profile.delete_account')}</p>
                       <p className="text-sm text-red-700 mb-4">
-                        Once you delete your account, there is no going back. Please be certain.
+                        {t('profile.delete_account_warning')}
                       </p>
                       <button
                         onClick={() => {
-                          if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                          if (confirm(t('profile.delete_account_confirm'))) {
                             handleLogout()
                           }
                         }}
                         className="px-6 py-3 rounded-lg bg-red-600 text-white font-medium hover:bg-red-700 transition-all"
                       >
-                        Delete Account
+                        {t('profile.delete_account')}
                       </button>
                     </div>
                   </div>

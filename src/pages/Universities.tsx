@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 import type { University } from '../types'
 import UniversityCard from '../components/UniversityCard'
 import ScrollReveal from '../components/ScrollReveal'
 
 export default function Universities() {
+  const { t } = useTranslation()
   const [searchParams] = useSearchParams()
   const [universities, setUniversities] = useState<University[]>([])
   const [filtered, setFiltered] = useState<University[]>([])
@@ -17,7 +19,7 @@ export default function Universities() {
     // Load from both JSON file and localStorage (user-created universities)
     Promise.all([
       fetch('/data/universities.json').then(res => res.json()).catch(() => []),
-      Promise.resolve(JSON.parse(localStorage.getItem('unimerk_all_universities') || '[]'))
+      Promise.resolve(JSON.parse(localStorage.getItem('unichoice_all_universities') || '[]'))
     ]).then(([jsonUnis, localUnis]) => {
       // Merge and deduplicate by ID
       const allUnis = [...jsonUnis, ...localUnis]
@@ -53,7 +55,7 @@ export default function Universities() {
           <div className="absolute inset-0 opacity-5">
             <img 
               src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920&h=800&fit=crop"
-              alt="University campus"
+              alt={t('universities.hero_image_alt')}
               className="w-full h-full object-cover"
             />
           </div>
@@ -70,7 +72,7 @@ export default function Universities() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                Explore Universities
+                {t('universities.hero_title')}
               </motion.h1>
               <motion.p 
                 className="text-xl md:text-2xl text-charcoal/70 mb-12 max-w-2xl mx-auto leading-relaxed"
@@ -78,7 +80,7 @@ export default function Universities() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                Discover top institutions across Ethiopia and find the perfect fit for your academic goals.
+                {t('universities.hero_subtitle')}
               </motion.p>
               
               <motion.div
@@ -91,7 +93,7 @@ export default function Universities() {
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search by university name, city, program, or keyword..."
+                  placeholder={t('universities.search_placeholder')}
                   className="flex-1 bg-transparent outline-none text-base px-4 py-4 placeholder:text-charcoal/40"
                 />
                 <motion.button 
@@ -99,7 +101,7 @@ export default function Universities() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Search
+                  {t('universities.search_button')}
                 </motion.button>
               </motion.div>
             </div>
@@ -112,10 +114,10 @@ export default function Universities() {
         <section className="container-page mb-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { label: 'Total Universities', value: universities.length },
-              { label: 'Cities', value: new Set(universities.map(u => u.city)).size },
-              { label: 'Programs', value: universities.reduce((acc, u) => acc + u.programs.length, 0) },
-              { label: 'Avg Rating', value: universities.length > 0 ? (universities.reduce((acc, u) => acc + u.rating, 0) / universities.length).toFixed(1) : '0.0' }
+              { label: t('universities.stats_total'), value: universities.length },
+              { label: t('universities.stats_cities'), value: new Set(universities.map(u => u.city)).size },
+              { label: t('universities.stats_programs'), value: universities.reduce((acc, u) => acc + u.programs.length, 0) },
+              { label: t('universities.stats_avg_rating'), value: universities.length > 0 ? (universities.reduce((acc, u) => acc + u.rating, 0) / universities.length).toFixed(1) : '0.0' }
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}
@@ -152,7 +154,7 @@ export default function Universities() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
               >
-                Found <span className="font-bold text-olive">{filtered.length}</span> {filtered.length === 1 ? 'university' : 'universities'}
+                {t('universities.found_count')} <span className="font-bold text-olive">{filtered.length}</span> {filtered.length === 1 ? t('universities.found_count_singular') : t('universities.found_count_plural')}
               </motion.p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -176,16 +178,16 @@ export default function Universities() {
                 <div className="max-w-md mx-auto">
                   <img 
                     src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=400&fit=crop"
-                    alt="No results"
+                    alt={t('universities.no_results_title')}
                     className="w-full h-64 object-cover rounded-lg mb-6 opacity-50"
                   />
-                  <p className="text-charcoal/60 text-xl mb-4">No universities found</p>
-                  <p className="text-charcoal/50 mb-6">Try a different search term or browse all universities</p>
+                  <p className="text-charcoal/60 text-xl mb-4">{t('universities.no_results_title')}</p>
+                  <p className="text-charcoal/50 mb-6">{t('universities.no_results_desc')}</p>
                   <Link
                     to="/universities"
                     className="inline-block px-6 py-3 rounded-lg bg-olive text-white font-medium hover:bg-olive/90 transition-all"
                   >
-                    View All Universities
+                    {t('universities.view_all_button')}
                   </Link>
                 </div>
               </motion.div>
@@ -200,16 +202,16 @@ export default function Universities() {
           <section className="mt-24 py-20 bg-gradient-to-r from-olive/10 to-terracotta/10">
             <div className="container-page text-center">
               <h2 className="text-4xl font-heading font-bold text-charcoal mb-4">
-                Need Help Deciding?
+                {t('universities.cta_title')}
               </h2>
               <p className="text-xl text-charcoal/70 mb-8 max-w-2xl mx-auto">
-                Use our comparison tool to see universities side by side and make an informed choice.
+                {t('universities.cta_desc')}
               </p>
               <Link
                 to="/compare"
                 className="inline-block px-8 py-4 rounded-lg bg-olive text-white font-bold hover:bg-olive/90 transition-all duration-250 hover:scale-105 shadow-lg"
               >
-                Compare Universities
+                {t('universities.cta_button')}
               </Link>
             </div>
           </section>
