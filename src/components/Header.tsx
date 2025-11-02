@@ -204,8 +204,8 @@ export default function Header() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => {
+                  logout()
                   navigate('/')
-                  setTimeout(() => logout(), 100)
                 }}
                 className="px-4 py-2 rounded-lg bg-gradient-to-r from-red-500 to-red-600 text-white text-sm font-medium hover:shadow-lg transition-all duration-250"
               >

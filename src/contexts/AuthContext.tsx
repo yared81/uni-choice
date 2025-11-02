@@ -87,7 +87,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // Auto login after signup
     const { password: _, ...userData } = newUser
     setUser(userData as User)
-    localStorage.setItem('unimerk_user', JSON.stringify(userData))
+    localStorage.setItem('unichoice_user', JSON.stringify(userData))
     return true
   }
 
@@ -96,7 +96,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const updatedUser = { ...user, ...updates }
     setUser(updatedUser)
-    localStorage.setItem('unimerk_user', JSON.stringify(updatedUser))
+    localStorage.setItem('unichoice_user', JSON.stringify(updatedUser))
 
     // Also update in users array
     const users = JSON.parse(localStorage.getItem('unichoice_users') || '[]')

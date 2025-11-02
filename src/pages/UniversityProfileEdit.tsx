@@ -310,8 +310,8 @@ export default function UniversityProfileEdit() {
   }
 
   const handleLogout = () => {
+    logout()
     navigate('/')
-    setTimeout(() => logout(), 100)
   }
 
   if (!user) {

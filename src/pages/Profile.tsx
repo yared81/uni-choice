@@ -16,8 +16,13 @@ export default function Profile() {
   const { user, logout, updateUser } = useAuth()
   const navigate = useNavigate()
 
+  useEffect(() => {
+    if (!user) {
+      navigate('/login')
+    }
+  }, [user, navigate])
+
   if (!user) {
-    navigate('/login')
     return null
   }
 
