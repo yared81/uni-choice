@@ -69,7 +69,7 @@ export default function About() {
                 transition={{ duration: 0.8 }}
               >
                 <img 
-                  src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&h=800&fit=crop"
+                  src="/img/Students in library.jpg"
                   alt="Students in library"
                   className="w-full h-96 object-cover"
                 />
@@ -170,10 +170,8 @@ export default function About() {
                 t('about.offer_item_3'),
                 t('about.offer_item_4'),
                 t('about.offer_item_5'),
-                t('about.offer_item_6'),
                 t('about.offer_item_7'),
-                t('about.offer_item_8'),
-                t('about.offer_item_9')
+                t('about.offer_item_8')
               ].map((item, i) => (
                 <motion.div
                   key={item}
@@ -203,8 +201,8 @@ export default function About() {
                 transition={{ duration: 0.8 }}
               >
                 <img 
-                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&h=800&fit=crop"
-                  alt="Diverse students"
+                  src="/img/Students in library_2.jpg"
+                  alt="Students in library"
                   className="w-full h-96 object-cover"
                 />
               </motion.div>

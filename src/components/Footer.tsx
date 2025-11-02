@@ -11,7 +11,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <img 
-                src="/img/uniChoice_logo.ico" 
+                src="/uniCHoice_logo.ico" 
                 alt={t('app.name')}
                 className="w-10 h-10 object-contain"
               />
@@ -33,18 +33,10 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-4">{t('footer.resources')}</h4>
-            <ul className="space-y-2 text-sm">
-              <li><Link to="/resources" className="hover:text-olive transition-colors">{t('footer.study_guides')}</Link></li>
-              <li><Link to="/help" className="hover:text-olive transition-colors">{t('footer.help_center')}</Link></li>
-            </ul>
-          </div>
-
-          <div>
             <h4 className="text-white font-bold mb-4">{t('footer.connect')}</h4>
             <ul className="space-y-2 text-sm">
               <li><Link to="/contact" className="hover:text-olive transition-colors">{t('footer.contact_us')}</Link></li>
-              <li><Link to="/resources/newsletter" className="hover:text-olive transition-colors">{t('footer.newsletter')}</Link></li>
+              <li><Link to="/help" className="hover:text-olive transition-colors">{t('footer.help_center')}</Link></li>
             </ul>
           </div>
         </div>

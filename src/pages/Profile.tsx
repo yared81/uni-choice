@@ -99,7 +99,7 @@ export default function Profile() {
                     : 'border-transparent text-charcoal/60 hover:text-charcoal'
                 }`}
               >
-                {t('profile.settings')}
+                {t('profile.tab_edit')}
               </button>
             </div>
           </div>
@@ -201,8 +201,8 @@ export default function Profile() {
   }
 
   const handleLogout = () => {
-    logout()
     navigate('/')
+    setTimeout(() => logout(), 100)
   }
 
   const profilePicture = user.profilePicture || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&size=200&background=6B7B4E&color=fff&bold=true`

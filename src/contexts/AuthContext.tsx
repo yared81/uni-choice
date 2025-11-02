@@ -112,6 +112,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = () => {
     setUser(null)
     localStorage.removeItem('unichoice_user')
+    // Navigation will be handled by components calling logout
   }
 
   return (

@@ -76,6 +76,7 @@ export default function Home() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                placeholder={t('landing.hero_search_placeholder')}
                 className="flex-1 bg-transparent outline-none text-base px-4 py-4 placeholder:text-charcoal/40"
               />
               <motion.button
@@ -87,33 +88,6 @@ export default function Home() {
                 {t('landing.search_button')}
               </motion.button>
             </div>
-          </motion.div>
-
-          {/* Quick Links */}
-          <motion.div 
-            className="flex flex-wrap justify-center gap-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            {[
-              { key: 'k12', text: t('landing.quick_link_k12'), path: 'k12schools' },
-              { key: 'colleges', text: t('landing.quick_link_colleges'), path: 'colleges' },
-              { key: 'grad', text: t('landing.quick_link_grad'), path: 'gradschools' }
-            ].map((link, i) => (
-              <motion.div
-                key={link.key}
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Link 
-                  to={`/universities?type=${link.path}`}
-                  className="px-8 py-4 rounded-lg bg-white border-2 border-charcoal/10 hover:border-olive hover:shadow-xl transition-all duration-250 font-bold text-charcoal hover:text-olive"
-                >
-                  {link.text}
-                </Link>
-              </motion.div>
-            ))}
           </motion.div>
         </div>
 
@@ -139,9 +113,9 @@ export default function Home() {
           <div className="container-page">
             <div className="grid md:grid-cols-4 gap-8 text-center">
               {[
-                { number: '50+', label: t('landing.stats_universities') },
-                { number: '10K+', label: t('landing.stats_students') },
-                { number: '200+', label: t('landing.stats_programs') },
+                { number: '33', label: t('landing.stats_universities') },
+                { number: '2000', label: t('landing.stats_students') },
+                { number: 'over 100', label: t('landing.stats_programs') },
                 { number: '6', label: t('landing.stats_languages') }
               ].map((stat, i) => (
                 <motion.div
@@ -314,21 +288,18 @@ export default function Home() {
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 {
-                  name: 'Meron Teklu',
+                  name: 'Bekele Abebe',
                   university: 'Addis Ababa University',
-                  image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=faces',
                   text: t('landing.testimonial_1', { appName: t('app.name') })
                 },
                 {
-                  name: 'Dawit Alemayehu',
+                  name: 'Kebede Damte',
                   university: 'Bahir Dar University',
-                  image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=faces',
                   text: t('landing.testimonial_2', { appName: t('app.name') })
                 },
                 {
-                  name: 'Sara Mohammed',
+                  name: 'Aster Belete',
                   university: 'Addis Ababa University',
-                  image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=faces',
                   text: t('landing.testimonial_3', { appName: t('app.name') })
                 }
               ].map((testimonial, i) => (
@@ -341,11 +312,9 @@ export default function Home() {
                   transition={{ delay: i * 0.15 }}
                 >
                   <div className="flex items-center mb-6">
-                    <img 
-                      src={testimonial.image} 
-                      alt={testimonial.name}
-                      className="w-16 h-16 rounded-full object-cover border-4 border-olive/20 mr-4"
-                    />
+                    <div className="w-16 h-16 rounded-full bg-olive/10 border-4 border-olive/20 mr-4 flex items-center justify-center">
+                      <span className="text-2xl font-bold text-olive">{testimonial.name.charAt(0)}</span>
+                    </div>
                     <div>
                       <div className="font-bold text-charcoal">{testimonial.name}</div>
                       <div className="text-sm text-charcoal/60">{testimonial.university}</div>

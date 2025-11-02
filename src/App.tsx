@@ -14,7 +14,6 @@ import Universities from './pages/Universities'
 import UniversityProfile from './pages/UniversityProfile'
 import Compare from './pages/Compare'
 import About from './pages/About'
-import Resources from './pages/Resources'
 import Contact from './pages/Contact'
 import Help from './pages/Help'
 import Login from './pages/Login'
@@ -52,8 +51,6 @@ function AppRoutes() {
         <Route path="/university/:id" element={<PageTransition><UniversityProfile /></PageTransition>} />
         <Route path="/compare" element={<PageTransition><Compare /></PageTransition>} />
         <Route path="/about" element={<PageTransition><About /></PageTransition>} />
-        <Route path="/resources" element={<PageTransition><Resources /></PageTransition>} />
-        <Route path="/resources/:category" element={<PageTransition><Resources /></PageTransition>} />
         <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
         <Route path="/help" element={<PageTransition><Help /></PageTransition>} />
         <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
