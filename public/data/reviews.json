@@ -1,0 +1,22 @@
+[
+  {
+    "id": "r1",
+    "uniId": "aau",
+    "author": "Mekdes T.",
+    "rating": 5,
+    "comment": "Strong engineering faculty and supportive community.",
+    "date": "2024-10-12",
+    "helpfulCount": 12,
+    "verified": true
+  },
+  {
+    "id": "r2",
+    "uniId": "bdu",
+    "author": "Yonatan A.",
+    "rating": 4,
+    "comment": "Great campus by the lake and hands-on labs.",
+    "date": "2024-11-04",
+    "helpfulCount": 7
+  }
+]
+

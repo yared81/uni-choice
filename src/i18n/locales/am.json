@@ -1,0 +1,25 @@
+{
+  "app": {
+    "name": "ዩኒመርክ",
+    "tagline": "ዩኒቨርሲቲዎችን ያስሱ፣ ይገምግሙ እና ይተባበሩ"
+  },
+  "nav": {
+    "home": "መነሻ",
+    "search": "ፈልግ",
+    "compare": "አወዳድር",
+    "favorites": "የምወዳቸው",
+    "about": "ስለ እኛ",
+    "help": "እርዳታ",
+    "login": "ግባ",
+    "signup": "መመዝገብ",
+    "language": "ቋንቋ"
+  },
+  "landing": {
+    "hero_title": "በኢትዮጵያ የሚመችህን ዩኒቨርሲቲ ፈልግ",
+    "hero_search_placeholder": "በከተማ፣ በፕሮግራም ወይም በቁልፍ ቃል ፈልግ",
+    "cta_explore": "ዩኒቨርሲቲዎችን አስስ",
+    "cta_student": "እንደ ተማሪ ተቀላቀል",
+    "cta_university": "እንደ ዩኒቨርሲቲ ተቀላቀል"
+  }
+}
+

@@ -1,0 +1,25 @@
+{
+  "app": {
+    "name": "UniMerk",
+    "tagline": "Explore, Review & Connect with Ethiopian Universities"
+  },
+  "nav": {
+    "home": "Home",
+    "search": "Search",
+    "compare": "Compare",
+    "favorites": "Favorites",
+    "about": "About",
+    "help": "Help",
+    "login": "Login",
+    "signup": "Sign up",
+    "language": "Language"
+  },
+  "landing": {
+    "hero_title": "Find your best-fit university in Ethiopia",
+    "hero_search_placeholder": "Search by city, program, or keyword",
+    "cta_explore": "Explore Universities",
+    "cta_student": "Join as Student",
+    "cta_university": "Join as University"
+  }
+}
+

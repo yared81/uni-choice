@@ -1,0 +1,22 @@
+{
+  "app": { "name": "UniMerk", "tagline": "Maqaaxiinkal jaamacadde Ethiopia afah tan gexxa, qiimeh tan gexxa" },
+  "nav": {
+    "home": "Guruba",
+    "search": "Raadisa",
+    "compare": "Isbarbar",
+    "favorites": "Jecel",
+    "about": "Kinnat",
+    "help": "Gargaar",
+    "login": "Seem",
+    "signup": "Isdiiwaan",
+    "language": "Af"
+  },
+  "landing": {
+    "hero_title": "Ethiopia kee jaamacad kaxxam kee garsi",
+    "hero_search_placeholder": "Magaalo, barnaamij, yama kalam",
+    "cta_explore": "Jaamacaddo dukua",
+    "cta_student": "Barattoh numti gal",
+    "cta_university": "Jaamacad numti gal"
+  }
+}
+

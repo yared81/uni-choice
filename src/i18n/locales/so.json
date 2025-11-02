@@ -1,0 +1,22 @@
+{
+  "app": { "name": "UniMerk", "tagline": "Ka baaro, qiimee oo la xiriir jaamacadaha Itoobiya" },
+  "nav": {
+    "home": "Hoyga",
+    "search": "Raadi",
+    "compare": "Isbarbar dhig",
+    "favorites": "Jecel",
+    "about": "Nagu saabsan",
+    "help": "Caawimaad",
+    "login": "Gal",
+    "signup": "Is diiwaangeli",
+    "language": "Luqad"
+  },
+  "landing": {
+    "hero_title": "Ka hel jaamacadda kugu habboon Itoobiya",
+    "hero_search_placeholder": "Magaalo, barnaamij, ama erey furayaal",
+    "cta_explore": "Baadh Jaamacadaha",
+    "cta_student": "Ku biir Arday ahaan",
+    "cta_university": "Ku biir Jaamacad ahaan"
+  }
+}
+

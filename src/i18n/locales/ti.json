@@ -1,0 +1,22 @@
+{
+  "app": { "name": "UniMerk", "tagline": "ዩኒቨርሲቲታት ኢትዮጵያ ምርምር ንመርመር ንምቕጻል" },
+  "nav": {
+    "home": "መእተዊ",
+    "search": "ድለ",
+    "compare": "ኣቐራርብ",
+    "favorites": "ተዓቂቡት",
+    "about": "ብዛዕባና",
+    "help": "ሓገዝ",
+    "login": "እቶ",
+    "signup": "መዝገብ",
+    "language": "ቛንቛ"
+  },
+  "landing": {
+    "hero_title": "ብኢትዮጵያ ዝምች ዩኒቨርሲቲ ርኸብ",
+    "hero_search_placeholder": "ከተማ፣ ፕሮግራም ወይ ቁልፊ ቃል",
+    "cta_explore": "ዩኒቨርሲቲታት ርአ",
+    "cta_student": "እንደ ተማሪ ምእታው",
+    "cta_university": "እንደ ዩኒቨርሲቲ ምእታው"
+  }
+}
+

@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-black/10;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-offwhite text-charcoal font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight text-charcoal;
+  }
+
+  a {
+    @apply transition duration-180;
+  }
+
+  a:not(.no-style) {
+    @apply text-olive underline-offset-4 decoration-olive/30 hover:decoration-olive;
+  }
+
+  button {
+    @apply transition-all duration-180;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-olive/60 ring-offset-2 ring-offset-offwhite;
+  }
+}
+
+@layer components {
+  .ui-card {
+    @apply bg-white rounded-lg shadow-soft border border-black/5 transition-all duration-250;
+  }
+
+  .container-page {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Parallax container */
+  .parallax-container {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+}

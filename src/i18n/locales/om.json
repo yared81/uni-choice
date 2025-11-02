@@ -1,0 +1,22 @@
+{
+  "app": { "name": "UniMerk", "tagline": "Yunivarsiitii Itoophiyaa barbaadi, madaali, wal qunnamu" },
+  "nav": {
+    "home": "Mana",
+    "search": "Barbaadi",
+    "compare": "Waliin madaali",
+    "favorites": "Jaalatamoo",
+    "about": "Waa'ee keenya",
+    "help": "Gargaarsa",
+    "login": "Seeni",
+    "signup": "Galmaa'i",
+    "language": "Afaan"
+  },
+  "landing": {
+    "hero_title": "Yunivarsiitii siif mijaatu Itoophiyaa keessa argadhu",
+    "hero_search_placeholder": "Magaalaa, barnoota, yookaan jecha banuu",
+    "cta_explore": "Yunivarsiitiilee Ilaali",
+    "cta_student": "Akka Barataa Dabalami",
+    "cta_university": "Akka Yunivarsiitii Dabalami"
+  }
+}
+
