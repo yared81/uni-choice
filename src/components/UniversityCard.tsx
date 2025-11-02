@@ -61,7 +61,6 @@ export default function UniversityCard({ uni, index = 0 }: Props) {
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       whileHover={{ y: -8, scale: 1.02 }}
-      transition={{ duration: 0.3 }}
       className="group"
     >
       <Link 
