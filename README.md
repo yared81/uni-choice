@@ -1,78 +1,79 @@
-# UniMerk – Professional University Discovery Platform
+# UniChoice – University Discovery Platform
 
-A modern, professional web application built with React, TypeScript, and TailwindCSS to help students discover and compare universities across Ethiopia.
+A web application that helps students discover and compare universities across Ethiopia. Built with React, TypeScript, and TailwindCSS.
+
+**🌐 Live Site:** [uni-choice.vercel.app](https://uni-choice.vercel.app)
 
 ## 🚀 Tech Stack
 
 - **React 19** + **TypeScript**
-- **Vite** (build tool)
 - **TailwindCSS** (styling)
 - **React Router** (routing)
 - **i18next** (multilingual support - 6 languages)
 - **React I18next** (React integration for i18n)
+- **Framer Motion** (animations)
 
 ## ✨ Features
 
-- **Professional Design**: Multi-billion dollar company aesthetic
-- **Hero Section**: Prominent centered search with tagline
-- **Comprehensive Navigation**: Fixed header with smooth scrolling
-- **University Discovery**: Search, filter, and browse institutions
+- **University Discovery**: Search, filter, and browse universities across Ethiopia
 - **Comparison Tool**: Side-by-side comparison of up to 3 universities
-- **Detailed Profiles**: Tabbed university pages with overview, programs, and reviews
-- **Multilingual**: Full support for English, Amharic, Tigrinya, Afaan Oromo, Somali, and Afar
-- **Responsive Design**: Works beautifully on all devices
-- **Professional Footer**: Complete site navigation and links
+- **Detailed Profiles**: Comprehensive university pages with programs, facilities, admissions info, and reviews
+- **User Accounts**: Create profiles, save favorites, and write reviews
+- **Multilingual Support**: Available in English, Amharic, Tigrinya, Afaan Oromo, Somali, and Afar
+- **University Management**: University representatives can edit and manage their institution profiles
+- **Resources Section**: Access guides, scholarship information, and helpful resources
+- **Responsive Design**: Works on desktop, tablet, and mobile devices
 
 ## 📁 Project Structure
 
 ```
-unimerk-react/
+uni-choice/
 ├── src/
 │   ├── components/
-│   │   ├── Header.tsx       # Professional fixed header
-│   │   ├── Footer.tsx        # Complete footer
-│   │   └── UniversityCard.tsx # Enhanced university cards
+│   │   ├── Header.tsx
+│   │   ├── Footer.tsx
+│   │   ├── UniversityCard.tsx
+│   │   ├── UniversityProfileView.tsx
+│   │   ├── PageTransition.tsx
+│   │   └── ScrollReveal.tsx
 │   ├── pages/
-│   │   ├── Home.tsx          # Landing page with hero
-│   │   ├── Universities.tsx  # Browse/search universities
-│   │   ├── UniversityProfile.tsx # Detailed university page
-│   │   ├── Compare.tsx       # Comparison tool
-│   │   ├── About.tsx         # About page
-│   │   ├── Resources.tsx     # Resources & guides
-│   │   ├── Contact.tsx       # Contact form
-│   │   └── Help.tsx          # FAQ & help center
+│   │   ├── Home.tsx
+│   │   ├── Universities.tsx
+│   │   ├── UniversityProfile.tsx
+│   │   ├── Compare.tsx
+│   │   ├── Profile.tsx
+│   │   ├── About.tsx
+│   │   ├── Resources.tsx
+│   │   ├── Contact.tsx
+│   │   ├── Help.tsx
+│   │   ├── Login.tsx
+│   │   └── Signup.tsx
+│   ├── contexts/
+│   │   └── AuthContext.tsx
 │   ├── i18n/
-│   │   ├── config.ts         # i18n configuration
-│   │   └── locales/          # Translation files (6 languages)
+│   │   ├── config.ts
+│   │   └── locales/
+│   │       ├── en.json
+│   │       ├── am.json
+│   │       ├── ti.json
+│   │       ├── om.json
+│   │       ├── so.json
+│   │       └── aa.json
 │   ├── types/
-│   │   └── index.ts          # TypeScript types
-│   ├── App.tsx               # Main app component
-│   ├── main.tsx              # Entry point
-│   └── style.css             # Tailwind + custom styles
+│   │   └── index.ts
+│   ├── utils/
+│   │   └── translateUniversityData.ts
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── style.css
 ├── public/
-│   └── data/
-│       ├── universities.json # Mock data
-│       └── reviews.json      # Mock reviews
-└── tailwind.config.js        # Tailwind configuration
+│   ├── data/
+│   │   ├── universities.json
+│   │   └── reviews.json
+│   └── img/
+└── tailwind.config.js
 ```
 
-## 🎨 Design System
-
-### Colors
-- **Offwhite**: `#FAF8F5` - Background
-- **Sand**: `#E7D9C4` - Accent
-- **Charcoal**: `#2F2F2F` - Primary text
-- **Olive**: `#6B7B4E` - Primary brand
-- **Terracotta**: `#C96A50` - Secondary accent
-
-### Typography
-- **Headings**: Playfair Display / Merriweather (serif)
-- **Body**: Inter / DM Sans (sans-serif)
-
-### Spacing
-- 8-12px rhythm
-- Generous whitespace
-- Consistent padding/margins
 
 ## 🛠️ Setup & Development
 
@@ -93,7 +94,7 @@ Opens on `http://localhost:5173` (or next available port)
 npm run build
 ```
 
-Output in `dist/` folder - ready for deployment to any static host.
+Output in `dist/` folder.
 
 ### Preview Production Build
 ```bash
@@ -102,18 +103,19 @@ npm run preview
 
 ## 📄 Pages
 
-1. **Home** (`/`) - Hero section, search, features, CTA
+1. **Home** (`/`) - Landing page with search functionality and featured universities
 2. **Universities** (`/universities`) - Browse and search all universities
-3. **University Profile** (`/university/:id`) - Detailed view with tabs
-4. **Compare** (`/compare`) - Side-by-side comparison
-5. **About** (`/about`) - Company story and mission
-6. **Resources** (`/resources`) - Guides, scholarships, blog
-7. **Contact** (`/contact`) - Contact form and information
-8. **Help** (`/help`) - FAQ and support
+3. **University Profile** (`/university/:id`) - Detailed university view with programs, facilities, and reviews
+4. **Compare** (`/compare`) - Side-by-side comparison of universities
+5. **Profile** (`/profile`) - User profile page with favorites and settings
+6. **About** (`/about`) - Information about the platform
+7. **Resources** (`/resources`) - Guides, scholarships, and educational resources
+8. **Contact** (`/contact`) - Contact form and information
+9. **Help** (`/help`) - FAQ and support center
 
 ## 🌍 Multilingual Support
 
-All 6 languages are fully integrated:
+The platform supports 6 languages:
 - English (en)
 - Amharic (am)
 - Tigrinya (ti)
@@ -121,47 +123,40 @@ All 6 languages are fully integrated:
 - Somali (so)
 - Afar (aa)
 
-Language preference is saved in cookies and persists across sessions.
+Language preference is automatically detected and saved for future visits.
 
-## 🚀 Deployment
+## 💡 How It Works
 
-### Static Hosting (Recommended)
+### For Students
+- Browse and search universities by name, location, or programs
+- View detailed information about each university including programs offered, facilities, admission requirements, and student reviews
+- Compare up to 3 universities side-by-side
+- Save favorite universities for easy access
+- Create an account to write reviews and manage your profile
 
-The app builds to static files - deploy `dist/` to:
+### For University Representatives
+- Create an account with university representative role
+- Edit and manage your university's profile information
+- Update programs, facilities, admission requirements, and other details
+- View how your university appears to students
 
-- **Vercel**: Push to GitHub → Import → Auto-detects Vite → Deploy
-- **Netlify**: Build command: `npm run build`, Publish: `dist`
-- **Cloudflare Pages**: Build: `npm run build`, Output: `dist`
-- **GitHub Pages**: Build and push `dist` to `gh-pages` branch
+## 🔑 Authentication
 
-### Build Command
-```bash
-npm run build
-```
+The platform uses a simple authentication system:
+- Users can sign up with email and password
+- Two user roles: students and university representatives
+- Session is maintained using localStorage
+- User profiles can be customized with personal information
 
-Output directory: `dist/`
+## 🎯 Key Features
 
-## 📊 Mock Data
-
-- Universities: Addis Ababa University, Bahir Dar University
-- Reviews: Sample student reviews
-- All data stored in `public/data/` (JSON files)
-
-## ✨ Key Features Implemented
-
-- ✅ Professional fixed header with logo and navigation
-- ✅ Stunning hero section with centered search
-- ✅ Introduction and features sections
-- ✅ Multiple content pages with ready text
-- ✅ Professional footer
-- ✅ University cards with hover effects
-- ✅ Detailed university profiles with tabs
-- ✅ Comparison functionality
-- ✅ Multilingual support
-- ✅ Responsive design
-- ✅ Smooth animations and transitions
-
----
-
-**Ready for client presentation!** 🎉
-
+- University search and filtering
+- Detailed university profiles with multiple information sections
+- Side-by-side comparison tool
+- User authentication and profiles
+- Favorites system
+- Review system
+- Multilingual interface
+- Responsive mobile and desktop design
+- Smooth animations and transitions
+- University profile management for representatives
